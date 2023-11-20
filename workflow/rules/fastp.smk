@@ -1,10 +1,41 @@
-DATA_READS = f'{config["path"]["root"]}/{config["folder"]["data"]}/{{IDs}}/{{IDs}}.fastq.gz'
+RAWDATA = f'{config["path"]["root"]}/{config["folder"]["data"]}/{{IDs}}/{{IDs}}.fastq.gz'
 
-rule qfilter: 
+def get_input(wildcards):
+    unit = units.loc[wildcards.sample].loc[wildcards.unit]
+
+    if pd.isna(unit["fq1"]):
+        # SRA sample (always paired-end for now)
+        accession = unit["sra"]
+        return expand("sra/{accession}_{read}.fastq", accession=accession, read=[1, 2])
+
+    if unit["fq1"].endswith("gz"):
+        ending = ".gz"
+    else:
+        ending = ""
+
+    if pd.isna(unit["fq2"]):
+        # single end local sample
+        return "pipe/cutadapt/{S}/{U}.fq1.fastq{E}".format(
+            S=unit.sample_name, U=unit.unit_name, E=ending
+        )
+    else:
+        # paired end local sample
+        return expand(
+            "pipe/cutadapt/{S}/{U}.{{read}}.fastq{E}".format(
+                S=unit.sample_name, U=unit.unit_name, E=ending
+            ),
+            read=["fq1", "fq2"],
+        )
+
+rule fastq: 
     input:
-        READS = DATA_READS
+        get_input
     output:
         f'{config["path"]["root"]}/{config["folder"]["qfiltered"]}/{{IDs}}/{{IDs}}.fastq.gz', 
+        fastq1="results/trimmed/{sample}_{unit}_R1.fastq.gz",
+        fastq2="results/trimmed/{sample}_{unit}_R2.fastq.gz",
+        json="results/trimmed/{sample}_{unit}.json",
+        html="results/trimmed/{sample}_{unit}.html",
     shell:
         """
         set +u;source activate {config[envs][metabagpipes]};set -u;
