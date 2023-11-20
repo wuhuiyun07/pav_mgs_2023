@@ -1,5 +1,5 @@
 sample_id,sample_name,sample_type,nucleotide_type,collection_date,collection_location
-16.1Ê,16_1_S1,water,DNA,1/10/23,San Jose
+16.1,16_1_S1,water,DNA,1/10/23,San Jose
 16.2Ê,16_2_S2,water,DNA,1/10/23,San Jose
 16.3Ê,16_3_S3,water,DNA,1/10/23,San Jose
 16.4Ê,16_4_S4,water,DNA,1/10/23,San Jose
