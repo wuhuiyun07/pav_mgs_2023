@@ -11,13 +11,13 @@ singularity shell -B /project/awlab/wuhuiyun ./pav_sif/snakemake_7.32.4--hdfd78a
 snakemake  --use-conda -s ./workflow/rules/fastp.smk --core 8 -np
 
 ls ./rawdata >filenames.txt # extract filenames from the raw data sample
-filename="example.txt"
+filename="filenames.txt"
 substring=$(echo "$filename" | awk -F'.' '{print $1}')
 echo "Substring: $substring"
 
 
-for file in *.fastq.gz; do 
+for file in ./rawdata/*.fastq.gz; do 
     file="${file%.*}"
     file="${file##*.}"
-    echo "${file:0:8}"
+    echo "${file:0:7}"
 done
