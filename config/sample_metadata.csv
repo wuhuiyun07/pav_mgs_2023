@@ -1,27 +1,27 @@
 sample_id,sample_name,sample_type,nucleotide_type,collection_date,collection_location
 16.1,16_1_S1,water,DNA,1/10/23,San Jose
-16.2Ê,16_2_S2,water,DNA,1/10/23,San Jose
-16.3Ê,16_3_S3,water,DNA,1/10/23,San Jose
-16.4Ê,16_4_S4,water,DNA,1/10/23,San Jose
-16.5Ê,16_5_S5,water,DNA,1/10/23,San Jose
-22.1Ê,22_1_S6,water,DNA,2/27/23,Gainesville
-22.2Ê,22_2_S7,water,DNA,2/27/23,Gainesville
-22.3Ê,22_3_S8,water,DNA,2/27/23,Gainesville
-22.4Ê,22_4_S9,water,DNA,2/27/23,Gainesville
-22.5Ê,22_5_S10,water,DNA,2/27/23,Gainesville
-23.1Ê,23_1_S11,water,DNA,3/13/23,Orange County
-23.2Ê,23_2_S12,water,DNA,3/13/23,Orange County
-23.3Ê,23_3_S13,water,DNA,3/13/23,Orange County
-23.4Ê,23_4_S14,water,DNA,3/13/23,Orange County
-23.5Ê,23_5_S15,water,DNA,3/13/23,Orange County
-24.1Ê,24_1_S16,water,DNA,3/13/23,Oceanside
-24.2Ê,24_2_S17,water,DNA,3/13/23,Oceanside
-24.3Ê,24_3_S18,water,DNA,3/13/23,Oceanside
-24.4Ê,24_4_S19,water,DNA,3/13/23,Oceanside
-24.5Ê,24_5_S20,water,DNA,3/13/23,Oceanside
-29.1Ê,29_1_S21,water,DNA,5/9/23,Oceanside
-29.2Ê,29_2_S22,water,DNA,5/9/23,Oceanside
-29.3Ê,29_3_S23,water,DNA,5/9/23,Oceanside
-29.4Ê,29_4_S24,water,DNA,5/9/23,Oceanside
-29.5Ê,29_5_S25,water,DNA,5/9/23,Oceanside
-Blank 8/15/23Ê,Blank_8_15_23_S26,water,DNA,Blank 8/15/23Ê,New Orleans
+16.2,16_2_S2,water,DNA,1/10/23,San Jose
+16.3,16_3_S3,water,DNA,1/10/23,San Jose
+16.4,16_4_S4,water,DNA,1/10/23,San Jose
+16.5,16_5_S5,water,DNA,1/10/23,San Jose
+22.1,22_1_S6,water,DNA,2/27/23,Gainesville
+22.2,22_2_S7,water,DNA,2/27/23,Gainesville
+22.3,22_3_S8,water,DNA,2/27/23,Gainesville
+22.4,22_4_S9,water,DNA,2/27/23,Gainesville
+22.5,22_5_S10,water,DNA,2/27/23,Gainesville
+23.1,23_1_S11,water,DNA,3/13/23,Orange County
+23.2,23_2_S12,water,DNA,3/13/23,Orange County
+23.3,23_3_S13,water,DNA,3/13/23,Orange County
+23.4,23_4_S14,water,DNA,3/13/23,Orange County
+23.5,23_5_S15,water,DNA,3/13/23,Orange County
+24.1,24_1_S16,water,DNA,3/13/23,Oceanside
+24.2,24_2_S17,water,DNA,3/13/23,Oceanside
+24.3,24_3_S18,water,DNA,3/13/23,Oceanside
+24.4,24_4_S19,water,DNA,3/13/23,Oceanside
+24.5,24_5_S20,water,DNA,3/13/23,Oceanside
+29.1,29_1_S21,water,DNA,5/9/23,Oceanside
+29.2,29_2_S22,water,DNA,5/9/23,Oceanside
+29.3,29_3_S23,water,DNA,5/9/23,Oceanside
+29.4,29_4_S24,water,DNA,5/9/23,Oceanside
+29.5,29_5_S25,water,DNA,5/9/23,Oceanside
+Blank 8/15/23,Blank_8_15_23_S26,water,DNA,Blank 8/15/23Ê,New Orleans
