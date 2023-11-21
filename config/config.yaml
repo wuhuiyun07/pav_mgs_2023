@@ -3,6 +3,8 @@ samples: config/samples.tsv
 # path or URL to sequencing unit sheet (TSV format, columns: sample, unit, fq1, fq2)
 # Units are technical replicates (e.g. lanes, or resequencing of the same biological
 # sample).
+# ref: https://github.com/snakemake-workflows/rna-seq-star-deseq2/tree/master/config
+samples: config/samples.tsv
 units: config/units.tsv
 cores:
     fastp: 4
