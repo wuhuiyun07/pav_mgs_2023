@@ -1,12 +1,11 @@
 #!/bin/bash
-#SBATCH --job-name=pav-mgs # sbatch options here only affect the overall job
+#SBATCH --job-name=pav-mgs 
 #SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=8
+#SBATCH --ntasks-per-node=8
 #SBATCH --time=96:00:00
-#SBATCH --output=log/hpc/slurm-%j.out-%N
-#SBATCH --erro=log/hpc/slurm-%j.err-%N 
-#SBATCH --account=wuhuiyun      # your account name
+#SBATCH --output=log/hpc/slurm-%j.out-%N  
+#SBATCH --error=log/hpc/slurm-%j.err-%N 
+#SBATCH --account=loni_virus2023      # your account name
 #SBATCH --partition=single             # the partition
 
 export WORK_DIR=/project/awlab/wuhuiyun/pav_mgs_2023
