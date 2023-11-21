@@ -1,7 +1,30 @@
+__author__ = "Huiyun Wu"
+__copyright__ = "Copyright 2023, Wu"
+__email__ = "hwu18@tulane.edu"
+__license__ = "MIT"
 
 
+import os
+import json
+import glob
+import pandas as pd
+from snakemake.utils import validate
+shell.executable("bash")
+
+#load configuration file with sample and path info
+configfile:"config/config.yaml"
+validate(config,"config/config.yaml")
 
 
+# Load runs and groups
+RUNS = pd.read_csv(config["samples"], sep = "\s+").set_index("run", drop = False)
+validate(RUNS, "schemas/samples.schema.yaml")
+RUN_IDS = RUNS.index.tolist()
+N_FILES = config["split_fasta"]["n_files"]
+N = list(range(1, N_FILES + 1, 1))
 
 
+wildcard_constraints:
+    run = "[a-zA-Z0-9]+",
+    n = "\d+"
 
