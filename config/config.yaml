@@ -1,9 +1,14 @@
 # path or URL to sample sheet (TSV format, columns: sample, condition, ...)
-samples: config/samples.tsv
 # path or URL to sequencing unit sheet (TSV format, columns: sample, unit, fq1, fq2)
 # Units are technical replicates (e.g. lanes, or resequencing of the same biological
 # sample).
-# ref: https://github.com/snakemake-workflows/rna-seq-star-deseq2/tree/master/config
+# ref1: https://github.com/snakemake-workflows/rna-seq-star-deseq2/tree/master/config
+# ref2: https://snakemake.github.io/snakemake-workflow-catalog/?usage=snakemake-workflows%2Frna-seq-star-deseq2#
+# ref3: https://github.com/SchlossLab/mikropml-snakemake-workflow/tree/main/config
+# my github link: https://github.com/wuhuiyun07/pav_mgs_2023
+
+# config dictionary 
+
 samples: config/samples.tsv
 units: config/units.tsv
 cores:

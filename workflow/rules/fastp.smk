@@ -26,12 +26,14 @@ def get_input(wildcards):
             ),
             read=["fq1", "fq2"],
         )
+rule all:
+    input:
+        expand("{sample}_{unit}.html",sample =config["samples"])
 
 rule fastq: 
     input:
         get_input
     output:
-        f'{config["path"]["root"]}/{config["folder"]["qfiltered"]}/{{IDs}}/{{IDs}}.fastq.gz', 
         fastq1="results/trimmed/{sample}_{unit}_R1.fastq.gz",
         fastq2="results/trimmed/{sample}_{unit}_R2.fastq.gz",
         json="results/trimmed/{sample}_{unit}.json",
