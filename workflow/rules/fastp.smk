@@ -26,9 +26,9 @@
 #             ),
 #             read=["fq1", "fq2"],
 #         )
-# rule all:
-#     input:
-#         expand("{sample}_{unit}.html",sample =config["samples"])
+rule all:
+    input:
+        expand("{sample}_{unit}.html",sample =config["samples"])
 
 rule fastq: 
     input:
