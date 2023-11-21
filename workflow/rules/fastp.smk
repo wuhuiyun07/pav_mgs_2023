@@ -32,7 +32,7 @@
 
 rule fastq: 
     input:
-        get_input
+        samples
     output:
         fastq1="results/trimmed/{sample}_{unit}_R1.fastq.gz",
         fastq2="results/trimmed/{sample}_{unit}_R2.fastq.gz",
