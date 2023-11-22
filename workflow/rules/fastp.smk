@@ -1,33 +1,10 @@
-# RAWDATA = f'{config["path"]["root"]}/{config["folder"]["data"]}/{{IDs}}/{{IDs}}.fastq.gz'
+SAMPLES = "16_1_S1 16_2_S2 16_3_S3 16_4_S4 16_5_S5 22_1_S6 22_2_S7 
+22_3_S8 22_4_S9 22_5_S10 23_1_S11 23_2_S12 23_3_S13 23_4_S14 23_5_S15 
+24_1_S16 24_2_S17 24_3_S18 24_4_S19 24_5_S20 29_1_S21 29_2_S22 29_3_S23 29_4_S24
+29_5_S25 Blank_8_15_23_S26".split()
 
-# def get_input(wildcards):
-#     unit = units.loc[wildcards.sample].loc[wildcards.unit]
-
-#     if pd.isna(unit["fq1"]):
-#         # SRA sample (always paired-end for now)
-#         accession = unit["sra"]
-#         return expand("sra/{accession}_{read}.fastq", accession=accession, read=[1, 2])
-
-#     if unit["fq1"].endswith("gz"):
-#         ending = ".gz"
-#     else:
-#         ending = ""
-
-#     if pd.isna(unit["fq2"]):
-#         # single end local sample
-#         return "pipe/cutadapt/{S}/{U}.fq1.fastq{E}".format(
-#             S=unit.sample_name, U=unit.unit_name, E=ending
-#         )
-#     else:
-#         # paired end local sample
-#         return expand(
-#             "pipe/cutadapt/{S}/{U}.{{read}}.fastq{E}".format(
-#                 S=unit.sample_name, U=unit.unit_name, E=ending
-#             ),
-#             read=["fq1", "fq2"],
-#         )
-# configfile: "config/config.yaml"
-
+rule all:
+    input: expand(results/trimmed/{sample}.html, sample=SAMPLES)
 
 rule fastp_pe: 
     input:
