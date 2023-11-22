@@ -6,7 +6,7 @@ from snakemake.utils import validate
 
 
 samples = (
-    pd.read_csv("config/samples.tsv", sep="\t", dtype={"sample_name": str}, encoding='latin-1')
+    pd.read_csv(config["samples"], sep="\t", dtype={"sample_name": str}, encoding='latin-1')
     .set_index("sample_name", drop=False)
     .sort_index()
     
