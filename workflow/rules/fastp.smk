@@ -26,32 +26,33 @@
 #             ),
 #             read=["fq1", "fq2"],
 #         )
-rule all:
-    input:
-        expand("{sample}_{unit}.html",sample =config["samples"])
+configfile: "config/config.yaml"
+
 
 rule fastq: 
     input:
         samples = config["samples"]
     output:
-        fastq1="results/trimmed/{sample}_{unit}_R1.fastq.gz",
-        fastq2="results/trimmed/{sample}_{unit}_R2.fastq.gz",
-        json="results/trimmed/{sample}_{unit}.json",
-        html="results/trimmed/{sample}_{unit}.html",
-    shell:
-        """
-        set +u;source activate {config[envs][metabagpipes]};set -u;
+        fastq1="results/trimmed/{sample}_L001_R1_001.fastq.gz",
+        fastq2="results/trimmed/{sample}_L001_R2_001.fastq.gz",
+        json="results/trimmed/{sample}.json",
+        html="results/trimmed/{sample}.html"
+    wrapper:
+        "v2.13.0/bio/fastp"    
+#        """
+#        set +u;source activate {config[envs][metabagpipes]};set -u;
 
-        mkdir -p $(dirname $(dirname {output}))
-        mkdir -p $(dirname {output})
-
-        fastp --thread {config[cores][fastp]} \
-            -i {input} \
-            -o {output} \
-            -j $(dirname {output})/$(echo $(basename $(dirname {output}))).json \
-            -h $(dirname {output})/$(echo $(basename $(dirname {output}))).html
-
-        """
+#        mkdir -p $(dirname $(dirname {output}))
+#        mkdir -p $(dirname {output})
+#
+#        fastp --thread {config[cores][fastp]} \
+#            -i {input} \
+#            -o {output} \
+#
+#-j $(dirname {output})/$(echo $(basename $(dirname {output}))).json \
+#            -h $(dirname {output})/$(echo $(basename $(dirname {output}))).html
+#
+#        """
 
 
 # rule fastp:
