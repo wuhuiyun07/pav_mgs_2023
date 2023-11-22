@@ -42,7 +42,8 @@ rule fastq:
         html="results/trimmed/29_1_S21.html"
     threads: 4
     wrapper:
-        "v2.13.0/bio/fastp"    
+        "v2.13.0/bio/fastp" 
+   
 #        """
 #        set +u;source activate {config[envs][metabagpipes]};set -u;
 
