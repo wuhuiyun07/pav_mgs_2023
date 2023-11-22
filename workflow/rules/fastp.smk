@@ -32,14 +32,15 @@ configfile: "config/config.yaml"
 rule fastq: 
     input:
         # samples = config["samples"]
-        sample=["rawdata/{sample}_L001_R1_001.fastq.gz",
-        "rawdata/{sample}_L001_R2_001.fastq.gz"]
+        sample=["rawdata/29_1_S21_L001_R1_001.fastq.gz",
+        "rawdata/29_1_S21_L001_R2_001.fastq.gz"]
 
     output:
-        fastq1="results/trimmed/{sample}_L001_R1_001.fastq.gz",
-        fastq2="results/trimmed/{sample}_L001_R2_001.fastq.gz",
-        json="results/trimmed/{sample}.json",
-        html="results/trimmed/{sample}.html"
+        fastq1="results/trimmed/29_1_S21_L001_R1_001.fastq.gz",
+        fastq2="results/trimmed/29_1_S21_L001_R2_001.fastq.gz",
+        json="results/trimmed/29_1_S21.json",
+        html="results/trimmed/29_1_S21.html"
+    threads: 4
     wrapper:
         "v2.13.0/bio/fastp"    
 #        """
