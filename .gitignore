@@ -1,11 +1,17 @@
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
-*$py.class
-
-# C extensions
 *.so
 .DS_Store
+
+.test/benchmarks/**
+.test/logs/**
+.test/results/**
+.test/resources/**
+.test/.snakemake/**
+benchmarks/**
+logs/**
+resources/**
+results/**
+.snakemake/**
+
 raw.data/*
 rawdata/*
 
@@ -114,14 +120,6 @@ celerybeat.pid
 # SageMath parsed files
 *.sage.py
 
-# Environments
-.env
-.venv
-env/
-venv/
-ENV/
-env.bak/
-venv.bak/
 
 # Spyder project settings
 .spyderproject
