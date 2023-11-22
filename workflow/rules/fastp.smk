@@ -16,23 +16,16 @@ rule fastp_pe:
         json="results/trimmed/{sample}.json",
         html="results/trimmed/{sample}.html"
     threads: 4
-    wrapper:
+    # shell:
+    #    """
+    #    fastp --thread {config[cores][fastp]} \
+    #        -i {input} \
+    #        -o {output} \
+    #        -j {output} \
+    #        -h {output} 
+    #    """
+     wrapper:
         "v2.13.0/bio/fastp"
-   
-#        """
-#        set +u;source activate {config[envs][metabagpipes]};set -u;
-
-#        mkdir -p $(dirname $(dirname {output}))
-#        mkdir -p $(dirname {output})
-#
-#        fastp --thread {config[cores][fastp]} \
-#            -i {input} \
-#            -o {output} \
-#
-#-j $(dirname {output})/$(echo $(basename $(dirname {output}))).json \
-#            -h $(dirname {output})/$(echo $(basename $(dirname {output}))).html
-#
-#        """
 
 
 # rule fastp:
