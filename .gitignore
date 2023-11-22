@@ -11,9 +11,7 @@ logs/**
 resources/**
 results/**
 .snakemake/**
-
-raw.data/*
-rawdata/*
+rawdata/**
 
 # Distribution / packaging
 .Python
