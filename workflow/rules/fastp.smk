@@ -26,7 +26,7 @@
 #             ),
 #             read=["fq1", "fq2"],
 #         )
-configfile: "config/config.yaml"
+# configfile: "config/config.yaml"
 
 
 rule fastp_pe: 
