@@ -12,7 +12,7 @@ rule fastp_pe:
         "rawdata/{sample}_L001_R2_001.fastq.gz"]
 
     output:
-        trimmed=["results/trimmed/{sample}_L001_R1_001.fastq.gz","results/trimmed/{sample}_L001_R2_001.fastq.gz"],
+        trimmed=["results/trimmed/{sample}_R1.fastq.gz","results/trimmed/{sample}_R2.fastq.gz"],
         json="results/trimmed/{sample}.json",
         html="results/trimmed/{sample}.html"
     # shell:
