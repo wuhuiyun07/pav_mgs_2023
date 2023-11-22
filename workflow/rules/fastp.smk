@@ -32,13 +32,13 @@ configfile: "config/config.yaml"
 rule fastp_pe: 
     input:
         # samples = config["samples"]
-        sample=["rawdata/29_1_S21_L001_R1_001.fastq.gz",
-        "rawdata/29_1_S21_L001_R2_001.fastq.gz"]
+        sample=["rawdata/{sample}_L001_R1_001.fastq.gz",
+        "rawdata/{sample}_L001_R2_001.fastq.gz"]
 
     output:
-        trimmed=["results/trimmed/29_1_S21_L001_R1_001.fastq.gz","results/trimmed/29_1_S21_L001_R2_001.fastq.gz"],
-        json="results/trimmed/29_1_S21.json",
-        html="results/trimmed/29_1_S21.html"
+        trimmed=["results/trimmed/{sample}_L001_R1_001.fastq.gz","results/trimmed/{sample}_L001_R2_001.fastq.gz"],
+        json="results/trimmed/{sample}.json",
+        html="results/trimmed/{sample}.html"
     threads: 2
     wrapper:
         "v2.13.0/bio/fastp"
