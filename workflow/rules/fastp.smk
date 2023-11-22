@@ -41,7 +41,7 @@ rule fastp_pe:
         html="results/trimmed/29_1_S21.html"
     threads: 2
     wrapper:
-        "v2.13.0/bio/fastp" 
+        "v2.13.0/bio/fastp"
    
 #        """
 #        set +u;source activate {config[envs][metabagpipes]};set -u;
