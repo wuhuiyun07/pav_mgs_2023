@@ -17,4 +17,4 @@ samples = (
 
 def get_final_output():
     final_output = expand(
-	"results/trimmed/{sample}.html")	
+	"results/trimmed/{samples}.html")	
