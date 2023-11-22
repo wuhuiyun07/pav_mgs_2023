@@ -29,7 +29,7 @@
 configfile: "config/config.yaml"
 
 
-rule fastq: 
+rule fastp_pe: 
     input:
         # samples = config["samples"]
         sample=["rawdata/29_1_S21_L001_R1_001.fastq.gz",
