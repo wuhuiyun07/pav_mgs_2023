@@ -18,3 +18,4 @@ samples = (
 def get_final_output():
     final_output = expand(
 	"results/trimmed/{samples}.html")	
+ return final_output
