@@ -23,7 +23,7 @@ rule fastp_pe:
     #        -j {output} \
     #        -h {output} 
     #    """
-     wrapper:
+    wrapper:
         "v2.13.0/bio/fastp"
 
 
