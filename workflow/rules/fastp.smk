@@ -15,7 +15,6 @@ rule fastp_pe:
         trimmed=["results/trimmed/{sample}_L001_R1_001.fastq.gz","results/trimmed/{sample}_L001_R2_001.fastq.gz"],
         json="results/trimmed/{sample}.json",
         html="results/trimmed/{sample}.html"
-    threads: 4
     # shell:
     #    """
     #    fastp --thread {config[cores][fastp]} \
