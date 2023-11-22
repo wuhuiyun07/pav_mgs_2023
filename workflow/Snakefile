@@ -32,3 +32,4 @@ include: "rules/fastp.smk"
 rule all:
     input:
         get_final_output(),
+        
