@@ -20,7 +20,7 @@ report: "report/workflow.rst"
 ##### load rules #####
 
 
-include: "rules/common.smk"
+# include: "rules/common.smk"
 include: "rules/fastp.smk"
 
 
@@ -29,7 +29,6 @@ include: "rules/fastp.smk"
 
 
 
-rule all:
-    input:
-        get_final_output(),
-        
+# rule all:
+#     input:
+#         get_final_output(),

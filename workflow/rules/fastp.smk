@@ -31,7 +31,10 @@ configfile: "config/config.yaml"
 
 rule fastq: 
     input:
-        samples = config["samples"]
+        # samples = config["samples"]
+        sample=["rawdata/{sample}_L001_R1_001.fastq.gz",
+        "rawdata/{sample}_L001_R2_001.fastq.gz"]
+
     output:
         fastq1="results/trimmed/{sample}_L001_R1_001.fastq.gz",
         fastq2="results/trimmed/{sample}_L001_R2_001.fastq.gz",
