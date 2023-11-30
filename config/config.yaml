@@ -9,89 +9,89 @@
 
 # config dictionary 
 
-SAMPLES = "16_1_S1 16_2_S2 16_3_S3 16_4_S4 16_5_S5 22_1_S6 22_2_S7 22_3_S8 22_4_S9 22_5_S10 23_1_S11 23_2_S12 23_3_S13 23_4_S14 23_5_S15 24_1_S16 24_2_S17 24_3_S18 24_4_S19 24_5_S20 29_1_S21 29_2_S22 29_3_S23 29_4_S24 29_5_S25 Blank_8_15_23_S26".split()
+# SAMPLES = "16_1_S1 16_2_S2 16_3_S3 16_4_S4 16_5_S5 22_1_S6 22_2_S7 22_3_S8 22_4_S9 22_5_S10 23_1_S11 23_2_S12 23_3_S13 23_4_S14 23_5_S15 24_1_S16 24_2_S17 24_3_S18 24_4_S19 24_5_S20 29_1_S21 29_2_S22 29_3_S23 29_4_S24 29_5_S25 Blank_8_15_23_S26".split()
 
-SAMPLES, = glob_wildcards("rawdata/{sample}_L001_R1_001.fastq.gz")
+# SAMPLES, = glob_wildcards("rawdata/{sample}_L001_R1_001.fastq.gz")
 
-rule all:
-    input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
+# rule all:
+#     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
 
 samples: config/samples.tsv
 units: config/units.tsv
 
 
-folder:
-    data: data
-    logs: logs
-    assemblies: assemblies
-    scripts: scripts
-    crossMap: crossMap 
-    concoct: concoct
-    maxbin: maxbin
-    metabat: metabat
-    refined: refined_bins
-    reassembled: reassembled_bins
-    classification: GTDBTk
-    abundance: abundance
-    GRiD: GRiD
-    GEMs: GEMs
-    SMETANA: SMETANA
-    memote: memote
-    qfiltered: qfiltered
-    stats: stats
-    proteinBins: protein_bins
-    dnaBins: dna_bins
-    pangenome: pangenome
-    kallisto: kallisto
-    kallistoIndex: kallistoIndex
-    benchmarks: benchmarks
-    prodigal: prodigal
-    blastp: blastp
-    blastp_db: blastp_db
-scripts:
-    kallisto2concoct: kallisto2concoct.py
-    prepRoary: prepareRoaryInput.R
-    binFilter: binFilter.py
-    qfilterVis: qfilterVis.R
-    assemblyVis: assemblyVis.R
-    binningVis: binningVis.R
-    modelVis: modelVis.R
-    compositionVis: compositionVis.R
-    taxonomyVis: taxonomyVis.R
-    carveme: media_db.tsv
-    toy: download_toydata.txt
-    GTDBtkVis: 
+# folder:
+#     data: data
+#     logs: logs
+#     assemblies: assemblies
+#     scripts: scripts
+#     crossMap: crossMap 
+#     concoct: concoct
+#     maxbin: maxbin
+#     metabat: metabat
+#     refined: refined_bins
+#     reassembled: reassembled_bins
+#     classification: GTDBTk
+#     abundance: abundance
+#     GRiD: GRiD
+#     GEMs: GEMs
+#     SMETANA: SMETANA
+#     memote: memote
+#     qfiltered: qfiltered
+#     stats: stats
+#     proteinBins: protein_bins
+#     dnaBins: dna_bins
+#     pangenome: pangenome
+#     kallisto: kallisto
+#     kallistoIndex: kallistoIndex
+#     benchmarks: benchmarks
+#     prodigal: prodigal
+#     blastp: blastp
+#     blastp_db: blastp_db
+# scripts:
+#     kallisto2concoct: kallisto2concoct.py
+#     prepRoary: prepareRoaryInput.R
+#     binFilter: binFilter.py
+#     qfilterVis: qfilterVis.R
+#     assemblyVis: assemblyVis.R
+#     binningVis: binningVis.R
+#     modelVis: modelVis.R
+#     compositionVis: compositionVis.R
+#     taxonomyVis: taxonomyVis.R
+#     carveme: media_db.tsv
+#     toy: download_toydata.txt
+#     GTDBtkVis: 
 
-cores:
-    fastp: 4
-    spades: 48
-    diamond: 12
-    checkv: 
-    vcontact:
-    virsorter:
-    vrhyme:
+# cores:
+#     fastp: 4
+#     spades: 48
+#     diamond: 12
+#     checkv: 
+#     vcontact:
+#     virsorter:
+#     vrhyme:
 
-params:
-    cutfasta: 10000
-    assemblyPreset: meta-sensitive
-    assemblyMin: 1000
-    concoct: 800
-    metabatMin: 50000
-    seed: 420
-    minBin: 1500
-    refineMem: 1600
-    refineComp: 50
-    refineCont: 10
-    reassembleMem: 1600
-    reassembleComp: 50
-    reassembleCont: 10
-    carveMedia: M8
-    smetanaMedia: M1,M2,M3,M4,M5,M7,M8,M9,M10,M11,M13,M14,M15A,M15B,M16
-    smetanaSolver: CPLEX
-    roaryI: 90
-    roaryCD: 90
+# params:
+#     cutfasta: 10000
+#     assemblyPreset: meta-sensitive
+#     assemblyMin: 1000
+#     concoct: 800
+#     metabatMin: 50000
+#     seed: 420
+#     minBin: 1500
+#     refineMem: 1600
+#     refineComp: 50
+#     refineCont: 10
+#     reassembleMem: 1600
+#     reassembleComp: 50
+#     reassembleCont: 10
+#     carveMedia: M8
+#     smetanaMedia: M1,M2,M3,M4,M5,M7,M8,M9,M10,M11,M13,M14,M15A,M15B,M16
+#     smetanaSolver: CPLEX
+#     roaryI: 90
+#     roaryCD: 90
 
-envs:
-    metagem: envs/metagem
-    metawrap: envs/metawrap
-    prokkaroary: envs/prokkaroary
+# envs:
+#     metagem: envs/metagem
+#     metawrap: envs/metawrap
+#     prokkaroary: envs/prokkaroary
