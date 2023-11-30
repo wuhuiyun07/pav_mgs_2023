@@ -16,7 +16,7 @@
 # rule all:
 #     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
 
-samples: config/samples-template.tsv
+sample: config/samples-template.tsv
 units: config/units.tsv
 
 
