@@ -8,10 +8,10 @@
 
 rule fastp_pe: 
     input:
-        # sample = config["sample"],
-        # sample=["rawdata/{sample}_L001_R1_001.fastq.gz",
-        # "rawdata/{sample}_L001_R2_001.fastq.gz"]
-        expand("rawdata/{sample}_L001_R1_001.fastq.gz","rawdata/{sample}_L001_R2_001.fastq.gz", sample=config["sample"])
+        sample = config["sample"],
+        sample=["rawdata/{sample}_L001_R1_001.fastq.gz",
+        "rawdata/{sample}_L001_R2_001.fastq.gz"]
+        # expand("rawdata/{sample}_L001_R1_001.fastq.gz","rawdata/{sample}_L001_R2_001.fastq.gz", sample=config["sample"])
         # print(sample)
 
 
