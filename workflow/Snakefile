@@ -22,8 +22,8 @@ configfile: "config/config.yaml"
 report: "reports/workflow.rst"
 
 ##### load rules #####
-include: "rules/common.smk"
-include: "rules/fastp.smk"
+include: "workflow/rules/common.smk"
+include: "workflow/rules/fastp.smk"
 
 
 ### target rules ####
