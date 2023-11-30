@@ -5,11 +5,10 @@
 # rule all:
 #     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
 
-# configfile: config/config.yaml
 
 rule fastp_pe: 
     input:
-        samples = config["samples"],
+        sample = config["samples"],
         sample=["rawdata/{sample}_L001_R1_001.fastq.gz",
         "rawdata/{sample}_L001_R2_001.fastq.gz"]
 
@@ -29,7 +28,6 @@ rule fastp_pe:
     #    """
     wrapper:
         "v2.13.0/bio/fastp"
-
 
 # rule fastp:
 #     output: 
