@@ -12,6 +12,8 @@ rule fastp_pe:
         # sample=["rawdata/{sample}_L001_R1_001.fastq.gz",
         # "rawdata/{sample}_L001_R2_001.fastq.gz"]
         expand("rawdata/{sample}_L001_R1_001.fastq.gz","rawdata/{sample}_L001_R2_001.fastq.gz", sample=config["sample"])
+        print(sample)
+
 
     output:
         trimmed=["results/trimmed/{sample}_R1.fastq.gz","results/trimmed/{sample}_R2.fastq.gz"],

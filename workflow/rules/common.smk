@@ -13,7 +13,6 @@ sample = (pd.read_csv(config["sample"], sep="\t", dtype={"sample_name": str})
     .sort_index()
 )
 
-print(sample)
 
 
 
