@@ -4,30 +4,29 @@ __email__ = "hwu18@tulane.edu"
 __license__ = "MIT"
 
 
+
 import os
 import json
 import glob
 import pandas as pd
 from snakemake.utils import validate
+from snakemake.utils import min_version
+##### set minimum snakemake version #####
+min_version("6.4.1")
 shell.executable("bash")
 
 
 ### setup report ####
 configfile: "config/config.yaml"
 
-report: "report/workflow.rst"
+report: "reports/workflow.rst"
 
 ##### load rules #####
-
-
-# include: "rules/common.smk"
+include: "rules/common.smk"
 include: "rules/fastp.smk"
 
 
-
 ### target rules ####
-
-
 
 # rule all:
 #     input:
