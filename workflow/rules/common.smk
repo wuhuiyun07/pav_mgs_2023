@@ -13,6 +13,8 @@ samples = (pd.read_csv(config["samples"], sep="\t", dtype={"sample_name": str})
     .sort_index()
 )
 
+print(samples)
+
 
 
 
