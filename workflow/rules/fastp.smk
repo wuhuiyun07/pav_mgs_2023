@@ -5,7 +5,7 @@
 # rule all:
 #     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
 
-configfile: config/config.yaml
+# configfile: config/config.yaml
 
 rule fastp_pe: 
     input:
