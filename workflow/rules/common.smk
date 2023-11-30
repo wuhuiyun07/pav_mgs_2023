@@ -6,7 +6,7 @@ from snakemake.utils import validate
 
 ftp = FTP.RemoteProvider()
 
-validate(config, schema="../schemas/config.schema.yaml")
+# validate(config, schema="../config.schema.yaml")
 
 samples = (
     pd.read_csv(config["samples"], sep="\t", dtype={"sample_name": str})
