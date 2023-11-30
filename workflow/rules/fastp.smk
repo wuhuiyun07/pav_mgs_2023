@@ -9,7 +9,7 @@
 
 rule fastp_pe: 
     input:
-         samples = config["samples"]
+        samples = config["samples"]
         sample=["rawdata/{sample}_L001_R1_001.fastq.gz",
         "rawdata/{sample}_L001_R2_001.fastq.gz"]
 
