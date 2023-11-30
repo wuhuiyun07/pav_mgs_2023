@@ -11,7 +11,7 @@ rule fastp_pe:
         # sample = config["sample"],
         # sample=["rawdata/{sample}_L001_R1_001.fastq.gz",
         # "rawdata/{sample}_L001_R2_001.fastq.gz"]
-        expand("rawdata/{sample}_L001_R1_001.fastq.gz","rawdata/{sample}_L001_R2_001.fastq.gz", sample=config["sample"])
+        expand("rawdata/{sample}_L001_R1_001.fastq.gz","rawdata/{sample}_L001_R2_001.fastq.gz", sample=config["sample"]),
         print(sample)
 
 
