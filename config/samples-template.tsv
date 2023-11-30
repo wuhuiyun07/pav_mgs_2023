@@ -1,6 +1,5 @@
-sample_name	treatment_1	treatment_2	jointly_handled
-A	untreated	untreated	1
-B	untreated	treated	1
-C	treated	untreated	1
-D	treated	untreated	2
-E	treated	treated	2
+sample_name	sample_id	sample_type	nucleiotide	collection_date	location	adapter	sequencing_kit
+16_1_S1	16.1	water	DNA	1/10/23	San Jose	A1	KAPA Hyperplus
+16_2_S2	16.2	water	DNA	1/10/23	San Jose	A2	KAPA Hyperplus
+16_3_S3	16.3	water	DNA	1/10/23	San Jose	A3	KAPA Hyperplus
+16_4_S4	16.4	water	DNA	1/10/23	San Jose	A4	KAPA Hyperplus
