@@ -8,11 +8,12 @@
 import pandas as pd
 
 samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
-sample_names, = samples_df['sample_name'].tolist()
+sample_names = samples_df["sample_name"].tolist()
 print(sample_names)
 
 rule fastp_pe: 
     input:
+        print(sample_names)
         # sample = config["samples"],
         # sample=pd.df["samples"],
         # R1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
