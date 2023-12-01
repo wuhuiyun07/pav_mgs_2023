@@ -16,9 +16,10 @@ rule fastp_pe:
         print(sample),
         # sample = config["samples"],
         # sample=pd.df["samples"],
-        # R1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
-        # R2=["rawdata/{sample}_L001_R2_001.fastq.gz"]
-        expand("rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz")
+        R1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
+        R2=["rawdata/{sample}_L001_R2_001.fastq.gz"],
+        print(R1)
+        # expand("rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz")
         # samples.to_csv(output[0], sep="\t", index=False)
        
 
