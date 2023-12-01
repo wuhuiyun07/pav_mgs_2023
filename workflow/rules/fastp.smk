@@ -8,7 +8,8 @@
 import pandas as pd
 
 samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
-sample = samples_df["sample_name"].tolist()
+# sample = samples_df["sample_name"].tolist()
+sample = "16_1_S1"
 print(sample)
 
 rule fastp_pe: 
@@ -17,7 +18,7 @@ rule fastp_pe:
         # sample = config["samples"],
         # sample=pd.df["samples"],
         R1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
-        R2=["rawdata/{sample}_L001_R2_001.fastq.gz"],
+        R2=["rawdata/{sample}_L001_R2_001.fastq.gz"]
         # expand("rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz")
         # samples.to_csv(output[0], sep="\t", index=False)
        
