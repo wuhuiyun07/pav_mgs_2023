@@ -9,11 +9,12 @@
 rule fastp_pe: 
     input:
         # sample = config["samples"],
+        sample=df["samples"],
         sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz"]
         # expand("rawdata/{sample}_L001_R1_001.fastq.gz","rawdata/{sample}_L001_R2_001.fastq.gz", sample=config["samples"])
         # samples.to_csv(output[0], sep="\t", index=False)
         # print(sample)
-        sample=df["samples"]
+       
 
 
     output:
