@@ -4,6 +4,7 @@
 
 # rule all:
 #     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
+
 import pandas as pd
 
 samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
