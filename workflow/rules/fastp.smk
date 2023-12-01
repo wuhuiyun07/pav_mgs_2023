@@ -13,7 +13,7 @@ print(sample_names)
 
 rule fastp_pe: 
     input:
-        print(sample_names)
+        print(sample_names),
         # sample = config["samples"],
         # sample=pd.df["samples"],
         # R1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
