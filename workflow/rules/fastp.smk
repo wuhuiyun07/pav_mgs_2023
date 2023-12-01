@@ -17,27 +17,26 @@ rule fastp_pe:
         # sample = config["samples"],
         # sample=pd.df["samples"],
         R1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
-        # R2=["rawdata/{sample}_L001_R2_001.fastq.gz"],
-        print(R1)
+        R2=["rawdata/{sample}_L001_R2_001.fastq.gz"],
         # expand("rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz")
         # samples.to_csv(output[0], sep="\t", index=False)
        
-    # output:
-    #     trimmed=["results/trimmed/{sample}_R1.fastq.gz","results/trimmed/{sample}_R2.fastq.gz"],
-    #     json="results/trimmed/{sample}.json",
-    #     html="results/trimmed/{sample}.html"
-    # log:
-    #     "logs/fastp/{sample}.log"
-    # # shell:
-    # #    """
-    # #    fastp --thread {config[cores][fastp]} \
-    # #        -i {input} \
-    # #        -o {output} \
-    # #        -j {output} \
-    # #        -h {output} 
-    # #    """
-    # wrapper:
-    #     "v2.13.0/bio/fastp"
+    output:
+        trimmed=["results/trimmed/{sample}_R1.fastq.gz","results/trimmed/{sample}_R2.fastq.gz"],
+        json="results/trimmed/{sample}.json",
+        html="results/trimmed/{sample}.html"
+    log:
+        "logs/fastp/{sample}.log"
+    # shell:
+    #    """
+    #    fastp --thread {config[cores][fastp]} \
+    #        -i {input} \
+    #        -o {output} \
+    #        -j {output} \
+    #        -h {output} 
+    #    """
+    wrapper:
+        "v2.13.0/bio/fastp"
 
 # rule fastp:
 #     output: 
@@ -62,16 +61,16 @@ rule fastp_pe:
 #         "v2.13.0/bio/fastp"
 
 
-# rule fastp_pe:
-# # https://github.com/OpenGene/fastp/
-#     input:
-#         sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz"]
-#     output:
-#         trimmed=["results/trimmed/{sample}_R1.fastq.gz", "results/trimmed/{sample}_R2.fastq.gz"],
-#         html="report/fastp/{sample}.html",
-#         json="report/fastp/{sample}.json"
-#     log:
-#         "reports/fastp/{sample}.log"
-#     threads: 8
-#     wrapper:
-#         "v2.11.1/bio/fastp"
+# # rule fastp_pe:
+# # # https://github.com/OpenGene/fastp/
+# #     input:
+# #         sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz"]
+# #     output:
+# #         trimmed=["results/trimmed/{sample}_R1.fastq.gz", "results/trimmed/{sample}_R2.fastq.gz"],
+# #         html="report/fastp/{sample}.html",
+# #         json="report/fastp/{sample}.json"
+# #     log:
+# #         "reports/fastp/{sample}.log"
+# #     threads: 8
+# #     wrapper:
+# #         "v2.11.1/bio/fastp"
