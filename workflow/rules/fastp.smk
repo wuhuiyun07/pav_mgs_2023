@@ -4,12 +4,13 @@
 
 # rule all:
 #     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
+import pandas as pd
 
 
 rule fastp_pe: 
     input:
         # sample = config["samples"],
-        sample=df["samples"],
+        sample=pd.df["samples"],
         R1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
         R2=["rawdata/{sample}_L001_R2_001.fastq.gz"]
         # expand("rawdata/{sample}_L001_R1_001.fastq.gz","rawdata/{sample}_L001_R2_001.fastq.gz", sample=config["samples"])
