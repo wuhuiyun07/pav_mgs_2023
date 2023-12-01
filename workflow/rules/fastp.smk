@@ -26,18 +26,18 @@ rule fastp_pe:
     #     trimmed=["results/trimmed/{sample}_R1.fastq.gz","results/trimmed/{sample}_R2.fastq.gz"],
     #     json="results/trimmed/{sample}.json",
     #     html="results/trimmed/{sample}.html"
-    log:
-        "logs/fastp/{sample}.log"
-    # shell:
-    #    """
-    #    fastp --thread {config[cores][fastp]} \
-    #        -i {input} \
-    #        -o {output} \
-    #        -j {output} \
-    #        -h {output} 
-    #    """
-    wrapper:
-        "v2.13.0/bio/fastp"
+    # log:
+    #     "logs/fastp/{sample}.log"
+    # # shell:
+    # #    """
+    # #    fastp --thread {config[cores][fastp]} \
+    # #        -i {input} \
+    # #        -o {output} \
+    # #        -j {output} \
+    # #        -h {output} 
+    # #    """
+    # wrapper:
+    #     "v2.13.0/bio/fastp"
 
 # rule fastp:
 #     output: 
