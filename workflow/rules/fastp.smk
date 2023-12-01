@@ -17,17 +17,15 @@ rule fastp_pe:
         # sample = config["samples"],
         # sample=pd.df["samples"],
         R1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
-        R2=["rawdata/{sample}_L001_R2_001.fastq.gz"],
+        # R2=["rawdata/{sample}_L001_R2_001.fastq.gz"],
         print(R1)
         # expand("rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz")
         # samples.to_csv(output[0], sep="\t", index=False)
        
-
-
-    output:
-        trimmed=["results/trimmed/{sample}_R1.fastq.gz","results/trimmed/{sample}_R2.fastq.gz"],
-        json="results/trimmed/{sample}.json",
-        html="results/trimmed/{sample}.html"
+    # output:
+    #     trimmed=["results/trimmed/{sample}_R1.fastq.gz","results/trimmed/{sample}_R2.fastq.gz"],
+    #     json="results/trimmed/{sample}.json",
+    #     html="results/trimmed/{sample}.html"
     log:
         "logs/fastp/{sample}.log"
     # shell:
