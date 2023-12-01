@@ -14,7 +14,6 @@ print(sample)
 
 rule fastp_pe: 
     input:
-        print(sample),
         # sample = config["samples"],
         # sample=pd.df["samples"],
         R1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
