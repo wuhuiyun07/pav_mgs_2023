@@ -4,8 +4,10 @@
 
 # rule all:
 #     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
-# import pandas as pd
+import pandas as pd
 
+samples_df = pd.read_csv("samples-template.tsv")
+sample_names = samples_df['sample_name'].tolist()
 
 rule fastp_pe: 
     input:
@@ -13,7 +15,8 @@ rule fastp_pe:
         # sample=pd.df["samples"],
         # R1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
         # R2=["rawdata/{sample}_L001_R2_001.fastq.gz"]
-        fastq = expand("rawdata/{sample}_L001_R1_001.fastq.gz","rawdata/{sample}_L001_R2_001.fastq.gz", sample=config["samples"])
+        
+        fastq = expand("rawdata/{sample}_L001_R1_001.fastq.gz","rawdata/{sample}_L001_R2_001.fastq.gz", sample=sample_names)
         # samples.to_csv(output[0], sep="\t", index=False)
        
 
