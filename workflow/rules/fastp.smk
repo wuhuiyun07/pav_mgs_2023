@@ -19,6 +19,7 @@ SAMPLES = samples_df["sample_name"].tolist()
 
 rule all:
     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
+print(SAMPLES)
 
 rule fastp_pe: 
     input:
