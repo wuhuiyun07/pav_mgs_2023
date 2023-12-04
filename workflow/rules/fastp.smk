@@ -8,17 +8,20 @@
 import pandas as pd
 
 samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
-# sample = samples_df["sample_name"].tolist()
-sample = "16_1_S1"
-print(sample)
+SAMPLES = samples_df["sample_name"].tolist()
+
+# SAMPLES, = glob_wildcards("rawdata/{sample}_L001_R1_001.fastq.gz")
+
+rule all:
+    input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
 
 rule fastp_pe: 
     input:
         # sample = config["samples"],
         # sample=pd.df["samples"],
-        R1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
+        r1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
         print("rawdata/{sample}_L001_R1_001.fastq.gz"),
-        R2=["rawdata/{sample}_L001_R2_001.fastq.gz"]
+        r2=["rawdata/{sample}_L001_R2_001.fastq.gz"]
         # expand("rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz")
         # samples.to_csv(output[0], sep="\t", index=False)
        
@@ -28,6 +31,7 @@ rule fastp_pe:
         html="results/trimmed/{sample}.html"
     log:
         "logs/fastp/{sample}.log"
+    threads: 2
     # shell:
     #    """
     #    fastp --thread {config[cores][fastp]} \
@@ -39,39 +43,3 @@ rule fastp_pe:
     wrapper:
         "v2.13.0/bio/fastp"
 
-# rule fastp:
-#     output: 
-#     "report/{sample}.html"
-
-# rule fastp_pe:
-# # https://github.com/OpenGene/fastp/
-#     input:
-#         sample=["test_fastp/{sample}_L001_R1_001.fastq.gz", "test_fastp/{sample}_L001_R2_001.fastq.gz"]
-#     output:
-#         trimmed=["test_fastp/trimmed_{sample}_R1.fastq.gz", "test_fastp/trimmed_{sample}_R2.fastq.gz"],
-#         html="report/{sample}.html",
-#         json="report/{sample}.json"
-#     log:
-#         "reports/{sample}.log"
-#     threads: 2,
-#     # conda:
-#     #     "workflow/envs/fastp.yml"
-#     # shell:
-#     #     "fastp -i test_fastp/{sample}_L001_R1_001.fastq.gz -I test_fastp/{sample}_L001_R2_001.fastq.gz -o test_fastp/trimmed_{sample}_R1.fastq.gz -O test_fastp/trimmed_{sample}_R2.fastq.gz"
-#     wrapper:
-#         "v2.13.0/bio/fastp"
-
-
-# # rule fastp_pe:
-# # # https://github.com/OpenGene/fastp/
-# #     input:
-# #         sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz"]
-# #     output:
-# #         trimmed=["results/trimmed/{sample}_R1.fastq.gz", "results/trimmed/{sample}_R2.fastq.gz"],
-# #         html="report/fastp/{sample}.html",
-# #         json="report/fastp/{sample}.json"
-# #     log:
-# #         "reports/fastp/{sample}.log"
-# #     threads: 8
-# #     wrapper:
-# #         "v2.11.1/bio/fastp"
