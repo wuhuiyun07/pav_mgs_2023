@@ -9,7 +9,7 @@ import pandas as pd
 wildcard_constraints:
     dataset="\d+"
 
-samples: config/samples-template.tsv
+# samples: config/samples-template.tsv
 
 samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
 SAMPLES = samples_df["sample_name"].tolist()
