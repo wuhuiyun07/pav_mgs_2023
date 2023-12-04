@@ -7,16 +7,14 @@
 
 # import pandas as pd
 
-samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
-SAMPLES = samples_df["sample_name"].tolist()
-print(SAMPLES)
+
 
 # SAMPLES, = glob_wildcards("rawdata/{sample}_L001_R1_001.fastq.gz")
 
 # dataset = rawdata
 # group = sample
 
-
+print(SAMPLES)
 rule all:
     input: expand("reports/fastp/{sample}.html", sample=SAMPLES)
 
