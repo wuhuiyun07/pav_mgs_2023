@@ -39,12 +39,12 @@ rule fastp_pe:
         "logs/fastp/{sample}.log"
     threads: 2
     # shell:
-    #    """
-    1_001.fastq.gzhread {config[cores][fastp]} \
-    #        -i {input} \
-    #        -o {output} \
-    #        -j {output} \
-    #        -h {output} 
+    # #    """
+    # 1_001.fastq.gzhread {config[cores][fastp]} \
+    # #        -i {input} \
+    # #        -o {output} \
+    # #        -j {output} \
+    # #        -h {output} 
     #    """
     wrapper:
         "v2.13.0/bio/fastp"
