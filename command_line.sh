@@ -21,3 +21,6 @@ for file in ./rawdata/*.fastq.gz; do
     file="${file##*.}"
     echo "${file:0:7}"
 done
+
+
+
