@@ -24,4 +24,4 @@ sample_name	sample_id	sample_type	nucleiotide	collection_date	location	adapter	s
 29_3_S23	29.3	water	DNA	5/9/23	Oceanside	B11	KAPA Hyperplus
 29_4_S24	29.4	water	DNA	5/9/23	Oceanside	B12	KAPA Hyperplus
 29_5_S25	29.5	water	DNA	5/9/23	Oceanside	C1	KAPA Hyperplus
-Blank_8_15_23_S26	Blank 8/15/23	water	DNA	Blank 8/15/23Ê	New Orleans	C2	KAPA Hyperplus
+Blank_8_15_23_S26	Blank	water	DNA	Blank 8/15/23Ê	New Orleans	C2	KAPA Hyperplus
