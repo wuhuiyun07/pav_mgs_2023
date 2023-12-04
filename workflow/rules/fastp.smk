@@ -15,8 +15,6 @@ samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
 SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
 
-# SAMPLES, = glob_wildcards("rawdata/{sample}_L001_R1_001.fastq.gz")
-
 rule all:
     input: expand("reports/fastp/{sample}.html", sample=SAMPLES)
 
