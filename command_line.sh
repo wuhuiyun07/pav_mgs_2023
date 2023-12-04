@@ -21,3 +21,9 @@ for file in ./rawdata/*.fastq.gz; do
     file="${file##*.}"
     echo "${file:0:7}"
 done
+
+rename 's/\.L001_R1_001.fastq.gz$/\._R1.fastq.gz/' *.L001_R1_001.fastq.gz
+
+rename -S <old_extension> <new_extension> <files>
+
+rename -s _L001_R1_001.fastq.gz _R1.fastq.gz *_L001_R1_001.fastq.gz

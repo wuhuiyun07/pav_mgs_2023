@@ -13,6 +13,7 @@
 
 # dataset = rawdata
 # group = sample
+SAMPLES = "16_1_S1 16_2_S2 16_3_S3 16_4_S4 16_5_S5".split()
 
 print(SAMPLES)
 rule all:
