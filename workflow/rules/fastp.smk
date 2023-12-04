@@ -17,35 +17,20 @@ print(SAMPLES)
 # group = sample
 
 
-
 rule all:
     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
 print(SAMPLES)
 
-rule fastp_pe: 
+rule fastp_pe:
     input:
-        # sample = config["samples"],
-        # sample=pd.df["samples"],
-        r1=["rawdata/{sample}_L001_R1_001.fastq.gz"],
-        print("rawdata/{sample}_L001_R1_001.fastq.gz"),
-        r2=["rawdata/{sample}_L001_R2_001.fastq.gz"]
-        # expand("rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz")
-        # samples.to_csv(output[0], sep="\t", index=False)
+        sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "reads/pe/{sample}L001_R2_001.fastq.gz"]
     output:
-        trimmed=["results/trimmed/{sample}_R1.fastq.gz","results/trimmed/{sample}_R2.fastq.gz"],
-        json="results/trimmed/{sample}.json",
-        html="results/trimmed/{sample}.html"
+        trimmed=["results/trimmed/{sample}.R1.fastq.gz", "results/trimmed/{sample}.R2.fastq.gz"],
+        html="reports/fastp/{sample}.html",
+        json="reports/fastp/{sample}.json"
     log:
         "logs/fastp/{sample}.log"
     threads: 2
-    # shell:
-    # #    """
-    # 1_001.fastq.gzhread {config[cores][fastp]} \
-    # #        -i {input} \
-    # #        -o {output} \
-    # #        -j {output} \
-    # #        -h {output} 
-    #    """
     wrapper:
-        "v2.13.0/bio/fastp"
+        "v3.0.2/bio/fastp"
 
