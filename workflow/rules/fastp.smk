@@ -5,7 +5,7 @@
 # rule all:
 #     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
 
-# import pandas as pd
+import pandas as pd
 wildcard_constraints:
     dataset="\d+"
 
