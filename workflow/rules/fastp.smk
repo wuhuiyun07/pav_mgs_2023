@@ -9,6 +9,7 @@
 
 samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
 SAMPLES = samples_df["sample_name"].tolist()
+print(SAMPLES)
 
 # SAMPLES, = glob_wildcards("rawdata/{sample}_L001_R1_001.fastq.gz")
 
@@ -39,7 +40,7 @@ rule fastp_pe:
     threads: 2
     # shell:
     #    """
-    #    fastp --thread {config[cores][fastp]} \
+    1_001.fastq.gzhread {config[cores][fastp]} \
     #        -i {input} \
     #        -o {output} \
     #        -j {output} \
