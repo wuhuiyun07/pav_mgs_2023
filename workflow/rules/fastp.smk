@@ -29,7 +29,6 @@ rule fastp_pe:
         r2=["rawdata/{sample}_L001_R2_001.fastq.gz"]
         # expand("rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz")
         # samples.to_csv(output[0], sep="\t", index=False)
-       
     output:
         trimmed=["results/trimmed/{sample}_R1.fastq.gz","results/trimmed/{sample}_R2.fastq.gz"],
         json="results/trimmed/{sample}.json",

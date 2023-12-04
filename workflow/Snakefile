@@ -23,7 +23,8 @@ import glob
 import pandas as pd
 from snakemake.utils import validate
 
-
+wildcard_constraints:
+    dataset="\d+"
 
 report: "reports/workflow.rst"
 
@@ -31,8 +32,7 @@ report: "reports/workflow.rst"
 include: "rules/common.smk"
 include: "rules/fastp.smk"
 
-wildcard_constraints:
-    dataset="\d+"
+
 
 ### target rules ####
 
