@@ -15,9 +15,9 @@
 # SAMPLES = samples_df["sample_name"].tolist()
 # print(SAMPLES)
 
-SAMPLES = "16_1_S1 16_2_S2 16_3_S3 16_4_S4 16_5_S5".split()
+# SAMPLES = "16_1_S1 16_2_S2 16_3_S3 16_4_S4 16_5_S5".split()
 
-SAMPLES, = glob_wildcards("rawdata/{sample}_L001_R1_001.fastq.gz")
+# SAMPLES, = glob_wildcards("rawdata/{sample}_L001_R1_001.fastq.gz")
 
 # dataset = rawdata
 # group = sample
