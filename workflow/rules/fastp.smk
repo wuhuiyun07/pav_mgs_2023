@@ -22,8 +22,8 @@
 # dataset = rawdata
 # group = sample
 
-rule all:
-    input: expand("reports/fastp/{sample}.html", sample=SAMPLES)
+# rule all:
+#     input: expand("reports/fastp/{sample}.html", sample=SAMPLES)
 
 rule fastp_pe:
     input:
