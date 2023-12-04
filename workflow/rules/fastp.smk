@@ -18,8 +18,7 @@ print(SAMPLES)
 
 
 rule all:
-    input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
-print(SAMPLES)
+    input: expand("reports/fastp/{sample}.html", sample=SAMPLES)
 
 rule fastp_pe:
     input:
