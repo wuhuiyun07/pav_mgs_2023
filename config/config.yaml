@@ -16,6 +16,9 @@
 # rule all:
 #     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
 
+wildcard_constraints:
+    dataset="\d+"
+
 samples: config/samples-template.tsv
 units: config/units.tsv
 

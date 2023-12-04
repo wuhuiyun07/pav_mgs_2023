@@ -3,21 +3,27 @@ __copyright__ = "Copyright 2023, Wu"
 __email__ = "hwu18@tulane.edu"
 __license__ = "MIT"
 
+from snakemake.utils import min_version
+min_version("6.4.1")
 
+configfile: "config/config.yaml"
+
+# module dna_seq:
+#     snakefile:
+#         # here, it is also possible to provide a plain raw URL like "https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling/raw/v2.0.1/workflow/Snakefile"
+#         github("snakemake-workflows/dna-seq-gatk-variant-calling", path="workflow/Snakefile", tag="v2.0.1")
+#     config:
+#         config
+
+# use rule * from dna_seq
 
 import os
 import json
 import glob
 import pandas as pd
 from snakemake.utils import validate
-from snakemake.utils import min_version
-##### set minimum snakemake version #####
-min_version("6.4.1")
-shell.executable("bash")
 
 
-### setup report ####
-configfile: "config/config.yaml"
 
 report: "reports/workflow.rst"
 
@@ -25,8 +31,8 @@ report: "reports/workflow.rst"
 include: "rules/common.smk"
 include: "rules/fastp.smk"
 
-
-
+wildcard_constraints:
+    dataset="\d+"
 
 ### target rules ####
 

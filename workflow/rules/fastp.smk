@@ -5,12 +5,17 @@
 # rule all:
 #     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
 
-import pandas as pd
+# import pandas as pd
 
 samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
 SAMPLES = samples_df["sample_name"].tolist()
 
 # SAMPLES, = glob_wildcards("rawdata/{sample}_L001_R1_001.fastq.gz")
+
+# dataset = rawdata
+# group = sample
+
+
 
 rule all:
     input: expand("results/trimmed/{sample}.html", sample=SAMPLES)
