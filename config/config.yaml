@@ -19,7 +19,7 @@
 wildcard_constraints:
     dataset="\d+"
 
-samples: config/samples-template.tsv
+samples: config/samples.tsv
 units: config/units.tsv
 
 
