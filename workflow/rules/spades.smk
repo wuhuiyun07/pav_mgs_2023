@@ -33,7 +33,7 @@ rule run_metaspades:
         "reports/assembly/{sample}.spades.log",
     # container:
     #     "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0"
-    threads: 16
+    threads: 48
     resources:
         mem_mem=250000,
         time=60 * 24,
