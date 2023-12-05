@@ -10,7 +10,7 @@ SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
 
 rule all:
-    input: expand("reports/assembly/{sample}_spades.txt", sample=SAMPLES)
+    input: expand("reports/assembly/{sample}.spades.txt", sample=SAMPLES)
 container: "docker://continuumio/miniconda3:4.4.10"
 
 rule run_metaspades:
