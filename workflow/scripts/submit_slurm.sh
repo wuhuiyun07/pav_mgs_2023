@@ -2,7 +2,7 @@
 #SBATCH --job-name=pav-mgs 
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=48
-#SBATCH --time=96:00:00
+#SBATCH --time=72:00:00
 #SBATCH --output=log/hpc/slurm-%j.out-%N  
 #SBATCH --error=log/hpc/slurm-%j.err-%N 
 #SBATCH --account=loni_virus2023      # your account name
