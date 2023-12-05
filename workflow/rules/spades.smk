@@ -1,8 +1,21 @@
-container: "docker://continuumio/miniconda3:4.4.10"
-rule run_metaspades:
 
+import pandas as pd
+wildcard_constraints:
+    dataset="\d+"
+
+# samples: config/samples-template.tsv
+
+samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
+SAMPLES = samples_df["sample_name"].tolist()
+print(SAMPLES)
+
+rule all:
+    input: expand("reports/assembly/{sample}_spades.txt", sample=SAMPLES)
+container: "docker://continuumio/miniconda3:4.4.10"
+
+rule run_metaspades:
     input:
-        reads=["results/trimmed/{sample}_R1.fastq.gz", "results/trimmed/{sample}_R2.fastq.gz"],
+        reads=["results/test/{sample}_R1.fastq.gz", "results/test/{sample}_R2.fastq.gz"],
     output:
         contigs="results/assembly/{sample}_contigs.fasta",
         scaffolds="results/assembly/{sample}_scaffolds.fasta",
@@ -21,5 +34,5 @@ rule run_metaspades:
     resources:
         mem_mem=250000,
         time=60 * 24,
-    # wrapper:
-    #     "v2.11.1/bio/spades/metaspades"
+    wrapper:
+        "v2.11.1/bio/spades/metaspades"
