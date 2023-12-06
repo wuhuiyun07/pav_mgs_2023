@@ -38,8 +38,10 @@ rule run_metaspades:
         time=60 * 24,
     container: 
         "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0"
-    script:
-        "../scripts/spades_script.py"
+    # script:
+    #     "../scripts/spades_script.py"
+     wrapper:
+        "v3.0.2/bio/spades/metaspades"
     
 
 
