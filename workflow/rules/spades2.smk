@@ -37,8 +37,7 @@ rule run_metaspades:
         kmers = snakemake.params.get("k", "'auto'")
         log = snakemake.log_fmt_shell(stdout=True, stderr=True)
 
-        mem_gb = snakemake.resources.mem_mb // 1000 if hasattr(snakemake.resources, "mem_mb") else ""
-        memory_requirements = f"--memory {mem_gb}" if mem_gb else ""
+        
 
         # Check if params.txt exists
         if not os.path.exists(os.path.join(output_dir, "params.txt")):

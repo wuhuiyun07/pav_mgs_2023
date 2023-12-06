@@ -36,4 +36,4 @@ export WORK_DIR=/project/awlab/wuhuiyun/pav_mgs_2023
 #     --stdout stdout-%j.log"
 
 
-snakemake --use-conda  -j 4 
+snakemake --use-conda  -c 6 -j 6
