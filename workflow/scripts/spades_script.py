@@ -63,8 +63,9 @@ if not os.path.exists(os.path.join(output_dir, "params.txt")):
 
     shell(
         "spades.py --meta "
-        " --threads {snakemake.threads} "
-        " {memory_requirements} "
+        " --threads 48 "
+        # " {memory_requirements} "
+        "--memory 250 Gb"
         " -o {output_dir} "
         " -k {kmers} "
         " {input_arg} "
@@ -85,7 +86,7 @@ else:
     shell(
         "spades.py --meta "
         " --restart-from last "
-        " --threads {threads} "
+        " --threads 48 "
         " {memory_requirements} "
         " -o {output_dir} "
         " >> {snakemake.log[0]} 2>&1 "

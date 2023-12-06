@@ -1,4 +1,3 @@
-
 import pandas as pd
 wildcard_constraints:
     dataset="\d+"
@@ -13,7 +12,6 @@ rule all:
     input: expand("reports/assembly/{sample}.spades2.txt", sample=SAMPLES)
 
 # https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/spades/metaspades.html
-
 
 
 rule run_metaspades:
@@ -35,7 +33,8 @@ rule run_metaspades:
     #     "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0"
     threads: 48
     resources:
-        mem_mem=250000,
+        mem_mb=250000,
+        # mem_mem=250000,
         time=60 * 24,
     container: 
         "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0"
