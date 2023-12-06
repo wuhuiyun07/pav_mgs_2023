@@ -38,8 +38,7 @@ rule run_metaspades:
         mem_mem=250000,
         time=60 * 24,
     script:
-    """"
-    "workflow/script/spdes.py"
-    """"
+        "workflow/script/spdes.py"
+    
 
 
