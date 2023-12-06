@@ -99,13 +99,11 @@ rule run_metaspades:
         cpus_per_task=48,
         time=60 * 24,
     shell:
-    """"
-        spades.py --meta \
-        --threads 48 \
-        --memory {resources.mem} \
-        -o {output_dir} \
-        -k {kmers} \
-        {input_arg} \
-        {extra} \
-        > {snakemake.log[0]} 2>&1 
-    """"
+        "spades.py --meta "
+        "--threads 48 "
+        "--memory {resources.mem} "
+        "-o {output_dir} "
+        "-k {kmers} "
+        "{input_arg} "
+        "{extra} "
+        "> {snakemake.log[0]} 2>&1"
