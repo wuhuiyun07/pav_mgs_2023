@@ -20,6 +20,10 @@
 #     script:
 #         "../scripts/spades_script.py"
 
+samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
+SAMPLES = samples_df["sample_name"].tolist()
+print(SAMPLES)
+
 rule run_metaspades:
     input:
         reads=["results/trimmed/test/{sample}.R1.fastq.gz", "results/trimmed/test/{sample}.R2.fastq.gz"],
