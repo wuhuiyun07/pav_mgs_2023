@@ -8,7 +8,6 @@ rule run_metaspades:
     params:
         k="auto",
         extra="--only-assembler",
-        mem_gb=lambda wildcards, resources: resources.mem_mb // 1000 if hasattr(resources, "mem_mb") else ""
     log:
         "reports/assembly/{sample}.spades2.log",
     threads: 48,
@@ -84,17 +83,17 @@ rule run_metaspades:
                 f">> {snakemake.log[0]} 2>&1"
             )
 
-        # Rename/move output files
-        Output_key_mapping = {
-            "contigs": "contigs.fasta",
-            "scaffolds": "scaffolds.fasta",
-            "graph": "assembly_graph_with_scaffolds.gfa",
-        }
+            # Rename/move output files
+            Output_key_mapping = {
+                "contigs": "contigs.fasta",
+                "scaffolds": "scaffolds.fasta",
+                "graph": "assembly_graph_with_scaffolds.gfa",
+            }
 
-        for key, value in Output_key_mapping.items():
-            if hasattr(snakemake.output, key):
-                file_produced = os.path.join(output_dir, value)
-                file_renamed = getattr(snakemake.output, key)
-                if file_produced != file_renamed:
-                    shutil.move(file_produced, file_renamed)
+            for key, value in Output_key_mapping.items():
+                if hasattr(snakemake.output, key):
+                    file_produced = os.path.join(output_dir, value)
+                    file_renamed = getattr(snakemake.output, key)
+                    if file_produced != file_renamed:
+                        shutil.move(file_produced, file_renamed)
         """
