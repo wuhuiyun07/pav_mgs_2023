@@ -6,7 +6,7 @@ __license__ = "MIT"
 from snakemake.utils import min_version
 min_version("6.4.1")
 
-configfile: "config/config.yaml"
+# configfile: "config/config.yaml"
 
 # module dna_seq:
 #     snakefile:
@@ -26,12 +26,12 @@ from snakemake.utils import validate
 wildcard_constraints:
     dataset="\d+"
 
-report: "reports/workflow.rst"
+# report: "reports/workflow.rst"
 
 ##### load rules #####
-include: "rules/common.smk"
-include: "rules/fastp.smk"
-
+# include: "rules/common.smk"
+# include: "rules/fastp.smk"
+include: "rules/spades2.smk"
 
 
 ### target rules ####
