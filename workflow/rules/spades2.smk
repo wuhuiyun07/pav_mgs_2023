@@ -34,10 +34,11 @@ rule run_metaspades:
     threads: 48
     resources:
         mem_mb=250000,
+        cpus_per_task=48,
         # mem_mem=250000,
-        time=60 * 24,
-    container: 
-        "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0"
+        # runtime=60 * 24,
+    # container: 
+    #     "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0"
     # script:
     #     "../scripts/spades_script.py"
     wrapper:

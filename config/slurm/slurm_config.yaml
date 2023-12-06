@@ -16,7 +16,7 @@ default-resources:
   - account=loni_virus2023
   - partition=workq
   - mail_on=FAIL
-  - mem_mb=512
+  - mem_mb=196000
   - time="72:00:00"
 conda-frontend: "mamba"
 immediate-submit: False

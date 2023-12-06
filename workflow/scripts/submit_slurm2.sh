@@ -18,4 +18,19 @@ module load python
 # cd /project/awlab/wuhuiyun/pav_mgs_2023
 export WORK_DIR=/project/awlab/wuhuiyun/pav_mgs_2023
 
-snakemake --use-conda  -c 48 -j 48 -s workflow/rules/spades2.smk
+snakemake --use-conda  \ 
+    # --configfile "$CONFIG" \
+    --latnecy-wait 60 \
+    --core 48 \
+    # --cluster "xenon -vvv scheduleer $SCH " \
+    --location local:// submit \
+    --working-directory . \
+    --jobs 48 \
+    --cpus-per-task 48\
+    -s workflow/rules/spades2.smk \
+    # --name smk.{rule} \ 
+    # --inherit-env \
+    --max-run-time 15 \
+    --working-directory . \
+    --stderr stderr-%j.log \
+    --stdout stdout-%j.log"
