@@ -1,0 +1,63 @@
+
+[ Help information ]
+
+1. You may use below commands as normal:
+
+snakemake
+
+2. Those commands may only run on computing nodes (not available on head nodes). Make sure you start a job!
+
+Building DAG of jobs...
+/usr/local/packages/Modules/4.5.0/init/bash: line 37: /usr/bin/tclsh: No such file or directory
+Using shell: /bin/bash
+Provided cores: 48
+Rules claiming more threads will be scaled down.
+Singularity containers: ignored
+Job stats:
+job               count
+--------------  -------
+all                   1
+run_metaspades        5
+total                 6
+
+Select jobs to execute...
+
+[Tue Dec  5 16:19:53 2023]
+rule run_metaspades:
+    input: results/trimmed/test/16_3_S3.R1.fastq.gz, results/trimmed/test/16_3_S3.R2.fastq.gz
+    output: results/assembly/test/16_3_S3.contigs.fasta, results/assembly/test/16_3_S3.scaffolds.fasta, results/assembly/test/16_3_S3_intermediate_files
+    log: reports/assembly/16_3_S3.spades.log
+    jobid: 3
+    benchmark: reports/assembly/16_3_S3.spades.txt
+    reason: Missing output files: reports/assembly/16_3_S3.spades.txt
+    wildcards: sample=16_3_S3
+    threads: 48
+    resources: tmpdir=/tmp, mem_mem=250000, time=1440
+
+Activating conda environment: .snakemake/conda/40fa86c58c63496eba1aa852f7ce7308_
+/usr/local/packages/Modules/4.5.0/init/bash: line 37: /usr/bin/tclsh: No such file or directory
+Activating conda environment: .snakemake/conda/40fa86c58c63496eba1aa852f7ce7308_
+/usr/local/packages/Modules/4.5.0/init/bash: line 37: /usr/bin/tclsh: No such file or directory
+/usr/local/packages/Modules/4.5.0/init/bash: line 37: /usr/bin/tclsh: No such file or directory
+[Wed Dec  6 04:03:48 2023]
+Finished job 3.
+1 of 6 steps (17%) done
+Select jobs to execute...
+
+[Wed Dec  6 04:03:48 2023]
+rule run_metaspades:
+    input: results/trimmed/test/16_4_S4.R1.fastq.gz, results/trimmed/test/16_4_S4.R2.fastq.gz
+    output: results/assembly/test/16_4_S4.contigs.fasta, results/assembly/test/16_4_S4.scaffolds.fasta, results/assembly/test/16_4_S4_intermediate_files
+    log: reports/assembly/16_4_S4.spades.log
+    jobid: 4
+    benchmark: reports/assembly/16_4_S4.spades.txt
+    reason: Missing output files: reports/assembly/16_4_S4.spades.txt
+    wildcards: sample=16_4_S4
+    threads: 48
+    resources: tmpdir=/tmp, mem_mem=250000, time=1440
+
+Activating conda environment: .snakemake/conda/40fa86c58c63496eba1aa852f7ce7308_
+/usr/local/packages/Modules/4.5.0/init/bash: line 37: /usr/bin/tclsh: No such file or directory
+Activating conda environment: .snakemake/conda/40fa86c58c63496eba1aa852f7ce7308_
+/usr/local/packages/Modules/4.5.0/init/bash: line 37: /usr/bin/tclsh: No such file or directory
+/usr/local/packages/Modules/4.5.0/init/bash: line 37: /usr/bin/tclsh: No such file or directory

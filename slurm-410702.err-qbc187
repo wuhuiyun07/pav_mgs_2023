@@ -1,0 +1,10 @@
+
+[ Help information ]
+
+1. You may use below commands as normal:
+
+snakemake
+
+2. Those commands may only run on computing nodes (not available on head nodes). Make sure you start a job!
+
+Unlocking working directory.
