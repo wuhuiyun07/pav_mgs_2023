@@ -25,6 +25,7 @@ import json
 import glob
 import pandas as pd
 from snakemake.utils import validate
+
 samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
 SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
@@ -55,12 +56,12 @@ rule run_metaspades:
     container:
         "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0",
     shell:
+        "singularity exec docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0 "
         "spades.py --meta "
         "--threads {threads} "
-        "--memory {resources.mem_mb} "
+        "--memory {resources.mem_mb} "  # Use resources.mem_mb instead of resources.mem
         "-o {output} "
         "-k {params.k} "
         "{input} "
         "{params.extra} "
         "> {log} 2>&1"
-
