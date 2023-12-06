@@ -30,7 +30,7 @@ SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
 
 rule all:
-    input: expand("reports/assembly/{sample}.spades2.txt", sample=SAMPLES)
+    input: expand("reports/assembly/{sample}.spades2.log", sample=SAMPLES)
 
 wildcard_constraints:
     dataset="\d+"
