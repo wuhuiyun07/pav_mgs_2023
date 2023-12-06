@@ -14,7 +14,7 @@ rule all:
 
 # https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/spades/metaspades.html
 
-container: "docker://continuumio/miniconda3:4.4.10"
+
 
 rule run_metaspades:
     input:
@@ -37,6 +37,8 @@ rule run_metaspades:
     resources:
         mem_mem=250000,
         time=60 * 24,
+    container: 
+        "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0"
     script:
         "../scripts/spades_script.py"
     

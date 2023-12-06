@@ -18,4 +18,4 @@ module load python
 # cd /project/awlab/wuhuiyun/pav_mgs_2023
 export WORK_DIR=/project/awlab/wuhuiyun/pav_mgs_2023
 
-snakemake -c 48 --use-conda -j 48 -s workflow/rules/spades2.smk
+snakemake -c 48 --use-singularity -j 48 -s workflow/rules/spades2.smk
