@@ -8,6 +8,7 @@ rule run_metaspades:
     params:
         k="auto",
         extra="--only-assembler",
+        mem_gb=lambda wildcards, resources: resources.mem_mb // 1000 if hasattr(resources, "mem_mb") else ""
     log:
         "reports/assembly/{sample}.spades2.log",
     threads: 48,
