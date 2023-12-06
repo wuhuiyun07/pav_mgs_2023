@@ -29,6 +29,12 @@ samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
 SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
 
+rule all:
+    input: expand("reports/assembly/{sample}.spades2.txt", sample=SAMPLES)
+
+wildcard_constraints:
+    dataset="\d+"
+
 rule run_metaspades:
     input:
         reads=["results/trimmed/test/{sample}.R1.fastq.gz", "results/trimmed/test/{sample}.R2.fastq.gz"],
