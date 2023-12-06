@@ -9,7 +9,7 @@ SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
 
 rule all:
-    input: expand("reports/assembly/{sample}.spades2.txt", sample=SAMPLES)
+    input: expand("reports/assembly/test2/{sample}.spades2.txt", sample=SAMPLES)
 
 # https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/spades/metaspades.html
 
