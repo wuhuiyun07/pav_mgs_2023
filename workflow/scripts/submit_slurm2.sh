@@ -36,7 +36,4 @@ export WORK_DIR=/project/awlab/wuhuiyun/pav_mgs_2023
 #     --stdout stdout-%j.log"
 
 
-
-# snakemake --use-conda  --core 48 -j 5 -s workflow/rules/spades2.smk 
-
-snakemake --use-conda  --core 48 -j 5 
+snakemake --use-conda  -j 4 
