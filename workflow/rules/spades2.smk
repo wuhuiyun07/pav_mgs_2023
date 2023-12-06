@@ -58,7 +58,7 @@ rule run_metaspades:
         "spades.py --meta "
         "--threads {threads} "
         "--memory {resources.mem_mb} "
-        "-o {output_dir} "
+        "-o {output} "
         "-k {params.k} "
         "{input} "
         "{params.extra} "
