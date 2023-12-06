@@ -38,7 +38,7 @@ rule run_metaspades:
         mem_mem=250000,
         time=60 * 24,
     script:
-        "spdes.py"
+        "spades_script.py"
     
 
 
