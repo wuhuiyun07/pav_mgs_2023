@@ -50,7 +50,7 @@ rule run_metaspades:
         "reports/assembly/{sample}.spades2.log",
     threads: 48,
     resources:
-        mem_mb=250000,
+        mem_mb=180000,
         cpus_per_task=48,
         time=60 * 24,
     # container:
