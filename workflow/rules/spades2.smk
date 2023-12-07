@@ -46,7 +46,6 @@ rule run_metaspades:
     params:
         k="auto",
         extra="--only-assembler",
-        p=lambda wc, input: spades_parameters(wc, input),
     log:
         "reports/assembly/{sample}.spades2.log",
     threads: 48,
