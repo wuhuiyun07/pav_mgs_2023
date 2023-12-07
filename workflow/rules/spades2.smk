@@ -46,6 +46,7 @@ rule run_metaspades:
     params:
         k="auto",
         extra="--only-assembler",
+        p=lambda wc, input: spades_parameters(wc, input),
     log:
         "reports/assembly/{sample}.spades2.log",
     threads: 48,
@@ -57,15 +58,17 @@ rule run_metaspades:
     #     "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0",
     conda:
         "../envs/spades.yml"
-    shell:
-        # "singularity exec docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0 "
-        "spades.py --meta "
-        "--threads {threads} "
-        "--memory {resources.mem_mb} "  # Use resources.mem_mb instead of resources.mem
-        "{input.reads} "
-        "--pe1-1 {input.reads[0]} "  # Specify the first mate pair
-        "--pe1-2 {input.reads[1]} "  # Specify the second mate pair
-        "-o {output} "        
-        "-k {params.k} "       
-        "{params.extra} "
-        "> {log} 2>&1"
+    # shell:
+    #     # "singularity exec docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0 "
+    #     "spades.py --meta "
+    #     "--threads {threads} "
+    #     "--memory {resources.mem_mb} "  # Use resources.mem_mb instead of resources.mem
+    #     # "{input.reads} "
+    #     "--pe1-1 {input.reads[0]} "  # Specify the first mate pair
+    #     "--pe1-2 {input.reads[1]} "  # Specify the second mate pair
+    #     "-o {output} "        
+    #     "-k {params.k} "       
+    #     "{params.extra} "
+    #     "> {log} 2>&1"
+    script:
+        "../scripts/spades_script.py"
