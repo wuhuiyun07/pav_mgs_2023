@@ -62,8 +62,8 @@ rule run_metaspades:
         "spades.py --meta "
         "--threads {threads} "
         "--memory {resources.mem_mb} "  # Use resources.mem_mb instead of resources.mem
-        "-o {output} "
-        "-k {params.k} "
         "{input.reads} "
+        "-o {output} "
+        "-k {params.k} "       
         "{params.extra} "
         "> {log} 2>&1"
