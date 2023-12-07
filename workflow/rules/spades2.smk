@@ -53,10 +53,12 @@ rule run_metaspades:
         mem_mb=250000,
         cpus_per_task=48,
         time=60 * 24,
-    container:
-        "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0",
+    # container:
+    #     "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0",
+    conda:
+        "../envs/spades.yml"
     shell:
-        "singularity exec docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0 "
+        # "singularity exec docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0 "
         "spades.py --meta "
         "--threads {threads} "
         "--memory {resources.mem_mb} "  # Use resources.mem_mb instead of resources.mem
