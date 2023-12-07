@@ -64,6 +64,6 @@ rule run_metaspades:
         "--memory {resources.mem_mb} "  # Use resources.mem_mb instead of resources.mem
         "-o {output} "
         "-k {params.k} "
-        "{input} "
+        "{input.reads} "
         "{params.extra} "
         "> {log} 2>&1"
