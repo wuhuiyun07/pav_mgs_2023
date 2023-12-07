@@ -63,9 +63,9 @@ rule run_metaspades:
         "--threads {threads} "
         "--memory {resources.mem_mb} "  # Use resources.mem_mb instead of resources.mem
         "{input.reads} "
-        "-o {output} "
         "--pe1-1 {input.reads[0]} "  # Specify the first mate pair
         "--pe1-2 {input.reads[1]} "  # Specify the second mate pair
+        "-o {output} "        
         "-k {params.k} "       
         "{params.extra} "
         "> {log} 2>&1"
