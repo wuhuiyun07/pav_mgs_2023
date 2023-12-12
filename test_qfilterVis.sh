@@ -1,9 +1,6 @@
-#!/bin/bash
 module load r/4.3.2/gcc-9.3.0
-        # cd report/fastp
-
         echo -e "\nGenerating quality filtering results file qfilter.stats: ... "
-        for folder in report/fastp/*/;do
+        for folder in reports/fastp/;do
             for file in $folder*.json;do
                 ID=$(echo $file|sed 's|/.*$||g')
                 readsBF=$(head -n 25 $file|grep total_reads|cut -d ':' -f2|sed 's/,//g'|head -n 1)
