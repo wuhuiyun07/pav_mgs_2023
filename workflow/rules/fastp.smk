@@ -55,11 +55,12 @@ rule qfilterVis:
         # plot = f'{config["path"]["root"]}/{config["folder"]["stats"]}/qfilterVis.pdf'
     shell:
         """
-        cd report/fastp
+        module load r/4.3.2/gcc-9.3.0
+        # cd report/fastp
 
         echo -e "\nGenerating quality filtering results file qfilter.stats: ... "
-        for folder in */;do
-            for file in $folder*json;do
+        for folder in report/fastp/*/;do
+            for file in $folder*.json;do
                 ID=$(echo $file|sed 's|/.*$||g')
                 readsBF=$(head -n 25 $file|grep total_reads|cut -d ':' -f2|sed 's/,//g'|head -n 1)
                 readsAF=$(head -n 25 $file|grep total_reads|cut -d ':' -f2|sed 's/,//g'|tail -n 1)
@@ -76,8 +77,8 @@ rule qfilterVis:
         done
 
         echo "Done summarizing quality filtering results ... \nMoving to /stats/ folder and running plotting script ... "
-        mv qfilter.stats {config[path][root]}/{config[folder][stats]}
-        cd {config[path][root]}/{config[folder][stats]}
+        # mv qfilter.stats {config[path][root]}/{config[folder][stats]}
+        # cd {config[path][root]}/{config[folder][stats]}
 
         Rscript workflow/scripts/qfilterVis.R
         echo "Done. "
