@@ -36,9 +36,10 @@ wildcard_constraints:
 # report: "reports/workflow.rst"
 
 ##### load rules #####
-# include: "rules/common.smk"
-# include: "rules/fastp.smk"
-include: "rules/spades2.smk"
+include: "rules/common.smk"
+include: "rules/fastp.smk" # use wrapper
+# include: "rules/spades.smk" #use container and wrapper
+include: "rules/spades2.smk" # use conda and script
 
 
 ### target rules ####

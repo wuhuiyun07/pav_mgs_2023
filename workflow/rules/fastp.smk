@@ -22,7 +22,8 @@ rule fastp_pe:
     input:
         sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz"]
     output:
-        trimmed=["results/trimmed/{sample}.R1.fastq.gz", "results/trimmed/{sample}.R2.fastq.gz"],
+        trimmed1="results/trimmed/{sample}.R1.fastq.gz", 
+        trimmed2="results/trimmed/{sample}.R2.fastq.gz"],
         html="reports/fastp/{sample}.html",
         json="reports/fastp/{sample}.json"
     log:
@@ -38,7 +39,8 @@ rule fastp_pe:
 
     #     fastp --thread {config[cores][fastp]} \
     #         -i {input} \
-    #         -o {output.trimmed} \
+    #         -o {output.trimmed1} \
+    #         -O {output.trimmed2}
     #         -j {output.json} \
     #         -h {output.html}
     #     """
