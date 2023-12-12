@@ -23,12 +23,15 @@ samples: config/samples-template.tsv
 units: config/units.tsv
 
 
+path:
+    root: /project/awlab/wuhuiyun/pav_mgs_2023
+    scratch: /work/wuhuiyun/pav_scratch
 # folder:
-#     data: data
-#     logs: logs
-#     assemblies: assemblies
+#     rawdata: rawdata
+#     log: log
+#     assembly: assembly
 #     scripts: scripts
-#     crossMap: crossMap 
+#     crossMap: crossMap
 #     concoct: concoct
 #     maxbin: maxbin
 #     metabat: metabat
@@ -65,14 +68,15 @@ units: config/units.tsv
 #     toy: download_toydata.txt
 #     GTDBtkVis: 
 
-# cores:
-#     fastp: 4
-#     spades: 48
-#     diamond: 12
-#     checkv: 
-#     vcontact:
-#     virsorter:
-#     vrhyme:
+cores:
+    fastp: 4
+    spades: 48
+    reassemble: 48
+    diamond: 12
+    checkv: 4
+    vcontact: 8
+    virsorter: 12
+    vrhyme: 8
 
 # params:
 #     cutfasta: 10000
