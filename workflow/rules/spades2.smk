@@ -34,7 +34,7 @@ SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
 
 rule all:
-    input: expand("reports/assembly/{sample}.spades2.log", sample=SAMPLES)
+    input: expand("results/assembly/{sample}.contigs.fasta", sample=SAMPLES)
 
 wildcard_constraints:
     dataset="\d+"
@@ -60,6 +60,10 @@ rule run_metaspades:
     #     "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0",
     conda:
         "../envs/spades.yml"
+    shell:
+        """"
+         export OMP_NUM_THREADS=48
+        """"
     # shell:
     #     # "singularity exec docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0 "
     #     "spades.py --meta "
@@ -74,3 +78,4 @@ rule run_metaspades:
     #     "> {log} 2>&1"
     script:
         "../scripts/spades_script.py"
+
