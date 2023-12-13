@@ -39,3 +39,4 @@ export WORK_DIR=/project/awlab/wuhuiyun/pav_mgs_2023
 snakemake --use-conda  -c6 -j6 -s workflow/rules/spades2.smk
 
 # snakemake --use-singularity -c6 -j6 -s workflow/rules/spades2.smk
+snakemake --use-conda  -c6 -j6 
