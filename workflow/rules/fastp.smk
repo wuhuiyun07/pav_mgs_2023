@@ -48,12 +48,10 @@ rule fastp_pe:
 
 rule qfilterVis:
     input: 
-        results/trimmed/qfilterVis.pdf
+        pdf = "results/trimmed/qfilterVis.pdf"
     output: 
-        text = results/trimmed/qfilterVis.stats,
-        plot = results/trimmed/qfilterVis.pdf
-        # text = f'{config["path"]["root"]}/{config["folder"]["stats"]}/qfilter.stats',
-        # plot = f'{config["path"]["root"]}/{config["folder"]["stats"]}/qfilterVis.pdf'
+        text = "results/trimmed/qfilterVis.stats",
+        plot = "results/trimmed/qfilterVis.pdf"
     shell:
         """
         module load r/4.3.2/gcc-9.3.0
