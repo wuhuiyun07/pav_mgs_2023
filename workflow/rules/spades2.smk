@@ -36,9 +36,7 @@ print(SAMPLES)
 rule all:
     input: expand("results/assembly/{sample}.contigs.fasta", sample=SAMPLES)
     shell:
-        """"
-        export OMP_NUM_THREADS=48
-        """"
+        "export OMP_NUM_THREADS=48"
 
 wildcard_constraints:
     dataset="\d+"
