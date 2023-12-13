@@ -15,6 +15,9 @@ rule all:
 # https://snakemake-wrappers.readthedocs.io/en/stable/wrappers/spades/metaspades.html
 
 container: "docker://continuumio/miniconda3:4.4.10"
+rule OMP:
+    shell:
+        "export OMP_NUM_THREADS=48"
 
 rule run_metaspades:
     input:
