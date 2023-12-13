@@ -40,7 +40,7 @@ rule all:
 
 rule OMP:
     shell:
-    "export OMP_NUM_THREADS=48"
+        "export OMP_NUM_THREADS=48"
 
 rule run_metaspades:
     input:
