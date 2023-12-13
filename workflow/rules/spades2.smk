@@ -41,7 +41,7 @@ wildcard_constraints:
 
 rule run_metaspades:
     input:
-        reads=["results/trimmed/test/{sample}.R1.fastq.gz", "results/trimmed/test/{sample}.R2.fastq.gz"],
+        reads=["results/trimmed/{sample}.R1.fastq.gz", "results/trimmed/{sample}.R2.fastq.gz"],
     output:
         contigs="results/assembly/test2/{sample}.contigs.fasta",
         scaffolds="results/assembly/test2/{sample}.scaffolds.fasta",
