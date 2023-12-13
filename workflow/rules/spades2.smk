@@ -33,7 +33,7 @@ SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
 
 rule OMP:
-    input: expand("results/assembly/{sample}.contigs.fasta", sample=SAMPLES)
+    # input: expand("results/assembly/{sample}.contigs.fasta", sample=SAMPLES)
     shell:
         "export OMP_NUM_THREADS=48"
 
