@@ -48,3 +48,9 @@ include: "rules/spades2.smk" # use conda and script
 rule all:
      shell:
         "export OMP_NUM_THREADS=48"
+##### load rules #####
+# include: "rules/common.smk"
+include: "workflow/rules/fastp.smk" # use wrapper
+# include: "rules/spades.smk" #use container and wrapper
+include: "workflow/rules/spades2.smk" # use conda and script
+# include: "rules/spades3.smk" # use HPC module spades SPAdes v3.13.0
