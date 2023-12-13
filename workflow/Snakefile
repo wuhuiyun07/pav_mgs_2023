@@ -39,8 +39,8 @@ wildcard_constraints:
 include: "rules/common.smk"
 include: "rules/fastp.smk" # use wrapper
 # include: "rules/spades.smk" #use container and wrapper
-# include: "rules/spades2.smk" # use conda and script
-include: "rules/spades3.smk" # use HPC module spades SPAdes v3.13.0
+include: "rules/spades2.smk" # use conda and script
+# include: "rules/spades3.smk" # use HPC module spades SPAdes v3.13.0
 
 
 ### target rules ####
