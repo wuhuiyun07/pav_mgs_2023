@@ -35,15 +35,6 @@ wildcard_constraints:
 
 # report: "reports/workflow.rst"
 
-<<<<<<< HEAD
-
-=======
-shell:
-    """"
-     export OMP_NUM_THREADS=48
-    """"
-    
->>>>>>> 330b7226a0d172bdc0e9f27cde9a130708662c3e
 ##### load rules #####
 # include: "rules/common.smk"
 include: "rules/fastp.smk" # use wrapper
