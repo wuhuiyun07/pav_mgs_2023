@@ -18,7 +18,7 @@ container: "docker://continuumio/miniconda3:4.4.10"
 
 rule run_metaspades:
     input:
-        reads=["results/trimmed/test/{sample}.R1.fastq.gz", "results/trimmed/test/{sample}.R2.fastq.gz"],
+        reads=["results/trimmed/{sample}.R1.fastq.gz", "results/trimmed/{sample}.R2.fastq.gz"],
     output:
         contigs="results/assembly/test/{sample}.contigs.fasta",
         scaffolds="results/assembly/test/{sample}.scaffolds.fasta",
