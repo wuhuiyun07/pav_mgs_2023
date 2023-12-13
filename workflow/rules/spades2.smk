@@ -36,9 +36,8 @@ wildcard_constraints:
     dataset="\d+"
 
 rule OMP:
-    # input: expand("results/assembly/{sample}.contigs.fasta", sample=SAMPLES)
-    shell:
-        "export OMP_NUM_THREADS=48"
+    input: expand("results/assembly/{sample}.contigs.fasta", sample=SAMPLES)
+ 
 
 rule run_metaspades:
     input:
@@ -61,6 +60,8 @@ rule run_metaspades:
     #     "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0",
     conda:
         "../envs/spades.yml"   
+    shell:
+        "export OMP_NUM_THREADS=48"
     # shell:
     #     # "singularity exec docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0 "
     #     "spades.py --meta "
