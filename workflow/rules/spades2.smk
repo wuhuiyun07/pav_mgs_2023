@@ -20,7 +20,6 @@
 #     script:
 #         "../scripts/spades_script.py"
 
-OMP_NUM_THREADS=48
 
 import os
 import json
