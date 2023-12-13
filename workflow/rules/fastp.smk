@@ -54,6 +54,7 @@ rule qfilterVis:
         plot = "results/trimmed/qfilterVis.pdf"
     shell:
         """
+        export OMP_NUM_THREADS=48
         module load r/4.3.2/gcc-9.3.0
         # cd reports/fastp
 

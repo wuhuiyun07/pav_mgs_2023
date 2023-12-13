@@ -45,7 +45,5 @@ include: "rules/spades2.smk" # use conda and script
 
 ### target rules ####
 rule all:
-    shell:
-        "export OMP_NUM_THREADS=48"
     input:
         get_final_output(),
