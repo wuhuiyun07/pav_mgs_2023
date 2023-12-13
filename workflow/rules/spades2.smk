@@ -36,7 +36,7 @@ wildcard_constraints:
     dataset="\d+"
 
 rule all:
-    input: expand("results/assembly/{sample}.contigs.fasta", sample=SAMPLES)
+    input: expand("reports/assembly/{sample}.spades.log", sample=SAMPLES)
 
 rule OMP:
     shell:
