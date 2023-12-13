@@ -32,13 +32,13 @@ SAMPLES = samples_df["sample_name"].tolist()
 
 print(SAMPLES)
 
+wildcard_constraints:
+    dataset="\d+"
+
 rule OMP:
     # input: expand("results/assembly/{sample}.contigs.fasta", sample=SAMPLES)
     shell:
         "export OMP_NUM_THREADS=48"
-
-wildcard_constraints:
-    dataset="\d+"
 
 rule run_metaspades:
     input:
