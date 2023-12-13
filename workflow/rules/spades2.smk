@@ -35,10 +35,10 @@ print(SAMPLES)
 wildcard_constraints:
     dataset="\d+"
 
-rule OMP:
-    input: expand("results/assembly/{sample}.contigs.fasta", sample=SAMPLES)
-    shell:
-        "export OMP_NUM_THREADS=48" 
+# rule OMP:
+#     input: expand("results/assembly/{sample}.contigs.fasta", sample=SAMPLES)
+#     shell:
+#         "export OMP_NUM_THREADS=48" 
  
 
 rule run_metaspades:

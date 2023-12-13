@@ -11,5 +11,5 @@ print(SAMPLES)
 
 
 def get_final_output():
-    final_output = expand("results/assembly/{sample}.fasta")	
+    final_output = expand("results/assembly/{sample}.contigs.fasta", sample=SAMPLES)	
     return final_output
