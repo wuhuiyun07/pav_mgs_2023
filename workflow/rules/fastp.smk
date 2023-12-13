@@ -23,7 +23,7 @@ rule fastp_pe:
         sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz"]
     output:
         trimmed1="results/trimmed/{sample}.R1.fastq.gz", 
-        trimmed2="results/trimmed/{sample}.R2.fastq.gz"],
+        trimmed2="results/trimmed/{sample}.R2.fastq.gz",
         html="reports/fastp/{sample}.html",
         json="reports/fastp/{sample}.json"
     log:
