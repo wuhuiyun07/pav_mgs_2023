@@ -44,9 +44,9 @@ rule run_metaspades:
     input:
         reads=["results/trimmed/{sample}.R1.fastq.gz", "results/trimmed/{sample}.R2.fastq.gz"],
     output:
-        contigs="results/assembly/{sample}.contigs.fasta",
-        scaffolds="results/assembly/{sample}.scaffolds.fasta",
-        dir=directory("results/assembly/{sample}_intermediate_files"),
+        contigs="results/assembly/test/{sample}.contigs.fasta",
+        scaffolds="results/assembly/test/{sample}.scaffolds.fasta",
+        dir=directory("results/assembly/test/{sample}_intermediate_files"),
     params:
         k="auto",
         extra="--only-assembler",
