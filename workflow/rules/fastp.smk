@@ -15,7 +15,7 @@ samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
 SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
 
-rule all:
+rule fastp_html:
     input: expand("reports/fastp/{sample}.html", sample=SAMPLES)
 
 rule fastp_pe:
