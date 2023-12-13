@@ -4,3 +4,7 @@ sample_name	sample_id	sample_type	nucleiotide	collection_date	location	adapter	s
 16_3_S3	16.3	water	DNA	1/10/23	San Jose	A3	KAPA Hyperplus
 16_4_S4	16.4	water	DNA	1/10/23	San Jose	A4	KAPA Hyperplus
 16_5_S5	16.5	water	DNA	1/10/23	San Jose	A5	KAPA Hyperplus
+22_1_S6	22.1	water	DNA	2/27/23	Gainesville	A6	KAPA Hyperplus
+22_2_S7	22.2	water	DNA	2/27/23	Gainesville	A7	KAPA Hyperplus
+22_3_S8	22.3	water	DNA	2/27/23	Gainesville	A8	KAPA Hyperplus
+22_4_S9	22.4	water	DNA	2/27/23	Gainesville	A9	KAPA Hyperplus
