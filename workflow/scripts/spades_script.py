@@ -42,6 +42,7 @@ if not os.path.exists(os.path.join(output_dir, "params.txt")):
 
     # Execute MetaSPAdes
     shell(
+        f"export OMP_NUM_THREADS=48; "
         f"spades.py --meta "
         f"--threads {snakemake.threads} "
         f"{memory_requirements} "
