@@ -14,7 +14,7 @@ rule run_metaspades:
     output:
         contigs="results/assembly/test/24_4_S19.contigs.fasta",
         scaffolds="results/assembly/test/24_4_S19.scaffolds.fasta",
-        dir=directory("results/assembly/test/24_4_S19}_intermediate_files"),
+        dir=directory("results/assembly/test/24_4_S19_intermediate_files"),
     params:
         k="auto",
         extra="--only-assembler",
@@ -24,10 +24,8 @@ rule run_metaspades:
         """
         spades.py --version
         export OMP_NUM_THREADS=48
-        spades.py --meta\   
-            -1 results/trimmed/24_4_S19.R1.fastq.gz  -2 results/trimmed/24_4_S19.R2.fastq.gz  \
+        spades.py --meta\\   
+            -1 results/trimmed/24_4_S19.R1.fastq.gz \\
+            -2 results/trimmed/24_4_S19.R2.fastq.gz \\
             -o results/assembly/test/
-        # spades.py --meta\
-        #     -1 results/trimmed/29_1_S21.R1.fastq.gz  -2 results/trimmed/29_1_S21.R2.fastq.gz  \
-        #     -o results/assembly/test/
         """
