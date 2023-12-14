@@ -9,7 +9,8 @@ SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
 
 rule all:
-    input: expand("reports/assembly/{sample}.spades.txt", sample=SAMPLES)
+    input:
+        expand("reports/assembly/{sample}.spades.log", sample=SAMPLES)
 
 # rule OMP:
 #     shell:
