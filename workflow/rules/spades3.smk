@@ -1,31 +1,22 @@
-import pandas as pd
-wildcard_constraints:
-    dataset="\d+"
-
-# samples: config/samples-template.tsv
-
-# samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
-# SAMPLES = samples_df["sample_name"].tolist()
-# print(SAMPLES)
-
+sample = "24_4_S19"
 rule run_metaspades:
     input:
-        reads=["results/trimmed/24_4_S19.R1.fastq.gz", "results/trimmed/24_4_S19.R2.fastq.gz"],
+        reads=["results/trimmed/{sample}.R1.fastq.gz", "results/trimmed/{sample}.R2.fastq.gz"],
     output:
-        contigs="results/assembly/test/24_4_S19.contigs.fasta",
-        scaffolds="results/assembly/test/24_4_S19.scaffolds.fasta",
-        dir=directory("results/assembly/test/24_4_S19_intermediate_files"),
+        contigs="results/assembly/test/{sample}.contigs.fasta",
+        scaffolds="results/assembly/test/{sample}.scaffolds.fasta",
+        dir=directory("results/assembly/test/{sample}_intermediate_files"),
     params:
         k="auto",
         extra="--only-assembler",
     log:
-        "reports/assembly/24_4_S19.spades2.log",
+        "reports/assembly/{sample}.spades2.log",
     shell:
         """
         spades.py --version
         export OMP_NUM_THREADS=48
-        spades.py --meta\\   
-            -1 results/trimmed/24_4_S19.R1.fastq.gz \\
-            -2 results/trimmed/24_4_S19.R2.fastq.gz \\
-            -o results/assembly/test/
+        spades.py --meta \\
+            -1 results/trimmed/{wildcards.sample}.R1.fastq.gz \\
+            -2 results/trimmed/{wildcards.sample}.R2.fastq.gz \\
+            -o results/assembly/test/{wildcards.sample}/
         """
