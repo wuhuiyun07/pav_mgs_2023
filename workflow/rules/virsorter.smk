@@ -7,7 +7,7 @@
 # singularity exec [options] <container> <command>
 singularity exec -B /project/awlab/wuhuiyun/pav_mgs_2023 \
 ./workflow/envs/virsorter_2.2.4--pyhdfd78af_1.sif \
-virsorter run -w /results/virsorter/16_5_S5.out -i /results/assembly/16_5_S5.contigs.fasta --min-length 1500 -j 4 all
+virsorter run -w ./results/virsorter/16_5_S5.out -i ./results/assembly/16_5_S5.contigs.fasta --min-length 1500 -j 4 all
 
 samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
 SAMPLES = samples_df["sample_name"].tolist()
