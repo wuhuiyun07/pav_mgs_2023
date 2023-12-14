@@ -19,10 +19,11 @@ rule run_metaspades:
         """
 # bash:
         
-#         spades.py --version
-#         export OMP_NUM_THREADS=48
-#         spades.py --meta \
-#             -1 results/trimmed/24_4_S19.R1.fastq.gz \
-#             -2 results/trimmed/24_4_S19.R2.fastq.gz \
-#             -o results/assembly/test/24_4_S19/
+        spades.py --version
+        export OMP_NUM_THREADS=48
+        spades.py --meta \
+            --threads 48 \
+            -1 results/trimmed/24_4_S19.R1.fastq.gz \
+            -2 results/trimmed/24_4_S19.R2.fastq.gz \
+            -o results/assembly/test/24_4_S19/
         
