@@ -1,10 +1,8 @@
 rule run_metaspades:
     input:
-        reads=["results/trimmed/24_4_S1.R1.fastq.gz", "results/trimmed/24_4_S1.R2.fastq.gz"],
+        reads=["results/trimmed/24_4_S1.R1.fastq.gz", "results/trimmed/24_4_S1.R2.fastq.gz"]
     output:
         contigs="results/assembly/test/24_4_S1.contigs.fasta",
-        scaffolds="results/assembly/test/24_4_S1.scaffolds.fasta",
-        dir=directory("results/assembly/test/24_4_S1_intermediate_files"),
     params:
         k="auto",
         extra="--only-assembler",
