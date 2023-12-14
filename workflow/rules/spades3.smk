@@ -26,4 +26,4 @@ rule run_metaspades:
             -1 results/trimmed/24_4_S19.R1.fastq.gz \
             -2 results/trimmed/24_4_S19.R2.fastq.gz \
             -o results/assembly/test/24_4_S19/
-        
+    
