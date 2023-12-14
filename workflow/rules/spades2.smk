@@ -10,7 +10,7 @@ print(SAMPLES)
 
 rule all:
     input:
-        trimmed=["results/trimmed/{sample}.R1.fastq.gz", "results/trimmed/{sample}.R2.fastq.gz"],
+        trimmed=["results/trimmed/{sample}.R1.fastq.gz", "results/trimmed/{sample}.R2.fastq.gz", sample = SAMPLES],
 
 # rule OMP:
 #     shell:
