@@ -8,6 +8,7 @@ samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
 SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
 
+
 rule all:
     input:
         expand("reports/assembly/{sample}.spades.log", sample=SAMPLES)

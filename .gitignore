@@ -12,6 +12,7 @@ resources/**
 results/**
 .snakemake/**
 rawdata/**
+slurm/**
 
 # Distribution / packaging
 .Python

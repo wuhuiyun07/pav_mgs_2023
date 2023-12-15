@@ -40,3 +40,5 @@ snakemake --use-conda  -c6 -j6 -s workflow/rules/spades2.smk
 
 # snakemake --use-singularity -c6 -j6 -s workflow/rules/spades2.smk
 snakemake --use-conda  -c6 -j6 
+
+snakemake --cluster 'qsub -pe smp "NUMBER of THREADS" ' --jobs N_JOBS
