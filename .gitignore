@@ -1,6 +1,7 @@
 *.so
 .DS_Store
 
+.test/**
 .test/benchmarks/**
 .test/logs/**
 .test/results/**
@@ -12,6 +13,7 @@ resources/**
 results/**
 .snakemake/**
 rawdata/**
+slurm/**
 
 # Distribution / packaging
 .Python
