@@ -1,6 +1,7 @@
 *.so
 .DS_Store
 
+.test/**
 .test/benchmarks/**
 .test/logs/**
 .test/results/**
