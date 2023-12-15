@@ -12,4 +12,4 @@
 # Load any required modules for your HPC.
 
 export OMP_NUM_THREADS=48
-singularity run -B /project resources/sifs/virsorter2.2.4.sif virsorter run --prep-for-dramv -w results/virsorter/16_3_S3 -i results/assembly/test/16_3_S3/contigs.fasta --min-length 1500 -j 48 all"
+singularity run -B /project resources/sifs/virsorter2.2.4.sif virsorter run --prep-for-dramv -w results/virsorter/16_3_S3 -i results/assembly/test/16_3_S3/contigs.fasta --min-length 1500 -j 4 all"
