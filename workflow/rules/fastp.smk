@@ -88,11 +88,10 @@ rule multiqc:
         """
 
 
-
 rule fastp:
     output: 
-        fq1 ="results/trimmed/pe/{sample}.R1.fastq.gz",
-        fq2 ="results/trimmed/pe/{sample}.R2.fastq.gz",
+        fq1 ="results/trimmed/{sample}.R1.fastq.gz",
+        fq2 ="results/trimmed/{sample}.R2.fastq.gz",
         html = "report/fastp/{sample}_fastp.html",
         json="report/fastp/{sample}_fastp.json"
     input:  
