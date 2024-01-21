@@ -73,7 +73,7 @@ rule multiqc:
            multiqc {output.mqc_in} -o {output.mqc_out}
         """
 
-        
+
 rule fastp:
     input:
         sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz"]
@@ -84,8 +84,8 @@ rule fastp:
         json="reports/fastp/{sample}.json"
     log:
         "logs/fastp/{sample}.log"
-    conda:
-        "envs/fastp.yml"
+    # conda:
+    #     "envs/fastp.yml"
     threads: 2
     wrapper:
         "v3.0.2/bio/fastp"
