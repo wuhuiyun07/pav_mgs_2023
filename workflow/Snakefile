@@ -19,8 +19,6 @@ print(SAMPLES)
 
 # ##### load rules #####
 # include: "rules/common.smk"
-# include: "rules/fastp.smk" # use wrapper
-# # include: "rules/spades.smk" #use container and wrapper
 # include: "rules/spades2.smk" # use conda and script
 # # include: "rules/spades3.smk" # use HPC module spades SPAdes v3.13.0
 # ### target rules ####
@@ -81,7 +79,8 @@ rule fastp:
            mv {wildcards.myfile}_fastqc.html {output.html}
            mv {wildcards.myfile}_fastqc.zip  {output.zip}
         """
-    container: "docker://quay.io/biocontainers/fastp:0.23.3--h5f740d0_0"
+    container: 
+        "docker://quay.io/biocontainers/fastp:0.23.3--h5f740d0_0"
     shell:
         "fastp -i {input.R1} -I {input.R2}  -o {output.fq1} -O {output.fq2}"
 
