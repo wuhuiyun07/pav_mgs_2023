@@ -75,7 +75,7 @@ print(SAMPLES)
 
 rule multiqc:
     input:
-        fastp= expand("reports/fastp/{sample}.html", sample = SAMPLES),
+        fastp= expand("reports/trimmed/{sample}.json", sample = SAMPLES),
     output:
         mqc_out = directory('results/multiqc_out'),
         mqc_in  = directory('results/multiqc_in'),
@@ -92,8 +92,8 @@ rule fastp:
     output: 
         fq1 ="results/trimmed/{sample}.R1.fastq.gz",
         fq2 ="results/trimmed/{sample}.R2.fastq.gz",
-        html = "reports/fastp/{sample}.html",
-        json="reports/fastp/{sample}.json"
+        html = "reports/trimmed/{sample}.html",
+        # json="reports/trimmed/{sample}.json"
     input:  
         R1 = ["rawdata/{sample}_L001_R1_001.fastq.gz"],
         R2 = ["rawdata/{sample}_L001_R2_001.fastq.gz"],
