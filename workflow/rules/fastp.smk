@@ -82,8 +82,6 @@ rule fastp:
         trimmed2="results/trimmed/{sample}.R2.fastq.gz",
         html="reports/fastp/{sample}.html",
         json="reports/fastp/{sample}.json"
-    log:
-        "logs/fastp/{sample}.log"
     # conda:
     #     "envs/fastp.yml"
     threads: 2
