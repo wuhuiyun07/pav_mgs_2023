@@ -21,8 +21,11 @@ rule multiqc:
         fastp= expand("reports/fastp/{sample}.html", sample = SAMPLES),
     output:
         mqc_out = directory('results/multiqc_out'),
-        html=  "results/multiqc_report.html",
+        mqc_in  = directory('results/multiqc_in'),
     container:
         "docker://quay.io/biocontainers/multiqc:1.19--pyhdfd78af_0"
     shell:
-        "multiqc {input.fastp} -o {output.mqc_out}"
+        """mkdir {output.mqc_in}
+           ln -snr -t {output.mqc_in} {input}
+           multiqc {output.mqc_in} -o {output.mqc_out}
+        """
