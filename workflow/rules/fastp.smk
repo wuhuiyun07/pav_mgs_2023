@@ -84,7 +84,7 @@ rule fastp:
         json="reports/fastp/{sample}.json"
     # conda:
     #     "envs/fastp.yml"
-    threads: 2
+    threads: 4
     wrapper:
         "v3.0.2/bio/fastp"
     
