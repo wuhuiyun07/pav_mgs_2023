@@ -6,16 +6,6 @@ __license__ = "MIT"
 from snakemake.utils import min_version
 min_version("6.4.1")
 
-# configfile: "config/config.yaml"
-
-# module dna_seq:
-#     snakefile:
-#         # here, it is also possible to provide a plain raw URL like "https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling/raw/v2.0.1/workflow/Snakefile"
-#         github("snakemake-workflows/dna-seq-gatk-variant-calling", path="workflow/Snakefile", tag="v2.0.1")
-#     config:
-#         config
-
-# use rule * from dna_seq
 
 import os
 import json
@@ -27,23 +17,250 @@ samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
 SAMPLES = samples_df["sample_name"].tolist()
 print(SAMPLES)
 
+# ##### load rules #####
+# include: "rules/common.smk"
+# include: "rules/fastp.smk" # use wrapper
+# # include: "rules/spades.smk" #use container and wrapper
+# include: "rules/spades2.smk" # use conda and script
+# # include: "rules/spades3.smk" # use HPC module spades SPAdes v3.13.0
+# ### target rules ####
 # rule all:
-#     input: expand("reports/assembly/{sample}.spades2.txt", sample=SAMPLES)
+#     input:
+#         get_final_output(),
 
-wildcard_constraints:
-    dataset="\d+"
+configfile: "config.yaml"
+print("Config is: ", config)
 
-# report: "reports/workflow.rst"
+### config.yaml contents is:
+# salmon_kmer_len: "31"
+# trimreads_qual_threshold: "20"
+# trimreads_min_length: "100"
+# conditions: ["etoh60", "temp33", "ref"]
+# replicates: ["1", "2", "3"]
 
-##### load rules #####
-include: "rules/common.smk"
-include: "rules/fastp.smk" # use wrapper
-# include: "rules/spades.smk" #use container and wrapper
-include: "rules/spades2.smk" # use conda and script
-# include: "rules/spades3.smk" # use HPC module spades SPAdes v3.13.0
+CONDITIONS = config["conditions"]
+REPLICATES = config["replicates"]
+print("Conditions are: ", CONDITIONS)
+print("Replicates are: ", REPLICATES)
+
+###
+# Snakefile you should have after completing episodes 01 to 07
+#
+# To run a full MultiQC report on all samples, use:
+#
+# $ snakemake -j1 -p multiqc
+###
+
+# Input conditions and replicates to process
+
+# "rule all_counts" has been removed to reduce clutter
+
+# Generic read counter rule using wildcards and placeholders,
+# which can count trimmed and untrimmed reads.
+rule countreads:
+    output: "results/countreads/{sample}.fastq.count"
+    input:  "rawdata/{sample}.fastq.gz"
+    shell:
+        "echo $(( $(wc -l <{input}) / 4 )) > {output}"
 
 
-### target rules ####
-rule all:
+rule fastp:
+    output: 
+        fq1 ="results/trimmed/pe/{sample}.1.fq.gz",
+        fq2 ="results/trimmed/pe/{sample}.2.fq.gz",
+        html = "report/fastp/{sample}_fastp.html",
+        json="report/fastp/{sample}_fastp.json"
+    input:  
+        R1 = ["rawdada/{sample}_L001_R1_001.fastq.gz"],
+        R2 = ["rawdada/{sample}_L001_R2_001.fastq.gz"],
+    log: 
+        "logs/fastp/pe/{sample}.log"
+    threads: 4
+    shell:
+        """fastqc -o . {input}
+           mv {wildcards.myfile}_fastqc.html {output.html}
+           mv {wildcards.myfile}_fastqc.zip  {output.zip}
+        """
+    container: "docker://quay.io/biocontainers/fastp:0.23.3--h5f740d0_0"
+    shell:
+        "fastp -i {input.R1} -I {input.R2}  -o {output.fq1} -O {output.fq2}"
+
+rule meta_SPAdes:
+    output: directory("results/assembly/SPAdes.{sample}")
+    # output:
+    #     contigs="assembly/{sample}.contigs.fasta",
+    #     scaffolds="assembly/{sample}.scaffolds.fasta",
+    #     dir=directory("assembly/{sample}.intermediate_files"),
     input:
-        get_final_output(),
+        fq1 ="results/trimmed/pe/{sample}.1.fq.gz",
+        fq2 ="results/trimmed/pe/{sample}.2.fq.gz", 
+        reads=["test_reads/sample1_R1.fastq.gz", "test_reads/sample1_R2.fastq.gz"],
+    params:
+        k="auto",
+        extra="--only-assembler"
+    threads: 48
+    resources:
+        mem_mem=250000,
+        time=60 * 24,
+    container: "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0"
+    log:
+        "log/{sample}.spades.log",
+    benchmark:
+        "logs/assembly/{sample}.spades.log"
+    shell: 
+        r"""
+        spades.py --meta --thread {threads} 
+        --pe1-1 {input.fq1} --pe1-2 {input.fq2} 
+        -o {output}
+        """
+
+rule add_sample_name:
+    output: 
+        contigs="assembly/contigs/{sample}.contigs.fasta",
+        scaffolds="assembly/scaffolds/{sample}.scaffolds.fasta",
+    input: "results/assembly/{sample}"
+    shell: "workflow/scripts/rename.file.sh"
+
+
+rule QUAST:
+    output:
+    input:
+    container: "docker://staphb/quast"
+    threads: 
+    params:
+    shell:
+
+
+rule virsorter2:
+    output:
+    input:
+    container: "docker://quay.io/biocontainers/virsorter:2.2.4--pyhdfd78af_1"
+    threads: 
+    params:
+    shell:
+
+rule checkV:
+    output:
+    input:
+    container: "docker://quay.io/biocontainers/checkv:0.9.0--pyhdfd78af_0"
+    threads: 
+    params:
+    shell:
+
+
+
+rule DAIMOND:
+    output:
+    input:
+    container: "docker://buchfink/diamond"
+    threads: 
+    params:
+    shell:
+
+rule r_taxon_annotation:
+    output: "results/anonotation/taxonomy.csv"
+    input: "results/annotation/taxaID.csv"
+    conda: "envs/r-taxon2.yml"
+    threads: 
+    params:
+    script: "scripts/r-taxon.sh"
+    shell:
+
+
+
+# Kallisto quantification of one sample
+# Modified to declare the whole directory as the output, and to capture all output to
+# a log file.
+rule kallisto_quant:
+    output: directory("kallisto.{sample}")
+    input:
+        index = "Saccharomyces_cerevisiae.R64-1-1.kallisto_index",
+        fq1   = "trimmed/{sample}_1.fq",
+        fq2   = "trimmed/{sample}_2.fq",
+    conda: "envs/kallisto.yml"
+    threads: 4
+    shell:
+        """
+        mkdir {output} 
+        kallisto quant -t {threads} -i {input.index} -o {output} {input.fq1} {input.fq2} >& {output}/kallisto_quant.log
+        """
+
+rule kallisto_index:
+    output:
+        idx = "{strain}.kallisto_index",
+        log = "{strain}.kallisto_log",
+    input:
+        fasta = "transcriptome/{strain}.cdna.all.fa.gz"
+    conda: "envs/kallisto.yml"
+    shell:
+        "kallisto index -i {output.idx} {input.fasta} >& {output.log}"
+
+rule fastqc:
+    output:
+        html = "{indir}.{myfile}_fastqc.html",
+        zip  = "{indir}.{myfile}_fastqc.zip"
+    input:  "{indir}/{myfile}.fq"
+    conda: "envs/fastqc.yml"
+    shell:
+        """fastqc -o . {input}
+           mv {wildcards.myfile}_fastqc.html {output.html}
+           mv {wildcards.myfile}_fastqc.zip  {output.zip}
+        """
+
+rule salmon_quant:
+    output: directory("salmon.{sample}")
+    input:
+        index = "Saccharomyces_cerevisiae.R64-1-1.salmon_index",
+        fq1   = "trimmed/{sample}_1.fq",
+        fq2   = "trimmed/{sample}_2.fq",
+    container: 
+        "docker://quay.io/biocontainers/salmon:1.4.0--h84f40af_1"
+    threads: 4
+    shell:
+        "salmon quant -p {threads} -i {input.index} -l A -1 {input.fq1} -2 {input.fq2} --validateMappings -o {output}"
+
+rule salmon_index:
+    output:
+        idx = directory("{strain}.salmon_index")
+    input:
+        fasta = "transcriptome/{strain}.cdna.all.fa.gz"
+    container: 
+       # "salmon-1.10.2.sif"
+        "docker://quay.io/biocontainers/salmon:1.4.0--h84f40af_1"
+       # "salmon_1.4.0--h84f40af_1.sif"
+    params:
+        kmer_len = config.get("salmon_kmer_len","29")
+    shell:
+        "salmon index -t {input.fasta} -i {output.idx} -k {params.kmer_len}"
+
+
+
+# A version of the MultiQC rule that ensures nothing unexpected is hoovered up by multiqc,
+# by linking the files into a temporary directory.
+# Note that this requires the *kallisto_quant* rule to be amended as above so that it has
+# a directory as the output, with that directory containing the console log.
+rule multiqc:
+    output:
+        mqc_out = directory('multiqc_out'),
+        mqc_in  = directory('multiqc_in'),
+    input:
+        salmon =   expand("salmon.{cond}_{rep}", cond=CONDITIONS, rep=REPLICATES),
+        kallisto = expand("kallisto.{cond}_{rep}", cond=CONDITIONS, rep=REPLICATES),
+        fastqc =   expand("reads.{cond}_{rep}_{end}_fastqc.zip", cond=CONDITIONS, rep=REPLICATES, end=["1","2"]),
+    container:
+        "docker://quay.io/biocontainers/multiqc:1.19--pyhdfd78af_0"
+    shell:
+        """mkdir {output.mqc_in}
+           ln -snr -t {output.mqc_in} {input}
+           multiqc {output.mqc_in} -o {output.mqc_out}
+        """
+
+
+# Rule to demonstrate using a conda environment
+rule a_conda_rule:
+    conda:  "envs/cutadapt.yml"
+    shell:
+        "which cutadapt"
+
+
+

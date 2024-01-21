@@ -10,6 +10,7 @@
 benchmarks/**
 logs/**
 resources/**
+reports/**
 results/**
 .snakemake/**
 rawdata/**

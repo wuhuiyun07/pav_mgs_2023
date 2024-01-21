@@ -1,0 +1,49 @@
+__author__ = "Huiyun Wu"
+__copyright__ = "Copyright 2023, Wu"
+__email__ = "hwu18@tulane.edu"
+__license__ = "MIT"
+
+from snakemake.utils import min_version
+min_version("6.4.1")
+
+# configfile: "config/config.yaml"
+
+# module dna_seq:
+#     snakefile:
+#         # here, it is also possible to provide a plain raw URL like "https://github.com/snakemake-workflows/dna-seq-gatk-variant-calling/raw/v2.0.1/workflow/Snakefile"
+#         github("snakemake-workflows/dna-seq-gatk-variant-calling", path="workflow/Snakefile", tag="v2.0.1")
+#     config:
+#         config
+
+# use rule * from dna_seq
+
+import os
+import json
+import glob
+import pandas as pd
+from snakemake.utils import validate
+
+samples_df = pd.read_csv("config/samples-template.tsv", sep="\t")
+SAMPLES = samples_df["sample_name"].tolist()
+print(SAMPLES)
+
+# rule all:
+#     input: expand("reports/assembly/{sample}.spades2.txt", sample=SAMPLES)
+
+wildcard_constraints:
+    dataset="\d+"
+
+# report: "reports/workflow.rst"
+
+##### load rules #####
+include: "rules/common.smk"
+include: "rules/fastp.smk" # use wrapper
+# include: "rules/spades.smk" #use container and wrapper
+include: "rules/spades2.smk" # use conda and script
+# include: "rules/spades3.smk" # use HPC module spades SPAdes v3.13.0
+
+
+### target rules ####
+rule all:
+    input:
+        get_final_output(),
