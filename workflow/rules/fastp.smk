@@ -92,8 +92,8 @@ rule fastp:
     output: 
         fq1 ="results/trimmed/{sample}.R1.fastq.gz",
         fq2 ="results/trimmed/{sample}.R2.fastq.gz",
-        html = "report/fastp/{sample}_fastp.html",
-        json="report/fastp/{sample}_fastp.json"
+        html = "report/fastp/{sample}.html",
+        json="report/fastp/{sample}.json"
     input:  
         R1 = ["rawdada/{sample}_L001_R1_001.fastq.gz"],
         R2 = ["rawdada/{sample}_L001_R2_001.fastq.gz"],
