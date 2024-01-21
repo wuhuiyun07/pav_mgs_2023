@@ -59,20 +59,6 @@ print(SAMPLES)
 #         rm Rplots.pdf
 #         """
 
-# rule fastp:
-#     input:
-#         sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz"]
-#     output:
-#         trimmed1="results/trimmed/{sample}.R1.fastq.gz", 
-#         trimmed2="results/trimmed/{sample}.R2.fastq.gz",
-#         html="reports/fastp/{sample}.html",
-#         json="reports/fastp/{sample}.json"
-#     # conda:
-#     #     "envs/fastp.yml"
-#     threads: 4
-#     wrapper:
-#         "v3.0.2/bio/fastp"
-
 rule multiqc:
     input:
         fastp= expand("reports/trimmed/{sample}.json", sample = SAMPLES),
@@ -89,17 +75,33 @@ rule multiqc:
 
 
 rule fastp:
-    output: 
-        fq1 ="results/trimmed/{sample}.R1.fastq.gz",
-        fq2 ="results/trimmed/{sample}.R2.fastq.gz",
-        html = "reports/trimmed/{sample}.html",
-        json="reports/trimmed/{sample}.json"
-    input:  
-        R1 = ["rawdata/{sample}_L001_R1_001.fastq.gz"],
-        R2 = ["rawdata/{sample}_L001_R2_001.fastq.gz"],
+    input:
+        sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz"]
+    output:
+        trimmed1="results/trimmed/{sample}.R1.fastq.gz", 
+        trimmed2="results/trimmed/{sample}.R2.fastq.gz",
+        html="reports/fastp/{sample}.html",
+        json="reports/fastp/{sample}.json"
+    # conda:
+    #     "envs/fastp.yml"
     threads: 4
-    container: 
-        "../sifs/fastp_0.23.3--h5f740d0_0.sif"
-    shell:
-        "fastp -i {input.R1} -I {input.R2}  -o {output.fq1} -O {output.fq2}"
+    wrapper:
+        "v3.0.2/bio/fastp"
+
+
+
+# rule fastp:
+#     output: 
+#         fq1 ="results/trimmed/{sample}.R1.fastq.gz",
+#         fq2 ="results/trimmed/{sample}.R2.fastq.gz",
+#         html = "reports/trimmed/{sample}.html",
+#         json="reports/trimmed/{sample}.json"
+#     input:  
+#         R1 = ["rawdata/{sample}_L001_R1_001.fastq.gz"],
+#         R2 = ["rawdata/{sample}_L001_R2_001.fastq.gz"],
+#     threads: 4
+#     container: 
+#         "../sifs/fastp_0.23.3--h5f740d0_0.sif"
+#     shell:
+#         "fastp -i {input.R1} -I {input.R2}  -o {output.fq1} -O {output.fq2}"
     
