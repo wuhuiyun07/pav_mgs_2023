@@ -95,8 +95,8 @@ rule fastp:
         html = "reports/fastp/{sample}.html",
         json="reports/fastp/{sample}.json"
     input:  
-        R1 = ["rawdada/{sample}_L001_R1_001.fastq.gz"],
-        R2 = ["rawdada/{sample}_L001_R2_001.fastq.gz"],
+        R1 = ["rawdata/{sample}_L001_R1_001.fastq.gz"],
+        R2 = ["rawdata/{sample}_L001_R2_001.fastq.gz"],
     threads: 4
     container: 
         "docker://quay.io/biocontainers/fastp:0.23.3--h5f740d0_0"
