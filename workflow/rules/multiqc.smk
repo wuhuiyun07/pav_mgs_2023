@@ -18,10 +18,10 @@ SAMPLES = "16_1_S1 16_2_S2 16_3_S3 16_4_S4 16_5_S5 22_1_S6 22_2_S7 22_3_S8 22_4_
 
 rule multiqc:
     input:
-        fastp= expand("report/fastp/{sample}.html", sample = SAMPLES),
+        fastp= expand("reports/fastp/{sample}.html", sample = SAMPLES),
     output:
         mqc_out = directory('results/multiqc_out'),
-        html=  "result/multiqc_report.html",
+        html=  "results/multiqc_report.html",
     container:
         "docker://quay.io/biocontainers/multiqc:1.19--pyhdfd78af_0"
     shell:
