@@ -99,7 +99,7 @@ rule fastp:
         R2 = ["rawdata/{sample}_L001_R2_001.fastq.gz"],
     threads: 4
     container: 
-        "docker://quay.io/biocontainers/fastp:0.23.3--h5f740d0_0"
+        "../sifs/fastp_0.23.3--h5f740d0_0.sif"
     shell:
         "fastp -i {input.R1} -I {input.R2}  -o {output.fq1} -O {output.fq2}"
     
