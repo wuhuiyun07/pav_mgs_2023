@@ -2,7 +2,7 @@
 
 # Specify the directory containing the individual folders
 # main_directory="/path/to/main_directory"
-main_directory="/project/awlab/wuhuiyun/pav_mgs_2023/results/assembly/rename.file/"
+main_directory="/project/awlab/wuhuiyun/pav_mgs_2023/results/assembly/"
 
 
 # Loop through each folder
