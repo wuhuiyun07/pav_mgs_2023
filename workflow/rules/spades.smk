@@ -23,7 +23,7 @@ print(SAMPLES)
 
 rule metaspades:
     input:
-        R1 = expand("results/trimmed/{sample}.R1.fastq.gz", sample = SAMPLES)
+        R1 = expand("results/trimmed/{sample}.R1.fastq.gz", sample = SAMPLES),
         R2 = expand("results/trimmed/{sample}.R2.fastq.gz", sample = SAMPLES)
     output:
         contigs="results/assembly/{sample}.contigs.fasta",
