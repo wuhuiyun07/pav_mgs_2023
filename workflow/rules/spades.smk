@@ -51,7 +51,6 @@ rule metaspades:
         -k {params.k}   
         --pe1-1 {input.R1}
         --pe1-2 {input.R2}  
-        --only-assembler  > {log} 2>&1
         """
     # wrapper:
     #     "v3.0.2/bio/spades/metaspades"
