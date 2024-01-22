@@ -46,7 +46,8 @@ rule metaspades:
         mem_mem=250000,
         time=60 * 24,
     shell:
-        r"""spades.py --meta  -t {threads}   
+        r"""mkdir {output.dir}
+        spades.py --meta  -t {threads}   
         -o {output.dir} 
         -k {params.k}   
         --pe1-1 {input.R1}
