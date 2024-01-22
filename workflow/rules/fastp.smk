@@ -74,22 +74,6 @@ rule multiqc:
         """
 
 
-# rule fastp:
-#     input:
-#         sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz"]
-#     output:
-#         trimmed1="results/trimmed/{sample}.R1.fastq.gz", 
-#         trimmed2="results/trimmed/{sample}.R2.fastq.gz",
-#         html="reports/trimmed/{sample}.html",
-#         json="reports/trimmed/{sample}.json"
-#     # conda:
-#     #     "envs/fastp.yml"
-#     threads: 4
-#     wrapper:
-#         "v3.0.2/bio/fastp"
-
-
-
 rule fastp:
     output: 
         fq1 ="results/trimmed/{sample}.R1.fastq.gz",
@@ -105,3 +89,16 @@ rule fastp:
     shell:
         "fastp -i {input.R1} -I {input.R2}  -o {output.fq1} -O {output.fq2} --json {output.json} --html {output.html}"
     
+# rule fastp:
+#     input:
+#         sample=["rawdata/{sample}_L001_R1_001.fastq.gz", "rawdata/{sample}_L001_R2_001.fastq.gz"]
+#     output:
+#         trimmed1="results/trimmed/{sample}.R1.fastq.gz", 
+#         trimmed2="results/trimmed/{sample}.R2.fastq.gz",
+#         html="reports/trimmed/{sample}.html",
+#         json="reports/trimmed/{sample}.json"
+#     # conda:
+#     #     "envs/fastp.yml"
+#     threads: 4
+#     wrapper:
+#         "v3.0.2/bio/fastp"
