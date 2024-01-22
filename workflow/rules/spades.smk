@@ -22,6 +22,9 @@ container: "docker://continuumio/miniconda3:4.4.10"
 #     shell:
 #         "export OMP_NUM_THREADS=48"
 
+rule all_spades:
+    input: expand("reports/assembly/{sample}.spades.txt", sample=SAMPLES)
+
 rule metaspades:
     input:
         reads=["results/trimmed/{sample}.R1.fastq.gz", "results/trimmed/{sample}.R2.fastq.gz"],
