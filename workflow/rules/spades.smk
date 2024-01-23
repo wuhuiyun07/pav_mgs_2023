@@ -48,6 +48,7 @@ rule metaspades:
     shell:
         r"""mkdir {output.dir}
         spades.py --meta  -t {threads}   
+        -output_dir = snakemake.output.dir
         -o {output.dir} 
         -k {params.k}   
         --pe1-1 {input.R1}
