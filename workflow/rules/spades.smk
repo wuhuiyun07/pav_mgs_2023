@@ -28,15 +28,13 @@ rule metaspades:
         R1 = expand("results/trimmed/{sample}.R1.fastq.gz", sample = SAMPLES),
         R2 = expand("results/trimmed/{sample}.R2.fastq.gz", sample = SAMPLES)
     output:
-        contigs="results/assembly/{sample}.contigs.fasta",
-        scaffolds="results/assembly/{sample}.scaffolds.fasta",
-        dir=directory("results/assembly/{sample}_intermediate_files"),
+        dir = directory("results/assembly/{sample}"),
+        # contigs="results/assembly/{sample}/contigs.fasta",
+        # scaffolds="results/assembly/{sample}/scaffolds.fasta",
     benchmark:
         "reports/assembly/{sample}.spades.txt" 
     params:
-        # all parameters are optional
         k= "auto",
-        extra= "--only-assembler",
     log:
         "reports/assembly/{sample}.spades.log",
     container:
@@ -46,11 +44,10 @@ rule metaspades:
         mem_mem=250000,
         time=60 * 24,
     shell:
-        r"""mkdir {output.dir}
-        spades.py --meta  -t {threads}   
-        -output_dir = snakemake.output.dir
+        r"""
+        spades.py --meta  
         -o {output.dir} 
-        -k {params.k}   
+        -t {threads}   
         --pe1-1 {input.R1}
         --pe1-2 {input.R2}  
         """
@@ -59,3 +56,5 @@ rule metaspades:
    
 
 
+# code from github metagenome assembly
+# https://github.com/metagenome-atlas/metagenome-assembly/blob/main/workflow/rules/spades.smk
