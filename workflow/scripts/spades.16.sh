@@ -29,7 +29,8 @@ export WORK_DIR=/project/awlab/wuhuiyun/pav_mgs_2023
             --threads 48 \
             -1 results/trimmed/16_1_S1.R1.fastq.gz \
             -2 results/trimmed/16_1_S1.R2.fastq.gz \
-            -o results/assembly/test/16_1_S1/
+            # -o results/assembly/test/16_1_S1/
+            -o results/assembly/16_1_S1/
 
  spades.py --version
         export OMP_NUM_THREADS=48

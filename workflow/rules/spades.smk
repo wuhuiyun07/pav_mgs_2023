@@ -25,8 +25,8 @@ rule all_spades:
 
 rule metaspades:
     input:
-        R1 = expand("results/trimmed/{sample}.R1.fastq.gz", sample = SAMPLES),
-        R2 = expand("results/trimmed/{sample}.R2.fastq.gz", sample = SAMPLES)
+        R1 = expand("results/trimmed/{sample}.R1.fastq.gz"),
+        R2 = expand("results/trimmed/{sample}.R2.fastq.gz")
     output:
         dir = directory("results/assembly/{sample}"),
         # contigs="results/assembly/{sample}/contigs.fasta",
