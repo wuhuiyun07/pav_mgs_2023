@@ -28,7 +28,8 @@ rule metaspades:
         R1 = "results/trimmed/{sample}.R1.fastq.gz",
         R2 = "results/trimmed/{sample}.R2.fastq.gz"
     output:
-        dir = directory("results/assembly/{sample}.tmp"),
+        dir = directory("results/assembly/{sample}"),
+        tmp = directory("results/assembly/{sample}.tmp"),
         contigs="results/assembly/{sample}.contigs.fasta",
         scaffolds="results/assembly/{sample}.scaffolds.fasta",
     benchmark:
