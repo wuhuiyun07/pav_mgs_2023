@@ -45,11 +45,7 @@ rule metaspades:
         time=60 * 24,
     shell:
         r"""
-        spades.py --meta  \
-        -o {output.dir} \
-        -t {threads}   \
-        --pe1-1 {input.R1} \
-        --pe1-2 {input.R2}  \
+        spades.py --meta  -o {output.dir} -t {threads}  --pe1-1 {input.R1} --pe1-2 {input.R2}  
         """
     # wrapper:
     #     "v3.0.2/bio/spades/metaspades"
