@@ -28,9 +28,9 @@ rule metaspades:
         R1 = "results/trimmed/{sample}.R1.fastq.gz",
         R2 = "results/trimmed/{sample}.R2.fastq.gz"
     output:
-        dir = directory("results/assembly/{sample}"),
-        # contigs="results/assembly/{sample}/contigs.fasta",
-        # scaffolds="results/assembly/{sample}/scaffolds.fasta",
+        dir = directory("results/assembly/{sample}.tmp"),
+        contigs="results/assembly/{sample}.contigs.fasta",
+        scaffolds="results/assembly/{sample}.scaffolds.fasta",
     benchmark:
         "reports/assembly/{sample}.spades.txt" 
     params:
@@ -46,6 +46,7 @@ rule metaspades:
     shell:
         r"""
         spades.py --meta  -o {output.dir} -t {threads}  --pe1-1 {input.R1} --pe1-2 {input.R2}  
+        mv results/assembly/{sample}/contigs.fasta results/assembly/{sample}.contigs.fasta
         """
     # wrapper:
     #     "v3.0.2/bio/spades/metaspades"
