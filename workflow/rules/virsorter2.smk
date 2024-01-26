@@ -48,10 +48,7 @@ rule vs2_RNA:
     container:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
     shell:
-        "virsorter run -w {params.path} -i {input} -j {params.nodes} all"
         "virsorter run -w {params.path} -i {input} --include-groups RNA -j {params.nodes} all" # include RNA virus group
-        "virsorter run -w {params.path} -i {input} --include-groupsdsDNAphage,ssDNA"
-        # "singularity run -B /project resources/sifs/virsorter2.2.4.sif virsorter run -w results/virsorter/16_5_S5 -i results/assembly/test/16_5_S5/contigs.fasta --min-length 1500 -j 4 all"
         
 
 # #to have wildcards in the input of a rule but not in the output of the rule
