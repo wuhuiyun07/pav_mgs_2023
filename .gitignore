@@ -1,6 +1,9 @@
 *.so
 .DS_Store
 
+.virsorter/*
+db/*
+.conda/*
 .test/**
 .test/benchmarks/**
 .test/logs/**
