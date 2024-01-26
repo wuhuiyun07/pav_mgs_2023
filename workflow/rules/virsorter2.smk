@@ -20,16 +20,37 @@ rule vs2:
     input:
         "results/assembly/{sample}.contigs.fasta"
     output:
-        fa = "results/vs2/{sample}.final-viral-combined.fa",
-        score ="results/vs2/{sample}.final-viral-score.tsv",
-        boundary = "results/vs2/{sample}.final-viral-boundary.tsv"
+        fa = "results/vs2/{sample}/final-viral-combined.fa",
+        score ="results/vs2/{sample}/final-viral-score.tsv",
+        boundary = "results/vs2/{sample}/final-viral-boundary.tsv"
     params:
-        path= "results/virsorter2/{sample}",
-        nodes= "8"
+        path = "results/vs2/{sample}",
+        nodes = "8"
     container:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
     shell:
         "virsorter run -w {params.path} -i {input} -j {params.nodes} all"
+        "virsorter run -w {params.path} -i {input} --include-groups RNA -j 4 all" # include RNA virus group
+        "virsorter run -w {params.path} -i {input} --include-groupsdsDNAphage,ssDNA"
+        # "singularity run -B /project resources/sifs/virsorter2.2.4.sif virsorter run -w results/virsorter/16_5_S5 -i results/assembly/test/16_5_S5/contigs.fasta --min-length 1500 -j 4 all"
+        
+rule vs2_RNA:
+    input:
+        "results/assembly/{sample}.contigs.fasta"
+    output:
+        dir = "results/vs2/{sample}.RNA"
+        fa = "results/vs2/{sample}.RNA/final-viral-combined.fa",
+        score ="results/vs2/{sample}.RNA/final-viral-score.tsv",
+        boundary = "results/vs2/{sample}.RNA/final-viral-boundary.tsv"
+    params:
+        path = "results/vs2/{sample}.RNA",
+        nodes = "8"
+    container:
+        "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
+    shell:
+        "virsorter run -w {params.path} -i {input} -j {params.nodes} all"
+        "virsorter run -w {params.path} -i {input} --include-groups RNA -j {params.nodes} all" # include RNA virus group
+        "virsorter run -w {params.path} -i {input} --include-groupsdsDNAphage,ssDNA"
         # "singularity run -B /project resources/sifs/virsorter2.2.4.sif virsorter run -w results/virsorter/16_5_S5 -i results/assembly/test/16_5_S5/contigs.fasta --min-length 1500 -j 4 all"
         
 
