@@ -9,11 +9,11 @@ print(SAMPLES)
 
 rule vs2:
     input:
-        "results/assembly/{sample}_contigs.fasta"
+        "results/assembly/{sample}.contigs.fasta"
     output:
-        "results/vs2/{sample}_final-viral-combined.fa",
-        "results/vs2/{sample}_final-viral-score.tsv",
-        "results/vs2/{sample}_final-viral-boundary.tsv"
+        "results/vs2/{sample}.final-viral-combined.fa",
+        "results/vs2/{sample}.final-viral-score.tsv",
+        "results/vs2/{sample}.final-viral-boundary.tsv"
     params:
         path= "results/virsorter2/",
         nodes= "16"
