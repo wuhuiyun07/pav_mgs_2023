@@ -11,17 +11,18 @@ rule vs2:
     input:
         "results/assembly/{sample}.contigs.fasta"
     output:
-        "results/vs2/{sample}.final-viral-combined.fa",
-        "results/vs2/{sample}.final-viral-score.tsv",
-        "results/vs2/{sample}.final-viral-boundary.tsv"
+        db = "resources/vs2_db"
+        fa = "results/vs2/{sample}.final-viral-combined.fa",
+        score ="results/vs2/{sample}.final-viral-score.tsv",
+        boundary = "results/vs2/{sample}.final-viral-boundary.tsv"
     params:
         path= "results/virsorter2/{sample}",
-        nodes= "16"
+        nodes= "8"
     container:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
     shell:
-        # ""
-        "virsorter --db-dir ../resources/vs2_db run -w {params.path} -i {input} -j {params.nodes} all"
+        "virsorter setup -d {output.db} -j 4"
+        "virsorter run -w {params.path} -i {input} -j {params.nodes} all"
         # "singularity run -B /project resources/sifs/virsorter2.2.4.sif virsorter run -w results/virsorter/16_5_S5 -i results/assembly/test/16_5_S5/contigs.fasta --min-length 1500 -j 4 all"
         
 
