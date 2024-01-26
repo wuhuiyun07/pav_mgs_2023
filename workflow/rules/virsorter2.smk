@@ -15,7 +15,7 @@ rule vs2:
         "results/vs2/{sample}.final-viral-score.tsv",
         "results/vs2/{sample}.final-viral-boundary.tsv"
     params:
-        path= "results/virsorter2/",
+        path= "results/virsorter2/{sample}",
         nodes= "16"
     container:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
