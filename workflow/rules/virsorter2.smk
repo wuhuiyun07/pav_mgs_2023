@@ -36,11 +36,11 @@ rule vs2_RNA:
     input:
         "results/assembly/{sample}.contigs.fasta"
     output:
-        fa = "results/vs2/{sample}.RNA/final-viral-combined.fa",
-        score ="results/vs2/{sample}.RNA/final-viral-score.tsv",
-        boundary = "results/vs2/{sample}.RNA/final-viral-boundary.tsv"
+        fa = "results/vs2/RNA/{sample}/final-viral-combined.fa",
+        score ="results/vs2/RNA/{sample}/final-viral-score.tsv",
+        boundary = "results/vs2/RNA/{sample}/final-viral-boundary.tsv"
     params:
-        path = "results/vs2/{sample}.RNA",
+        path = "results/vs2/RNA/{sample}",
         nodes = "8"
     container:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
