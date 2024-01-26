@@ -20,7 +20,8 @@ rule vs2:
     container:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
     shell:
-        "virsorter run -w {params.path} -i {input} -j {params.nodes} all"
+        # ""
+        "virsorter --db-dir ../resources/vs2_db run -w {params.path} -i {input} -j {params.nodes} all"
         # "singularity run -B /project resources/sifs/virsorter2.2.4.sif virsorter run -w results/virsorter/16_5_S5 -i results/assembly/test/16_5_S5/contigs.fasta --min-length 1500 -j 4 all"
         
 
