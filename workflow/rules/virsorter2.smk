@@ -38,7 +38,7 @@ rule vs2_RNA:
     input:
         "results/assembly/{sample}.contigs.fasta"
     output:
-        dir = "results/vs2/{sample}.RNA"
+        dir = "results/vs2/{sample}.RNA",
         fa = "results/vs2/{sample}.RNA/final-viral-combined.fa",
         score ="results/vs2/{sample}.RNA/final-viral-score.tsv",
         boundary = "results/vs2/{sample}.RNA/final-viral-boundary.tsv"
