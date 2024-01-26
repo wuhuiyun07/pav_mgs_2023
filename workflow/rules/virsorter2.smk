@@ -11,9 +11,9 @@ rule vs2:
     input:
         "results/assembly/{sample}_contigs.fasta"
     output:
-        "results/v2/{sample}_final-viral-combined.fa",
-        "results/v2/{sample}_final-viral-score.tsv",
-        "results/v2/{sample}_final-viral-boundary.tsv"
+        "results/vs2/{sample}_final-viral-combined.fa",
+        "results/vs2/{sample}_final-viral-score.tsv",
+        "results/vs2/{sample}_final-viral-boundary.tsv"
     params:
         path= "results/virsorter2/",
         nodes= "16"
