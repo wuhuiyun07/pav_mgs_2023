@@ -11,7 +11,7 @@ rule vs2:
     input:
         "results/assembly/{sample}.contigs.fasta"
     output:
-        db = "resources/vs2_db"
+        db = "resources/vs2_db",
         fa = "results/vs2/{sample}.final-viral-combined.fa",
         score ="results/vs2/{sample}.final-viral-score.tsv",
         boundary = "results/vs2/{sample}.final-viral-boundary.tsv"
