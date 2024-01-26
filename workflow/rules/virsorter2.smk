@@ -9,11 +9,11 @@ print(SAMPLES)
 
 rule vs2_db:
     output:
-        db = "resources/vs2_db",
+        db = "./resources/vs2_db",
     container:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
     shell:
-        "virsorter setup -d {output.db} -j 4"
+        "virsorter config --init-source --db-dir={output.db}"
         
 
 rule vs2:
