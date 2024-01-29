@@ -1,8 +1,3 @@
-
-# import pandas as pd
-# wildcard_constraints:
-#     dataset="\d+"
-
 # # samples: config/samples-template.tsv
 
 # SAMPLES = samples_df["sample_name"].tolist()
@@ -34,7 +29,6 @@ rule metaspades:
     shell:
         r"""
         spades.py --meta  -o {output.dir} -t {threads}  --pe1-1 {input.R1} --pe1-2 {input.R2}  
-        # mv results/assembly/{sample}/contigs.fasta results/assembly/{sample}.contigs.fasta
         """
     # wrapper:
     #     "v3.0.2/bio/spades/metaspades"
