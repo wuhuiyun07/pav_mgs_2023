@@ -9,7 +9,7 @@ print(SAMPLES)
 
 rule vs2_db:
     output:
-        db = "./resources/vs2_db",
+        db = "resources/vs2_db",
     container:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
     shell:
