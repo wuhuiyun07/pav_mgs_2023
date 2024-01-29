@@ -9,7 +9,7 @@ print(SAMPLES)
 
 rule all_v2:
     input: 
-        DNA.score = expand("results/vs2_DNA/{sample}/final-viral-score.tsv", sample=SAMPLES)
+        DNA.score = expand("results/vs2_DNA/{sample}/final-viral-score.tsv", sample=SAMPLES),
         RNA.score = expand("results/vs2_RNA/{sample}/final-viral-score.tsv", sample=SAMPLES)
 
 rule vs2_DNA:
