@@ -21,7 +21,7 @@ print(SAMPLES)
 
 
 rule all_spades:
-    input: expand("reports/assembly/{sample}.spades.txt", sample=SAMPLES)
+    input: expand("results/assembly/spades3.13/{sample}/contigs.fasta", sample=SAMPLES)
 
 rule metaspades:
     input:
