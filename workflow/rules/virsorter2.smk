@@ -16,16 +16,15 @@ rule vs2_db:
         "virsorter config --init-source --db-dir={output.db}"
         
 
-rule vs2:
+rule vs2_DNA:
     input:
-        "results/assembly/{sample}.contigs.fasta"
+        "results/assembly/spades3.13/{sample}/contigs.fasta"
     output:
-        dir = "results/vs2/{sample}",
-        fa = "results/vs2/{sample}/final-viral-combined.fa",
-        score ="results/vs2/{sample}/final-viral-score.tsv",
-        boundary = "results/vs2/{sample}/final-viral-boundary.tsv"
+        fa = "results/vs2_DNA/{sample}/final-viral-combined.fa",
+        score ="results/vs2_DNA/{sample}/final-viral-score.tsv",
+        boundary = "results/vs2_DNA/{sample}/final-viral-boundary.tsv"
     params:
-        path = "results/vs2/{sample}",
+        path = "results/vs2_DNA/{sample}",
         nodes = "8"
     container:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
@@ -34,7 +33,7 @@ rule vs2:
         
 rule vs2_RNA:
     input:
-        "results/assembly/{sample}.contigs.fasta"
+        "results/assembly/spades3.13/{sample}/contigs.fasta"
     output:
         fa = "results/vs2_RNA/{sample}/final-viral-combined.fa",
         score ="results/vs2_RNA/{sample}/final-viral-score.tsv",
@@ -46,7 +45,8 @@ rule vs2_RNA:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
     shell:
         "virsorter run -w {params.path} -i {input} --include-groups RNA -j {params.nodes} all" # include RNA virus group
-        
+    
+    # snakemake -c 48 -s workflow/rules/virsorter2.smk --use-singularity results/vs2_RNA/16_4_S4/final-viral-score.tsv -p
 
 # #to have wildcards in the input of a rule but not in the output of the rule
 # def table_inputs(folder, name, wildcards):
