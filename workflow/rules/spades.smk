@@ -21,7 +21,7 @@ print(SAMPLES)
 
 
 rule all_spades:
-    input: expand("results/assembly/spades3.13/{sample}/contigs.fasta", sample=SAMPLES)
+    input: expand("results/assembly/spades3.13/{sample}/contigs.fasta", sample = SAMPLES)
 
 rule metaspades:
     input:
@@ -30,9 +30,6 @@ rule metaspades:
     output:
         dir = directory("results/assembly/spades3.13/{sample}"),
         contigs="results/assembly/spades3.13/{sample}/contigs.fasta",
-        scaffolds="results/assembly/spades3.13/{sample}/scaffolds.fasta",
-    benchmark:
-        "reports/assembly/{sample}.spades.txt" 
     params:
         k= "auto",
     log:
