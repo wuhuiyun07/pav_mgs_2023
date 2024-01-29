@@ -36,7 +36,7 @@ rule metaspades:
     params:
         k= "auto",
     log:
-        "reports/assembly/{sample}.spades.log",     
+        "reports/assembly/{sample}/spades.log",     
     container:
         "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0"
     threads: 48
