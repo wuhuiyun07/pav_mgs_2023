@@ -47,7 +47,7 @@ rule metaspades:
     shell:
         r"""
         spades.py --meta  -o {output.dir} -t {threads}  --pe1-1 {input.R1} --pe1-2 {input.R2}  
-        mv results/assembly/{sample}/contigs.fasta results/assembly/{sample}.contigs.fasta
+        # mv results/assembly/{sample}/contigs.fasta results/assembly/{sample}.contigs.fasta
         """
     # wrapper:
     #     "v3.0.2/bio/spades/metaspades"
