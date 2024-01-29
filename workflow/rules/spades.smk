@@ -7,19 +7,19 @@ SAMPLES = "16_1_S1 16_2_S2 16_3_S3 16_4_S4 16_5_S5 22_1_S6 22_2_S7 22_3_S8 22_4_
 print(SAMPLES)
 
 rule all_spades:
-    input: expand("reports/spades.3.13/{sample}/spades.log", sample = SAMPLES)
+    input: expand("reports/spades.3.15/{sample}/spades.log", sample = SAMPLES)
 
 rule metaspades:
     input:
         R1 = "results/trimmed/{sample}.R1.fastq.gz",
         R2 = "results/trimmed/{sample}.R2.fastq.gz"
     output:
-        dir = directory("results/spades.3.13/{sample}"),
-        contigs="results/spades.3.13/{sample}/contigs.fasta",
+        dir = directory("results/spades.3.15/{sample}"),
+        contigs="results/spades.3.15/{sample}/contigs.fasta",
     params:
         k= "auto",
     log:
-        "reports/spades.3.13/{sample}/spades.log",     
+        "reports/spades.3.15/{sample}/spades.log",     
     container:
         "docker://quay.io/biocontainers/spades:3.15.5--h95f258a_0"
     threads: 48
