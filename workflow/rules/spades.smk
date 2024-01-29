@@ -20,7 +20,7 @@ rule metaspades:
         R2 = "results/trimmed/{sample}.R2.fastq.gz"
     output:
         dir = directory("results/spades3.13/{sample}"),
-        contigs="results/spades3.13/{sample}/contigs.fasta",
+        contigs="results/spades.3.13/{sample}/contigs.fasta",
     params:
         k= "auto",
     log:
