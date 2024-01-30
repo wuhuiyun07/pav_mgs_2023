@@ -31,17 +31,17 @@ rule diamond_makedb:
 
 rule diamond_vs2:
     output:
-        fname = "results/diamond_blastp/vs2_RNA/{sample}.tsv.gz"
+        tsv = "results/diamond_blastp/vs2_RNA/{sample}.tsv.gz"
     input:    
-        fname_fasta = "results/vs2_RNA/{sample}/final-viral-combined.fa",
-        fname_db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
-    # container:
-    #     "../sifs/diamond_lastest.sif"
+        fa = "results/vs2_RNA/{sample}/final-viral-combined.fa",
+        db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
+    container:
+        "../sifs/diamond_lastest.sif"
     threads: 8
     log:
         "logs/diamond_blastp/{sample}.RNA.log",
-    params:
-        extra= "--header --compress 1",  # Additional arguments
+    # params:
+        # extra= "--header --compress 1",  # Additional arguments
     # wrapper:
     #     "v3.3.5-42-g895739f/bio/diamond/blastp"
     shell:
@@ -52,6 +52,7 @@ rule diamond_vs2:
         "-o {output.tsv}"
         "--header"
         "--verbose"
+        "--compress 1"
         "--log"
 
     
