@@ -14,7 +14,7 @@ rule diamond_makedb:
         fname1 = "resources/ncbi_db/protein/{reference}.faa",
         fname2 = "resources/ncbi_db/genome/{reference}.fna"
     output:
-        p_db = "resources/ncbi_db/protein/{reference}.dmnd"
+        p_db = "resources/ncbi_db/protein/{reference}.dmnd",
         g_db = "resources/ncbi_db/genome/{reference}.dmnd"
     log:
         "logs/diamond_makedb/{reference}.log"
