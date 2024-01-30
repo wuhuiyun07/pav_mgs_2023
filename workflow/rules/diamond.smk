@@ -42,15 +42,16 @@ rule diamond_vs2:
         "logs/diamond_blastp/{sample}.RNA.log",
     params:
         extra= "--header --compress 1",  # Additional arguments
-    wrapper:
-        "v3.3.5-42-g895739f/bio/diamond/blastp"
-    # shell:
-    #     "diamond blastp "
-    #     "--threads {threads}"
-    #     "-q {input.fa} "
-    #     "-d {input.db} "
-    #     "-o {output.tsv}"
-    #     "--verbose"
-    #     "--log"
+    # wrapper:
+    #     "v3.3.5-42-g895739f/bio/diamond/blastp"
+    shell:
+        "diamond blastx "
+        "--threads {threads}"
+        "-q {input.fa} "
+        "-d {input.db} "
+        "-o {output.tsv}"
+        "--header"
+        "--verbose"
+        "--log"
 
     
