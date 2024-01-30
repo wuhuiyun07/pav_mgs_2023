@@ -5,14 +5,17 @@ rule ncbi_db:
     shell:
         "wget https://ftp.ncbi.nlm.nih.gov/refseq/release/viral/viral.1.protein.faa.gz"
         "gunzip viral.1.protein.faa.gz"
+        "gunzip viral.1.1.genomic.fna.gz"
         
 
 
 rule diamond_makedb:
     input:
-        fname = "resources/ncbi_db/protein/{reference}.faa",
+        fname1 = "resources/ncbi_db/protein/{reference}.faa",
+        fname2 = "resources/ncbi_db/genome/{reference}.fna"
     output:
-        fname = "resources/ncbi_db/protein/{reference}.dmnd"
+        p_db = "resources/ncbi_db/protein/{reference}.dmnd"
+        g_db = "resources/ncbi_db/genome/{reference}.dmnd"
     log:
         "logs/diamond_makedb/{reference}.log"
     params:
