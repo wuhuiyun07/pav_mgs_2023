@@ -24,8 +24,8 @@ rule diamond_makedb:
     shell:
         "diamond makedb"
         " --threads {threads}"
-        " --in {input.fname}"
-        " --db {output.fname}"
+        " --in {input}"
+        " --db {output}"
 
 
 
