@@ -23,11 +23,7 @@ rule diamond_makedb:
         "v3.3.5-42-g895739f/bio/diamond/makedb"
 
 
-from snakemake.shell import shell
 
-
-extra = snakemake.params.get("extra", "")
-log = snakemake.log_fmt_shell(stdout=False, stderr=True)
 
 rule diamond_makedb_2:
     input:
