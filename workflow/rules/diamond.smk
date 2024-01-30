@@ -36,7 +36,7 @@ rule diamond_vs2:
         fa = "results/vs2_RNA/{sample}/final-viral-combined.fa",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
     container:
-        "../sifs/diamond_lastest.sif"
+        "../.sifs/diamond_lastest.sif"
     threads: 8
     log:
         "logs/diamond_blastp/{sample}.RNA.log",
