@@ -33,7 +33,7 @@ rule diamond_vs2:
     output:
         tsv = "results/diamond_blasp/vs2_{cond}/{sample}.tsv"
     input:    
-        fa = "results/vs2_{cond}/{sample}/final-viral-combined.fa"
+        fa = "results/vs2_{cond}/{sample}/final-viral-combined.fa",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
     container:
         "../sifs/diamond_lastest.sif"
