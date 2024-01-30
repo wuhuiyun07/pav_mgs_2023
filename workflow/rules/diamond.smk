@@ -12,10 +12,8 @@ rule ncbi_db:
 rule diamond_makedb:
     input:
         fname1 = "resources/ncbi_db/protein/{reference}.faa",
-        fname2 = "resources/ncbi_db/genome/{reference}.fna"
     output:
         p_db = "resources/ncbi_db/protein/{reference}.dmnd",
-        g_db = "resources/ncbi_db/genome/{reference}.dmnd"
     log:
         "logs/diamond_makedb/{reference}.log"
     params:
@@ -25,7 +23,18 @@ rule diamond_makedb:
         "v3.3.5-42-g895739f/bio/diamond/makedb"
 
 
-
+rule diamond_makedb_2:
+    input:
+        fname2 = "resources/ncbi_db/genome/{reference}.fna"
+    output:
+        g_db = "resources/ncbi_db/genome/{reference}.dmnd"
+    log:
+        "logs/diamond_makedb/{reference}.log"
+    params:
+        extra=""
+    threads: 8
+    wrapper:
+        "v3.3.5-42-g895739f/bio/diamond/makedb"
 
 rule diamond_vs2:
     output:
