@@ -27,7 +27,7 @@ rule diamond_makedb_2:
     input:
         fname = "resources/ncbi_db/genome/{reference}.fna"
     output:
-        "resources/ncbi_db/genome/{reference}.dmnd"
+        fname = "resources/ncbi_db/genome/{reference}.dmnd"
     log:
         "logs/diamond_makedb/{reference}.log"
     params:
