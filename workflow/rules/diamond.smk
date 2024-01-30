@@ -19,20 +19,6 @@ rule diamond_makedb:
     params:
         extra=""
     threads: 8
-    wrapper:
-        "v3.3.5-42-g895739f/bio/diamond/makedb"
-
-
-
-
-rule diamond_makedb_2:
-    input:
-        fname = "resources/ncbi_db/genome/{reference}.fna"
-    output:
-        fname = "resources/ncbi_db/genome/{reference}.dmnd"
-    log:
-        "logs/diamond_makedb/{reference}.log"
-    threads: 8
     container:
         "../sifs/diamond_latest.sif"
     shell:
@@ -41,14 +27,24 @@ rule diamond_makedb_2:
         " --in {input.fname}"
         " --db {output.fname}"
 
+
+
 rule diamond_vs2:
     output:
-        tsv = "results/diamond/{sample}.tsv"
+        tsv = "results/diamond_blasp/vs2_{cond}/{sample}.tsv"
     input:    
         fa = "results/vs2_{cond}/{sample}/final-viral-combined.fa"
+        db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
     container:
         "../sifs/diamond_lastest.sif"
+    threads: 8
     shell:
-        "diamond blastx "
+        "diamond blastp "
+        "--threads {threads}"
+        "-q {input.fa} "
+        "-d {input.db} "
+        "-o {output.tsv}"
+        "--verbose"
+        "--log"
 
     
