@@ -23,6 +23,12 @@ rule diamond_makedb:
         "v3.3.5-42-g895739f/bio/diamond/makedb"
 
 
+from snakemake.shell import shell
+
+
+extra = snakemake.params.get("extra", "")
+log = snakemake.log_fmt_shell(stdout=False, stderr=True)
+
 rule diamond_makedb_2:
     input:
         fname = "resources/ncbi_db/genome/{reference}.fna"
@@ -30,11 +36,14 @@ rule diamond_makedb_2:
         fname = "resources/ncbi_db/genome/{reference}.dmnd"
     log:
         "logs/diamond_makedb/{reference}.log"
-    params:
-        extra=""
     threads: 8
-    wrapper:
-        "v3.3.5-42-g895739f/bio/diamond/makedb"
+    container:
+        "../sifs/diamond_latest.sif"
+    shell:
+        "diamond makedb"
+        " --threads {threads}"
+        " --in {input.fname}"
+        " --db {output.fname}"
 
 rule diamond_vs2:
     output:
