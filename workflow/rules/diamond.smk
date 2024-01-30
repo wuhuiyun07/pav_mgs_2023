@@ -31,7 +31,7 @@ rule diamond_makedb:
 
 rule diamond_vs2:
     output:
-        tsv = "results/diamond_blasp/vs2_RNA/{sample}.tsv"
+        tsv = "results/diamond_blastp/vs2_RNA/{sample}.tsv"
     input:    
         fname_fasta = "results/vs2_RNA/{sample}/final-viral-combined.fa",
         fname_db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
