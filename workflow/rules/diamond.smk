@@ -46,13 +46,13 @@ rule diamond_vs2:
     #     "v3.3.5-42-g895739f/bio/diamond/blastp"
     shell:
         "diamond blastx "
-        "--threads {threads}"
-        "-q {input.fa} "
-        "-d {input.db} "
-        "-o {output.tsv}"
-        "--header"
-        "--verbose"
-        "--compress 1"
-        "--log"
+        " --threads {threads}"
+        " -q {input.fa} "
+        " -d {input.db} "
+        " -o {output.tsv}"
+        " --header"
+        " --verbose"
+        " --compress 1"
+        " --log"
 
     
