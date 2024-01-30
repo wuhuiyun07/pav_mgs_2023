@@ -10,9 +10,9 @@ rule ncbi_db:
 
 rule diamond_makedb:
     input:
-        fname = "resources/ncbi/protein/{reference}.faa",
+        fname = "resources/ncbi_db/protein/{reference}.faa",
     output:
-        fname = "resources/ncbi/protein/{reference}.dmnd"
+        fname = "resources/ncbi_db/protein/{reference}.dmnd"
     log:
         "logs/diamond_makedb/{reference}.log"
     params:
