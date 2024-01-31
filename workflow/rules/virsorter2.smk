@@ -19,7 +19,7 @@ rule all_vs2:
 
 rule vs2_DNA:
     input:
-        "results/assembly/spades3.15/{sample}/contigs.fasta"
+        "results/spades.3.15/{sample}/contigs.fasta"
     output:
         fa = "results/vs2_DNA/{sample}/final-viral-combined.fa",
         score ="results/vs2_DNA/{sample}/final-viral-score.tsv",
@@ -34,7 +34,7 @@ rule vs2_DNA:
         
 rule vs2_RNA:
     input:
-        "results/assembly/spades3.15/{sample}/contigs.fasta"
+        "results/spades.3.15/{sample}/contigs.fasta"
     output:
         fa = "results/vs2_RNA/{sample}/final-viral-combined.fa",
         score ="results/vs2_RNA/{sample}/final-viral-score.tsv",
