@@ -53,6 +53,6 @@ rule diamond_vs2:
         " --header"
         " --verbose"
         " --compress 1"
-        " --log"
+        " --log {log}"
 
     
