@@ -52,8 +52,6 @@ rule diamond_makedb:
         "resources/ncbi_db/protein/{reference}.dmnd",
     log:
         "logs/diamond_makedb/{reference}.log"
-    params:
-        extra=""
     threads: 8
     container:
         "../sifs/diamond_latest.sif"
@@ -61,6 +59,7 @@ rule diamond_makedb:
         "diamond makedb"
         " --threads {threads}"
         " --in {input}"
-        # " --taxonmap"
-        # " --taxonnames"
+        " --taxonmap"
+        " --taxonnodes"
+        " --taxonnames"
         " --db {output}"
