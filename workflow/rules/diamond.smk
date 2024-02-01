@@ -10,11 +10,11 @@ rule all_diamond:
         expand("results/diamond_blastp/{vs2_na}/{sample}.tsv", vs2_na = NA, sample=SAMPLES)
 
 
-rule diamond_vs2:
+rule diamond_vs2_RNA:
     output:
-        tsv = "results/diamond_blastp/{vs2_na}/{sample}.tsv"
+        tsv = "results/diamond_blastp/vs_RNA/{sample}.tsv"
     input:    
-        fa = "results/{vs2_na}/{sample}/final-viral-combined.fa",
+        fa = "results/vs2_RNA/{sample}/final-viral-combined.fa",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
     container:
         "../sifs/diamond_latest.sif"
