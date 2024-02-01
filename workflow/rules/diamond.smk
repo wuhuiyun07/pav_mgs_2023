@@ -62,6 +62,6 @@ rule diamond_makedb:
         "diamond makedb"
         " --threads {threads}"
         " --in {input}"
-        " --taxonmap"
-        " --taxonnames"
+        # " --taxonmap"
+        # " --taxonnames"
         " --db {output}"
