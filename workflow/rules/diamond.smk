@@ -35,8 +35,7 @@ rule diamond_vs2_RNA:
         " --outfmt {params.fmt}"
         " --verbose"
         " --compress 1"
-        " --log {log}"
-
+        
 
 rule ncbi_db:
     output: 
