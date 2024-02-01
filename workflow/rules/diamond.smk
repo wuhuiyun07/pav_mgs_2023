@@ -20,7 +20,7 @@ rule diamond_vs2:
         "../sifs/diamond_latest.sif"
     threads: 8
     log:
-        "reports/diamond_blastp/{sample}.{vs_na}.log",
+        "reports/diamond_blastp/{vs2_na}/{sample}.log",
     params:
         fmt = "6 qseqid sseqid pident length mismatch evalue bitscore staxids sscinames sskingdoms skingdoms sphylums stitle",  # Additional arguments
     # wrapper:
