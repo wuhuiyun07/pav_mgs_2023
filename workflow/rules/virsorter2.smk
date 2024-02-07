@@ -15,7 +15,7 @@ print(NA)
 
 rule all_vs2:
     input: 
-        expand("results/{vs2_na}/{sample}/final-viral-score.tsv", vs2_na = NA, sample=SAMPLES),
+        expand("results/vs2/{sample}/final-viral-score.tsv", sample=SAMPLES),
 
 
 
