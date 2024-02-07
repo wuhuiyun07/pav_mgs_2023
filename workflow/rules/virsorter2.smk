@@ -17,6 +17,27 @@ rule all_vs2:
     input: 
         expand("results/{vs2_na}/{sample}/final-viral-score.tsv", vs2_na = NA, sample=SAMPLES),
 
+
+virsorter run -w $path -i $samplename --include-groups all -j $threads all
+
+
+
+rule vs2:
+    input:
+        "results/spades.3.15/{sample}/contigs.fasta"
+    output:
+        fa = "results/vs2/{sample}/final-viral-combined.fa",
+        score ="results/vs2/{sample}/final-viral-score.tsv",
+        boundary = "results/vs2/{sample}/final-viral-boundary.tsv"
+    params:
+        path = "results/vs2/{sample}",
+        nodes = "8"
+    container:
+        "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
+    shell:
+        "virsorter run -w {params.path} -i {input} --include-groups all -j {params.nodes} all"
+
+        
 rule vs2_DNA:
     input:
         "results/spades.3.15/{sample}/contigs.fasta"

@@ -41,7 +41,7 @@ rule ncbi_db:
     output: 
         protein ="resources/ncbi_db/protein/viral.1.protein.faa"
     shell:
-        "wget -P resources/ncbi_db/https://ftp.ncbi.nlm.nih.gov/refseq/release/viral/viral.1.protein.faa.gz"
+        "wget -P resources/ncbi_db/https://:viral/viral.1.protein.faa.gz"
         "gunzip {output.protein}"
 
 
@@ -59,7 +59,8 @@ rule diamond_makedb:
         "diamond makedb"
         " --threads {threads}"
         " --in {input}"
+        " --db {output}"
         " --taxonmap"
         " --taxonnodes"
         " --taxonnames"
-        " --db {output}"
+        
