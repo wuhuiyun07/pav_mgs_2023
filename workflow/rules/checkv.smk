@@ -15,7 +15,7 @@ rule checkV_spades:
         dir ="results/checkV/{sample}"
     shell:
         """
-        check end_to_end {input.fasta} {output.dir} -t {params.threads} -d {params.db}
+        checkv end_to_end {input.fasta} {output.dir} -t {params.threads} -d {params.db}
         """
 
 
