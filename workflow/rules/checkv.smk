@@ -10,7 +10,7 @@ rule checkV_spades:
         dir = "results/checkV/{sample}",
         db = "resources/checkv-db-v1.5/"
     container:
-        "../sif/checkv_0.9.0--pyhdfd78af_0.sif"
+        "../sifs/checkv_0.9.0--pyhdfd78af_0.sif"
     output:
         dir ="results/checkV/{sample}"
     shell:
