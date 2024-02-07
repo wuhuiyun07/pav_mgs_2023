@@ -18,9 +18,6 @@ rule all_vs2:
         expand("results/{vs2_na}/{sample}/final-viral-score.tsv", vs2_na = NA, sample=SAMPLES),
 
 
-virsorter run -w $path -i $samplename --include-groups all -j $threads all
-
-
 
 rule vs2:
     input:
@@ -36,6 +33,8 @@ rule vs2:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
     shell:
         "virsorter run -w {params.path} -i {input} --include-groups all -j {params.nodes} all"
+# virsorter run -w $path -i $samplename --include-groups all -j $threads all
+
 
         
 rule vs2_DNA:
