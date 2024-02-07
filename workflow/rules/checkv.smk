@@ -3,7 +3,7 @@ print(SAMPLES)
 
 rule all_checkV:
     input:
-        expand("results/checkV/{sample}/complete_genomes.tsv", sample = SAMPLES)
+        expand("results/checkV/{sample}", sample = SAMPLES)
 
 rule checkV_spades:
     input:
