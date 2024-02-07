@@ -1,6 +1,6 @@
-rule all_checkV:
-    input:
-        merged = "results/checkV/merged_checkV_allcontigs.tsv"
+# rule all_checkV:
+#     input:
+#         merged = "results/checkV/merged_checkV_allcontigs.tsv"
 
 rule checkV_spades:
     input:
@@ -15,9 +15,7 @@ rule checkV_spades:
         dir ="results/checkV/{sample}"
     shell:
         """
-        check end_to_end {input.fasta} {p}
-        checkV contamination {input.fasta} {output.dir} -t {params.threads} -d {params.db}
-        # checkv end_to_end input_file.fna output_directory -t 16
+        check end_to_end {input.fasta} {output.dir} -t {params.threads} -d {params.db}
         """
 
 
@@ -31,17 +29,17 @@ rule checkv_database:
 
 
 
-#to have wildcards in the input of a rule but not in the output of the rule
-def table_inputs(folder, name, wildcards):
-    files=expand("%s{sample}%s" % (folder, name), sample=SAMPLE)
-    return files
+# #to have wildcards in the input of a rule but not in the output of the rule
+# def table_inputs(folder, name, wildcards):
+#     files=expand("%s{sample}%s" % (folder, name), sample=SAMPLE)
+#     return files
 
-rule merge_checkV:
-    input:
-        i=table_inputs(folder="checkV/", name="/quality_summary.tsv", wildcards=SAMPLE)
-    output:
-        merge="checkV/merged_checkV_allcontigs.tsv"
-    script:
-        "Scripts/merge_checkV.py"
+# rule merge_checkV:
+#     input:
+#         i=table_inputs(folder="checkV/", name="/quality_summary.tsv", wildcards=SAMPLE)
+#     output:
+#         merge="checkV/merged_checkV_allcontigs.tsv"
+#     script:
+#         "Scripts/merge_checkV.py"
 
 
