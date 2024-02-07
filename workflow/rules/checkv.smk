@@ -12,7 +12,7 @@ rule checkV_spades:
     container:
         "../sifs/checkv_0.9.0--pyhdfd78af_0.sif"
     output:
-        dir ="results/checkV/{sample}"
+        dir = directory("results/checkV/{sample}")
     shell:
         """
         checkv end_to_end {input.fasta} {output.dir} -t {params.threads} -d {params.db}
