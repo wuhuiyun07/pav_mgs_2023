@@ -10,7 +10,7 @@ rule checkV_spades:
         dir = "results/checkV/{sample}",
         db = "resources/checkv-db-v1.5/"
     container:
-        "docker://quay.io/biocontainers/checkV:0.9.0--pyhdfd78af_0"
+        "../sif/checkv_0.9.0--pyhdfd78af_0.sif"
     output:
         dir ="results/checkV/{sample}"
     shell:
@@ -23,7 +23,7 @@ rule checkv_database:
     output:
         db = "resources/checkv-db-v1.5/"
     container:
-        "docker://quay.io/biocontainers/checkV:0.9.0--pyhdfd78af_0"
+        "../sif/checkv_0.9.0--pyhdfd78af_0.sif"
     shell:
         "checkv download_database resources/"
 
