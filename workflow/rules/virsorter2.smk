@@ -32,8 +32,11 @@ rule vs2:
     container:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
     shell:
-        "virsorter run -w {params.path} -i {input} --include-groups all -j {params.nodes} all"
-# virsorter run -w $path -i $samplename --include-groups all -j $threads all
+        r"""virsorter run -w {params.path} -i {input}"""
+        """   --include-groups "dsDNAphage,ssDNA,NCLDV,RNA,lavidaviridae"""
+        """   -j {params.nodes}"""
+        """   --prep-for-dramv"""
+# virsorter run -w test.out -i test.fa --include-groups "dsDNAphage,ssDNA" -j 4 --min-score 0.9 --label rerun classify
 
 
         
