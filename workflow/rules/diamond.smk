@@ -23,8 +23,6 @@ rule diamond_vs2_RNA:
         "reports/diamond_blastp/vs_RNA/{sample}.log",
     params:
         fmt = "6 qseqid sseqid pident length mismatch evalue bitscore staxids sscinames sskingdoms skingdoms sphylums stitle",  # Additional arguments
-    # wrapper:
-    #     "v3.3.5-42-g895739f/bio/diamond/blastp"
     shell:
         "diamond blastx "
         " --threads {threads}"
@@ -47,7 +45,10 @@ rule ncbi_db:
 
 rule diamond_makedb:
     input:
-        fname = "resources/ncbi_db/protein/{reference}.faa",
+        refseq = "resources/ncbi_db/protein/{reference}.faa",
+        nodes = "resources/ncbi_db/nodes.dmp",
+        names = "resources/ncbi_db/names.dmp"
+        
     output:
         "resources/ncbi_db/protein/{reference}.dmnd",
     log:
@@ -58,9 +59,9 @@ rule diamond_makedb:
     shell:
         "diamond makedb"
         " --threads {threads}"
-        " --in {input}"
+        " --in {input.refseq}"
         " --db {output}"
-        " --taxonmap"
-        " --taxonnodes"
-        " --taxonnames"
+        " --taxonmap "
+        " --taxonnodes {input.nodes}"
+        " --taxonnames {input.names}"
         
