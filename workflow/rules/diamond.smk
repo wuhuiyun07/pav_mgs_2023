@@ -39,7 +39,8 @@ rule ncbi_db:
     output: 
         protein ="resources/ncbi_db/protein/viral.1.protein.faa"
     shell:
-        "wget -P resources/ncbi_db/https://:viral/viral.1.protein.faa.gz"
+        "wget -P resources/ncbi_db/protein/https://:viral/viral.1.protein.faa.gz"
+        "wget -P resources/ncbi_db/protein/ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/accession2taxid/prot.accession2taxid.gz"
         "gunzip {output.protein}"
 
 
@@ -47,7 +48,8 @@ rule diamond_makedb:
     input:
         refseq = "resources/ncbi_db/protein/{reference}.faa",
         nodes = "resources/ncbi_db/nodes.dmp",
-        names = "resources/ncbi_db/names.dmp"
+        names = "resources/ncbi_db/names.dmp",
+        map = "resources/ncbi_db/protein/prot.accession2taxid.gz"
         
     output:
         "resources/ncbi_db/protein/{reference}.dmnd",
@@ -61,7 +63,7 @@ rule diamond_makedb:
         " --threads {threads}"
         " --in {input.refseq}"
         " --db {output}"
-        " --taxonmap "
+        " --taxonmap {input.map}"
         " --taxonnodes {input.nodes}"
         " --taxonnames {input.names}"
         
