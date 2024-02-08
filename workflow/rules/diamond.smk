@@ -12,7 +12,7 @@ rule all_diamond:
 
 rule diamond_vs2_RNA:
     output:
-        tsv = "results/diamond_blastp/vs_RNA/{sample}.tsv"
+        tsv = "results/diamond_blastp/vs2_RNA/{sample}.tsv"
     input:    
         fa = "results/vs2_RNA/{sample}/final-viral-combined.fa",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
@@ -23,16 +23,8 @@ rule diamond_vs2_RNA:
         "reports/diamond_blastp/vs_RNA/{sample}.log",
     params:
         fmt = "6 qseqid sseqid pident length mismatch evalue bitscore staxids sscinames sskingdoms skingdoms sphylums stitle",  # Additional arguments
-    shell:
-        "diamond blastx "
-        " --threads {threads}"
-        " -q {input.fa} "
-        " -d {input.db} "
-        " -o {output.tsv}"
-        " --header"
-        " --outfmt {params.fmt}"
-        " --verbose"
-        " --compress 1"
+    script:
+        "workflow/scripts/diamond.sh"
         
 
 rule ncbi_db:
