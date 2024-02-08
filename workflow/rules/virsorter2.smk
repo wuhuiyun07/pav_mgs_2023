@@ -33,7 +33,7 @@ rule vs2:
         "../sifs/virsorter_2.2.4--pyhdfd78af_1.sif"
     shell:
         r"""virsorter run -w {params.path} -i {input}"""
-        """   --include-groups "dsDNAphage,ssDNA,NCLDV,RNA,lavidaviridae"""
+        """   --include-groups "dsDNAphage,ssDNA,NCLDV,RNA,lavidaviridae" """
         """   -j {params.nodes}"""
         """   --prep-for-dramv"""
 # virsorter run -w test.out -i test.fa --include-groups "dsDNAphage,ssDNA" -j 4 --min-score 0.9 --label rerun classify
