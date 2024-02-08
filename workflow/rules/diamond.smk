@@ -23,8 +23,16 @@ rule diamond_vs2_RNA:
         "reports/diamond_blastp/vs_RNA/{sample}.log",
     params:
         fmt = "6 qseqid sseqid pident length mismatch evalue bitscore staxids sscinames sskingdoms skingdoms sphylums stitle",  # Additional arguments
-    script:
-        "../scripts/diamond.sh"
+    shell:
+        r"""diamond blastx """
+        """ --threads {threads}"""
+        """ -q {input.fa} """
+        """ -d {input.db} """
+        """ -o {output.tsv} """
+        """ --header"""
+        """ --outfmt {params.fmt} """
+        """ --verbose """
+        """ --compress 1 """
         
 
 rule ncbi_db:
