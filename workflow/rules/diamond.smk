@@ -24,7 +24,7 @@ rule diamond_vs2_RNA:
     params:
         fmt = "6 qseqid sseqid pident length mismatch evalue bitscore staxids sscinames sskingdoms skingdoms sphylums stitle",  # Additional arguments
     script:
-        "workflow/scripts/diamond.sh"
+        "../scripts/diamond.sh"
         
 
 rule ncbi_db:
