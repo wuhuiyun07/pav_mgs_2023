@@ -3,7 +3,15 @@ print(SAMPLES)
 
 rule all_checkV:
     input:
-        expand("results/checkV/{sample}", sample = SAMPLES)
+        expand("results/checkV/{sample}.checkv.quality_summary.tsv", sample = SAMPLES)
+
+rule chg_file_name:
+    output:
+        checkV = "results/checkV/{sample}.checkv.quality_summary.tsv"
+    input:
+        checkV = "results/checkV/{sample}/quality_summary.tsv"
+    shell:
+        """ scp {input.checkV} {output.checkV} """
 
 rule checkV_spades:
     input:
