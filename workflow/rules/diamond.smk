@@ -40,9 +40,9 @@ rule chg_file_name:
         vs2 = "results/vs2/{sample}/final-viral-score.tsv",
         checkV = "results/checkV/{sample}/quality_summary.tsv"
     shell:
-        "scp {input.diamond} {output.diamond}"
-        "scp {input.vs2} {output.vs2}"
-        "scp {input.checkV} {output.checkV}"
+        " scp {input.diamond} {output.diamond} "
+        " scp {input.vs2} {output.vs2} "
+        " scp {input.checkV} {output.checkV} "
         
         
 
