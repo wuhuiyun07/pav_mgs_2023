@@ -15,8 +15,15 @@ print(NA)
 
 rule all_vs2:
     input: 
-        expand("results/vs2/{sample}/final-viral-score.tsv", sample=SAMPLES),
+        expand("results/vs2/{sample}.vs2.final-viral-score.tsv", sample=SAMPLES),
 
+rule chg_file_name:
+    output:
+        vs2 = "results/vs2/{sample}.vs2.final-viral-score.tsv",
+    input:
+        vs2 = "results/vs2/{sample}/final-viral-score.tsv",
+    shell:
+        """ scp {input.vs2} {output.vs2} """
 
 
 rule vs2:
