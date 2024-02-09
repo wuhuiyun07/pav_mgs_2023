@@ -17,8 +17,6 @@ rule diamond_vs2:
     container:
         "../sifs/diamond_latest.sif"
     threads: 8
-    log:
-        "reports/diamond_vs2/{sample}/log",
     params:
         fmt = "6 qseqid sseqid pident length mismatch evalue bitscore staxids sscinames sskingdoms skingdoms sphylums stitle",  # Additional arguments
     shell:
