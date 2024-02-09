@@ -15,7 +15,7 @@ rule chg_file_name:
         checkV = "results/checkV/{sample}/quality_summary.tsv"
     shell:
         r""" scp {input.diamond} {output.diamond} """
-        r""" #scp {input.vs2} {output.vs2} """
+        r""" scp {input.vs2} {output.vs2} """
         r""" scp {input.checkV} {output.checkV} """
 
 
