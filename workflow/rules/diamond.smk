@@ -5,7 +5,7 @@ print(SAMPLES)
 
 rule all_diamond:
     input: 
-        expand("results/diamond_vs2/{sample}.tsv.gz", sample=SAMPLES)
+        expand("results/diamond_vs2/{sample}.diamond.tsv", sample=SAMPLES)
 
 
 rule diamond_vs2:
