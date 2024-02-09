@@ -21,9 +21,9 @@ rule chg_file_name:
 
 rule gunzip_diamond:
     output: 
-        expand("results/diamond_vs2/{sample}.tsv")
+        "results/diamond_vs2/{sample}.tsv"
     input:
-        expand("results/diamond_vs2/{sample}.tsv.gz", sample = SAMPLES)
+        "results/diamond_vs2/{sample}.tsv.gz"
     shell:
         "gunzip {input} {output}"
 
