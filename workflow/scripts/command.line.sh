@@ -17,3 +17,7 @@ done
 
 # Replace '.txt' extension with '.md' for all files in the current directory
 rename 's/\_L001_R1_001.fastq.gz$/R2.fastq.gz/' *_L001_R1_001.fastq.g
+
+# export manual
+# in singularity shell
+diamond help > diamond_manual.txt

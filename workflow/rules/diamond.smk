@@ -31,6 +31,18 @@ rule diamond_vs2:
         """ --outfmt {params.fmt} """
         """ --verbose """
         """ --compress 1 """
+
+rule chg_file_name:
+    output:
+        diamond = "results/diamond_vs2/{sample}.diamond.tsv"
+        vs2 = "results/vs2/{sample}.vs2.final-viral-score.tsv"
+        checkv = "results/checkV/{sample}.checkv.quality_summary.tsv"
+    input:
+        diamond = "results/diamond_vs2/{sample}.tsv"
+        vs2 = "results/vs2/{sample}/final-viral-score.tsv"
+        checkv = "results/checkV/{sample}/quality_summary.tsv"
+    shell:
+        "scp {input.diamond} {output.diamond}"
         
 
 rule ncbi_db:
