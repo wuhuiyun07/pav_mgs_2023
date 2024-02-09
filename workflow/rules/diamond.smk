@@ -15,8 +15,8 @@ rule chg_file_name:
         checkV = "results/checkV/{sample}/quality_summary.tsv"
     shell:
         r""" scp {input.diamond} {output.diamond} """
-        """ scp {input.vs2} {output.vs2} """
-        """ scp {input.checkV} {output.checkV} """
+        # """ scp {input.vs2} {output.vs2} """
+        # """ scp {input.checkV} {output.checkV} """
 
 
 rule gunzip_diamond:
@@ -25,7 +25,7 @@ rule gunzip_diamond:
     input:
         "results/diamond_vs2/{sample}.tsv.gz"
     shell:
-        "gunzip {input} {output}"
+        "gunzip {input} "
 
 
 rule diamond_vs2:
