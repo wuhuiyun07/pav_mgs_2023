@@ -8,7 +8,7 @@ rule chg_file_name:
     output:
         diamond = "results/diamond_vs2/{sample}.diamond.tsv",
         vs2 = "results/vs2/{sample}.vs2.final-viral-score.tsv",
-        # checkV = "results/checkV/{sample}.checkv.quality_summary.tsv"
+        checkV = "results/checkV/{sample}.checkv.quality_summary.tsv"
     input:
         diamond = "results/diamond_vs2/{sample}.tsv",
         vs2 = "results/vs2/{sample}/final-viral-score.tsv",
