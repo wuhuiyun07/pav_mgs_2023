@@ -5,12 +5,12 @@ print(SAMPLES)
 
 rule all_diamond:
     input: 
-        expand("results/diamond_vs2/{sample}.tsv.gz", sample=SAMPLES)
+        expand("results/diamond_vs2/{sample}.tsv", sample=SAMPLES)
 
 
 rule diamond_vs2:
     output:
-        tsv = "results/diamond_vs2/{sample}.tsv.gz"
+        tsv = "results/diamond_vs2/{sample}.tsv"
     input:    
         fa = "results/vs2/{sample}/final-viral-combined.fa",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
