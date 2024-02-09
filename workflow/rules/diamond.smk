@@ -10,7 +10,7 @@ rule all_diamond:
 
 rule diamond_vs2:
     output:
-        tsv = "results/diamond_vs2/{sample}.tsv.gz"
+        tsv = "results/diamond_vs2/{sample}.tsv"
     input:    
         fa = "results/vs2/{sample}/final-viral-combined.fa",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
