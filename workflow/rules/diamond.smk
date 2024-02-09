@@ -30,19 +30,19 @@ rule diamond_vs2:
         """ --verbose """
         """ --compress 1 """
 
-rule chg_file_name:
-    output:
-        diamond = "results/diamond_vs2/{sample}.diamond.tsv",
-        vs2 = "results/vs2/{sample}.vs2.final-viral-score.tsv",
-        checkV = "results/checkV/{sample}.checkv.quality_summary.tsv"
-    input:
-        diamond = "results/diamond_vs2/{sample}.tsv",
-        vs2 = "results/vs2/{sample}/final-viral-score.tsv",
-        checkV = "results/checkV/{sample}/quality_summary.tsv"
-    shell:
-        " scp {input.diamond} {output.diamond} "
-        " scp {input.vs2} {output.vs2} "
-        " scp {input.checkV} {output.checkV} "
+# rule chg_file_name:
+#     output:
+#         diamond = "results/diamond_vs2/{sample}.diamond.tsv",
+#         vs2 = "results/vs2/{sample}.vs2.final-viral-score.tsv",
+#         checkV = "results/checkV/{sample}.checkv.quality_summary.tsv"
+#     input:
+#         diamond = "results/diamond_vs2/{sample}.tsv",
+#         vs2 = "results/vs2/{sample}/final-viral-score.tsv",
+#         checkV = "results/checkV/{sample}/quality_summary.tsv"
+#     shell:
+#         " scp {input.diamond} {output.diamond} "
+#         " scp {input.vs2} {output.vs2} "
+#         " scp {input.checkV} {output.checkV} "
         
         
 
