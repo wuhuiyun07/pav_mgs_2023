@@ -44,6 +44,20 @@ rule diamond_vs2:
         """ --verbose """
         """ --compress 1 """
 
+    # qseqid: Query seqID
+    # sseqid: Subject seqID
+    # pident: percentage of identical matches
+    # length: Alignment length
+    # mismatch: number of mismatches
+    # evalue: expected value
+    # bitscore: bit score
+    # staxids: subject taxonomy ID, sep by a ";"
+    # sscinames: subject scientific names
+    # sskingdoms: subject superkingdoms
+    # skingdoms: subject kindoms
+    # sphylums: subject phylum
+    # stitle: subject title
+
 
         
         

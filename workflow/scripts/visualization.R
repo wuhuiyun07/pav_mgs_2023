@@ -6,18 +6,19 @@ library(ggplot2)
 setwd("/Users/huiyunwu/Desktop/Virus_particle/pav_mgs_2023")
 getwd()
 
-# file_list <- list.files(pattern = "results/vs2/test/*.tsv")
-# vs2_combined <- map_dfr(file_list, ~read_tsv(.x))
-# vs2 <-
-#   list.files( pattern = "results/vs2/test/*.tsv") %>%
-#   map_dfr(~read_tsv(.))
+diamond<-read_tsv("results/diamond/16_4_S4.tsv", skip=3, col_names=FALSE, show_col_types = FALSE)
+# read_tsv("results/diamond/16_4_S4.tsv", skip=3, col_names=FALSE, show_col_types = FALSE)
+colnames(diamond)<- c("qseqid", "sseqid", "pident", "length", "mismatch", "evalue", "bitscore", "staxids", "sscinames", "sskingdoms", "skingdoms", "sphylums", "stitle")
 
-# checkV
+mammal<-read_tsv("/Users/huiyunwu/Desktop/Mentees/Katie/ONR10623barcode03.txt", col_names = FALSE, show_col_types = FALSE)
+# colnames(mammal)<- c("NA","qseqid", "sseqid", "pident", "length", "mismatch", "evalue", "bitscore", "staxids", "sscinames", "sskingdoms", "skingdoms", "sphylums", "stitle")
 
-# diamond <- read_csv(file="results/diamond/16_5_S5.tsv", col_names = FALSE)
-# write_tsv(diamond, file= "results/diamond/16_5_S5_v2.tsv")
-# diamond <- read_csv(file="results/diamond/16_5_S5_v2.tsv",col_names = FALSE, separate("\t"))
 
+
+diamond_screened <- diamond %>% 
+  filter(pident > 30 &
+         bitscore >50 &
+         length > 30)
 
 
 vs2 <- read_tsv(file = "results/vs2/22_5_S10.vs2.final-viral-score.tsv")
