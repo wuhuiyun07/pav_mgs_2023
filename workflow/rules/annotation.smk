@@ -15,7 +15,6 @@ rule annotation:
         annotation = "results/annotation/{sample}.tsv"
     shell:
         """
-        module load r/4.3.2/gcc-9.3.0
         {input.script} {input.vs2_file} {input.checkV_file} {input.diamond_file} {output.annotation}
         """
 
