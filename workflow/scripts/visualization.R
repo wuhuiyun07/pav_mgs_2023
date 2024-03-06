@@ -15,9 +15,9 @@ diamond_file <- input[3]
 output_file <- output[0]
 
 # test_dat <- read_csv(snakemake@input[["test"]])
-vs2 <- read_tsv(file = "results/vs2/{sample}.vs2.final-viral-score.tsv")
-checkV <- read_tsv(file = "results/checkV/{sample}.checkv.quality_summary.tsv")
-diamond<-read_tsv("results/diamond_vs2/{sample}.diamond.tsv", skip=3, col_names=FALSE, show_col_types = FALSE)
+vs2 <- read_tsv(vs2_file)  #results/vs2/{sample}.vs2.final-viral-score.tsv
+checkV <- read_tsv(checkV_file) #results/checkV/{sample}.checkv.quality_summary.tsv
+diamond<-read_tsv(diamond_file, skip=3, col_names=FALSE, show_col_types = FALSE), results/diamond_vs2/{sample}.diamond.tsv
 # read_tsv("results/diamond/16_4_S4.tsv", skip=3, col_names=FALSE, show_col_types = FALSE)
 colnames(diamond)<- c("qseqid", "sseqid", "pident", "length", "mismatch", "evalue", "bitscore", "staxids", "sscinames", "sskingdoms", "skingdoms", "sphylums", "stitle")
 diamond
