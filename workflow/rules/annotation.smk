@@ -11,5 +11,5 @@ rule annotation:
         annotation = "results/annotation/{sample}.tsv"
     shell:
         """
-        {input.script} {input} {output}
+        {input.script} {input.vs2_file} {input.checkV_file} {input.diamond_file} {output.annotation}
         """
