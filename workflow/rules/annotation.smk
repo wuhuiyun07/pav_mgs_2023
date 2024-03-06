@@ -29,4 +29,4 @@ rule add_numbers:
     output:
         "results/sum.txt"
     script:
-        "scripts/visualization.R"
+        "../scripts/visualization.R"
