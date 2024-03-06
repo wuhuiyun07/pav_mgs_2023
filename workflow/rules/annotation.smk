@@ -8,7 +8,7 @@ rule annotation:
         checkV_file = expand("results/checkV/{sample}.checkv.quality_summary.tsv", sample = SAMPLES),
         diamond_file = expand("results/diamond_vs2/{sample}.diamond.tsv", sample = SAMPLES),
     output:
-        annotation = "results/annotation/{sample}.csv"
+        annotation = "results/annotation/{sample}.tsv"
     shell:
         """
         {input.script} {input} {output}
