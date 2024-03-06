@@ -72,10 +72,10 @@ library(tidyverse)
 getwd()
 
 # Input and output files
-vs2_file <- snakemake@input[[1]]
-checkV_file <- snakemake@input[[2]]
-diamond_file <- snakemake@input[[3]]
-output_file <- snakemake@output[["annotation"]]
+vs2_file <- input[[1]]
+checkV_file <- input[[2]]
+diamond_file <- input[[3]]
+output_file <- output[["annotation"]]
 
 # Read input files
 vs2 <- read_tsv(vs2_file)
