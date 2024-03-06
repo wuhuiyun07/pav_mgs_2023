@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 
 import pandas as pd
+import os
+import shutil
+from snakemake.shell import shell
 
 # Read input files
 vs2_file = snakemake.input["vs2_file"]
