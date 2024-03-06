@@ -72,14 +72,14 @@ library(tidyverse)
 getwd()
 
 # Input and output files
-vs2_file <- input[[1]]
+vs2_file <- "results/vs2/{sample}.vs2.final-viral-score.tsv",
 checkV_file <- input[[2]]
 diamond_file <- input[[3]]
 output_file <- output[["annotation"]]
 
 # Read input files
-vs2 <- read_tsv(vs2_file)
-checkV <- read_tsv(checkV_file)
+vs2 <- read_tsv("results/vs2/{sample}.vs2.final-viral-score.tsv")
+checkV <- read_tsv("results/checkV/{sample}.checkv.quality_summary.tsv")
 diamond <- read_tsv(diamond_file, skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
 
 # Rename column names for diamond data
