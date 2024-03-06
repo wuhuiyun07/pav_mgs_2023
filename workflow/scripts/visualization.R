@@ -61,53 +61,64 @@
 
 
 
+# #!/usr/bin/env Rscript
+
+# library(tidyverse)
+
+# # Set working directory if needed
+# # setwd("/Users/huiyunwu/Desktop/Virus_particle/pav_mgs_2023")
+
+# # Print working directory
+# getwd()
+
+# # Input and output files
+# vs2_file <- snakemake@input[[1]]
+# checkV_file <- snakemake@input[[2]]
+# diamond_file <- snakemake@input[[3]]
+# output_file <- snakemake@output[["annotation"]]
+
+# # Read input files
+# vs2 <- read_tsv(vs2_file)
+# checkV <- read_tsv(checkV_file)
+# diamond <- read_tsv(diamond_file, skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
+
+# # Rename column names for diamond data
+# colnames(diamond) <- c("qseqid", "sseqid", "pident", "length", "mismatch", "evalue", "bitscore", "staxids", "sscinames", "sskingdoms", "skingdoms", "sphylums", "stitle")
+
+# # Filter checkV data
+# checkV_screened <- checkV %>%
+#   filter(checkv_quality %in% c("Low-quality", "Medium-quality", "High-quality")) %>%
+#   filter(contig_length > 1000)
+
+# # Filter vs2 data
+# vs2_screened <- vs2 %>%
+#   filter(max_score > 0.5) %>%
+#   filter(length > 1000) %>%
+#   separate(seqname, into = c("contig_id", "gene"), sep = "\\|\\|")
+
+# # Join vs2 and checkV data
+# contigs_for_diamond <- full_join(vs2_screened, checkV_screened, by = "contig_id")
+
+# # Filter and sort diamond data
+# diamond_combined <- diamond %>%
+#   filter(pident > 30 & bitscore > 50 & length > 30) %>%
+#   arrange(desc(bitscore), evalue, desc(length), desc(pident)) %>%
+#   separate(qseqid, into = c("contig_id", "gene"), sep = "\\|\\|")
+
+# # Perform left join and write output
+# annotation <- left_join(contigs_for_diamond, diamond_combined, by = "contig_id") %>%
+#   distinct(contig_id, .keep_all = TRUE) %>%
+#   write_tsv(output_file)
+
+
 #!/usr/bin/env Rscript
 
-library(tidyverse)
+# Read the two numbers from command line arguments
+number1 <- as.numeric(commandArgs(trailingOnly = TRUE)[1])
+number2 <- as.numeric(commandArgs(trailingOnly = TRUE)[2])
 
-# Set working directory if needed
-# setwd("/Users/huiyunwu/Desktop/Virus_particle/pav_mgs_2023")
+# Calculate the sum
+sum_result <- number1 + number2
 
-# Print working directory
-getwd()
-
-# Input and output files
-vs2_file <- snakemake@input[[1]]
-checkV_file <- snakemake@input[[2]]
-diamond_file <- snakemake@input[[3]]
-output_file <- snakemake@output[["annotation"]]
-
-# Read input files
-vs2 <- read_tsv(vs2_file)
-checkV <- read_tsv(checkV_file)
-diamond <- read_tsv(diamond_file, skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
-
-# Rename column names for diamond data
-colnames(diamond) <- c("qseqid", "sseqid", "pident", "length", "mismatch", "evalue", "bitscore", "staxids", "sscinames", "sskingdoms", "skingdoms", "sphylums", "stitle")
-
-# Filter checkV data
-checkV_screened <- checkV %>%
-  filter(checkv_quality %in% c("Low-quality", "Medium-quality", "High-quality")) %>%
-  filter(contig_length > 1000)
-
-# Filter vs2 data
-vs2_screened <- vs2 %>%
-  filter(max_score > 0.5) %>%
-  filter(length > 1000) %>%
-  separate(seqname, into = c("contig_id", "gene"), sep = "\\|\\|")
-
-# Join vs2 and checkV data
-contigs_for_diamond <- full_join(vs2_screened, checkV_screened, by = "contig_id")
-
-# Filter and sort diamond data
-diamond_combined <- diamond %>%
-  filter(pident > 30 & bitscore > 50 & length > 30) %>%
-  arrange(desc(bitscore), evalue, desc(length), desc(pident)) %>%
-  separate(qseqid, into = c("contig_id", "gene"), sep = "\\|\\|")
-
-# Perform left join and write output
-annotation <- left_join(contigs_for_diamond, diamond_combined, by = "contig_id") %>%
-  distinct(contig_id, .keep_all = TRUE) %>%
-  write_tsv(output_file)
-
-
+# Write the sum to a text file
+write.table(sum_result, file = "results/sum.txt", row.names = FALSE, col.names = FALSE)
