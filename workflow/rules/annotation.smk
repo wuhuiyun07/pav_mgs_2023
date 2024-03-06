@@ -4,9 +4,12 @@ print(SAMPLES)
 rule annotation:
     input:
         script= "workflow/scripts/visualization.R",
-        vs2_file = expand("results/vs2/{sample}.vs2.final-viral-score.tsv", sample = SAMPLES),
-        checkV_file = expand("results/checkV/{sample}.checkv.quality_summary.tsv", sample = SAMPLES),
-        diamond_file = expand("results/diamond_vs2/{sample}.diamond.tsv", sample = SAMPLES),
+        vs2_file = [f"results/vs2/{sample}.vs2.final-viral-score.tsv" for sample in SAMPLES],
+        checkV_file = [f"results/checkV/{sample}.checkv.quality_summary.tsv" for sample in SAMPLES],
+        diamond_file = [f"results/diamond_vs2/{sample}.diamond.tsv" for sample in SAMPLES],
+        # vs2_file = expand("results/vs2/{sample}.vs2.final-viral-score.tsv", sample = SAMPLES),
+        # checkV_file = expand("results/checkV/{sample}.checkv.quality_summary.tsv", sample = SAMPLES),
+        # diamond_file = expand("results/diamond_vs2/{sample}.diamond.tsv", sample = SAMPLES),
     output:
         annotation = "results/annotation/{sample}.tsv"
     shell:
