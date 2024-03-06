@@ -60,6 +60,7 @@
 # # %>% write_csv(snakemake@output[["csv"]])
 
 
+
 #!/usr/bin/env Rscript
 
 library(tidyverse)
@@ -108,3 +109,5 @@ diamond_combined <- diamond %>%
 annotation <- left_join(contigs_for_diamond, diamond_combined, by = "contig_id") %>%
   distinct(contig_id, .keep_all = TRUE) %>%
   write_tsv(output_file)
+
+
