@@ -1,0 +1,15 @@
+name: pav_mgs_2023
+channels:
+  - conda-forge
+  - base
+  - bioconda
+  - R
+dependdencies:
+  - r-base=4.3.2
+  - r-tidyverse=2.0.0
+  - r-ggplot2=3.4.4
+  - r-readr=2.1.4
+  - r-dplyr=1.1.4
+  - wget=1.20.3
+  - snakemake=7.32.4
+  - graphviz=9.0.0

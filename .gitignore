@@ -15,7 +15,13 @@ logs/**
 resources/**
 reports/**
 results/**
+
+#Snakemake
 .snakemake/**
+
+# R environment variables
+.Renviron
+
 rawdata/**
 slurm/**
 
