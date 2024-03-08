@@ -3,8 +3,8 @@ print(SAMPLES)
 
 rule all_diamond:
     input: 
+        diamond_all = expand("results/diamond/{sample}.tsv.gz", sample = SAMPLES),
         diamond_vs2 = expand("results/diamond_vs2/{sample}.diamond.tsv", sample = SAMPLES),
-        diamond_all = expand("results/diamond/{sample}.tsv.gz", sample = SAMPLES)
 
 rule chg_file_name:
     output:
