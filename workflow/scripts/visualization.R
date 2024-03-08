@@ -14,8 +14,8 @@ getwd()
 
 vs2_file <- list.files("results/vs2", full.name = TRUE)
 checkV_file <- list.files("results/checkV", full.name = TRUE)
-diamond_file <- list.files("results/diamond_vs2", full.name = TRUE)
-
+diamond_vs2_file <- list.files("results/diamond_vs2", full.name = TRUE)
+diamond_file<- list.files("results/diamond", full.name = TRUE)
 
 
 
@@ -23,6 +23,8 @@ diamond_file <- list.files("results/diamond_vs2", full.name = TRUE)
 vs2 <- read_tsv(vs2_file, col_names = TRUE)
 checkV <- read_tsv(checkV_file, col_names = TRUE)
 diamond <- read_tsv(diamond_file, skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
+diamond_vs2 <- read_tsv(diamond_vs2_file, skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
+
 
 # Rename column names for diamond data
 colnames(diamond) <- c("qseqid", "sseqid", "pident", "length", "mismatch", "evalue", "bitscore", "staxids", "sscinames", "sskingdoms", "skingdoms", "sphylums", "stitle")
@@ -61,13 +63,19 @@ diamond_combined <- diamond %>%
 screen_result <- left_join(contigs_for_diamond, diamond_combined, by = "contig_id") %>%
   distinct(contig_id, .keep_all = TRUE) %>% 
   select(contig_id, gene.y, contig_length, bitscore, max_score, max_score_group, viral_genes,checkv_quality, completeness,miuvig_quality,skingdoms,sphylums,sscinames) %>%
-  arrange(checkv_quality, miuvig_quality,desc(completeness),max_score_group, desc(skingdoms), desc(bitscore),desc(contig_length))   %>%
+  arrange(checkv_quality, miuvig_quality,desc(completeness),max_score_group, desc(skingdoms), desc(bitscore),desc(contig_length))  # %>%
   write_tsv("results/screen_result.tsv")
 
 # contig_length
 length<- screen_result %>% 
   count(contig_id, contig_length, completeness) %>%
   arrange(desc(contig_length))
+
+screen_result %>%
+  count(sphylums)
+
+screen_result %>%
+  count(skingdoms)
 
 ggplot(screen_result, aes(x=contig_length)) + 
   geom_histogram()
