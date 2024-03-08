@@ -2,7 +2,9 @@ SAMPLES = "16_1_S1 16_2_S2 16_3_S3 16_4_S4 16_5_S5 22_1_S6 22_2_S7 22_3_S8 22_4_
 print(SAMPLES)
 
 rule all_diamond:
-    input: expand("results/diamond_vs2/{sample}.diamond.tsv", sample = SAMPLES) 
+    input: 
+        diamond_all = expand("results/diamond/{sample}.tsv.gz", sample = SAMPLES),
+        diamond_vs2 = expand("results/diamond_vs2/{sample}.diamond.tsv", sample = SAMPLES),
 
 rule chg_file_name:
     output:
@@ -24,7 +26,7 @@ rule gunzip_diamond:
 
 rule diamond_vs2:
     output:
-        tsv = "results/diamond_vs2/{sample}.tsv.gz"
+        tsv = "results/diamond_vs2/{sample}.diamond.tsv"
     input:    
         fa = "results/vs2/{sample}/final-viral-combined.fa",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
@@ -59,7 +61,42 @@ rule diamond_vs2:
     # stitle: subject title
 
 
-        
+rule diamond_all:
+    output:
+        tsv = "results/diamond/{sample}.tsv.gz"
+    input:    
+        fa = "results/spades.3.15/{sample}/contigs.fasta",
+        db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
+    container:
+        "../sifs/diamond_latest.sif"
+    threads: 8
+    params:
+        fmt = "6 qseqid sseqid pident length mismatch evalue bitscore staxids sscinames sskingdoms skingdoms sphylums stitle",  # Additional arguments
+    shell:
+        r"""diamond blastx """
+        """ --threads {threads}"""
+        """ -q {input.fa} """
+        """ -d {input.db} """
+        """ -o {output.tsv} """
+        """ --header """
+        """ --outfmt {params.fmt} """
+        """ --verbose """
+        """ --compress 1 """
+
+    # qseqid: Query seqID
+    # sseqid: Subject seqID
+    # pident: percentage of identical matches
+    # length: Alignment length
+    # mismatch: number of mismatches
+    # evalue: expected value
+    # bitscore: bit score
+    # staxids: subject taxonomy ID, sep by a ";"
+    # sscinames: subject scientific names
+    # sskingdoms: subject superkingdoms
+    # skingdoms: subject kindoms
+    # sphylums: subject phylum
+    # stitle: subject title
+   
         
 
 rule ncbi_db:
