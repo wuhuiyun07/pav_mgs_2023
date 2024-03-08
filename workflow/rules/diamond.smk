@@ -26,7 +26,7 @@ rule gunzip_diamond:
 
 rule diamond_vs2:
     output:
-        tsv = "results/diamond_vs2/{sample}.diamond.tsv"
+        tsv = "results/diamond_vs2/{sample}.tsv.gz"
     input:    
         fa = "results/vs2/{sample}/final-viral-combined.fa",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
