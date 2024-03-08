@@ -24,7 +24,7 @@ rule gunzip_diamond:
 
 rule diamond_vs2:
     output:
-        tsv = "results/diamond_vs2/{sample}.tsv.gz"
+        tsv = "results/diamond_vs2/{sample}.diamond.tsv"
     input:    
         fa = "results/vs2/{sample}/final-viral-combined.fa",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
@@ -59,7 +59,42 @@ rule diamond_vs2:
     # stitle: subject title
 
 
-        
+rule diamond_all:
+    output:
+        tsv = "results/diamond/{sample}.tsv.gz"
+    input:    
+        fa = "results/spades.3.15/{sample}/contigs.fasta",
+        db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
+    container:
+        "../sifs/diamond_latest.sif"
+    threads: 8
+    params:
+        fmt = "6 qseqid sseqid pident length mismatch evalue bitscore staxids sscinames sskingdoms skingdoms sphylums stitle",  # Additional arguments
+    shell:
+        r"""diamond blastx """
+        """ --threads {threads}"""
+        """ -q {input.fa} """
+        """ -d {input.db} """
+        """ -o {output.tsv} """
+        """ --header """
+        """ --outfmt {params.fmt} """
+        """ --verbose """
+        """ --compress 1 """
+
+    # qseqid: Query seqID
+    # sseqid: Subject seqID
+    # pident: percentage of identical matches
+    # length: Alignment length
+    # mismatch: number of mismatches
+    # evalue: expected value
+    # bitscore: bit score
+    # staxids: subject taxonomy ID, sep by a ";"
+    # sscinames: subject scientific names
+    # sskingdoms: subject superkingdoms
+    # skingdoms: subject kindoms
+    # sphylums: subject phylum
+    # stitle: subject title
+   
         
 
 rule ncbi_db:
