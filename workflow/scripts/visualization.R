@@ -16,11 +16,7 @@ vs2_file <- list.files("results/vs2", full.name = TRUE)
 checkV_file <- list.files("results/checkV", full.name = TRUE)
 diamond_file <- list.files("results/diamond_vs2", full.name = TRUE)
 
-# Input and output files
-# vs2_file <- snakemake@input[["vs2_file"]]
-# checkV_file <- snakemake@input[["checkV_file"]]
-# diamond_file <- snakemake@input[["diamond_file"]]
-# output_file <- snakemake@output[["annotation"]]
+
 
 
 # Read input files
