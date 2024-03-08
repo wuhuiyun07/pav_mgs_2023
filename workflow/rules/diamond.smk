@@ -2,7 +2,9 @@ SAMPLES = "16_1_S1 16_2_S2 16_3_S3 16_4_S4 16_5_S5 22_1_S6 22_2_S7 22_3_S8 22_4_
 print(SAMPLES)
 
 rule all_diamond:
-    input: expand("results/diamond_vs2/{sample}.diamond.tsv", sample = SAMPLES) 
+    input: 
+        diamond_vs2 = expand("results/diamond_vs2/{sample}.diamond.tsv", sample = SAMPLES),
+        diamond_all = expand("results/diamond/{sample}.tsv.gz", sample = SAMPLES)
 
 rule chg_file_name:
     output:
