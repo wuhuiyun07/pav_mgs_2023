@@ -3,21 +3,30 @@ print(SAMPLES)
 
 rule all:
     input:
-        expand("results/annotation/{sample}.tsv", sample=SAMPLES)
+        expand("results/annotation/{sample}_screened.csv", sample=SAMPLES)
 
-rule annotation:
+# rule annotation:
+#     input:
+#         script= "workflow/scripts/visualization.R",
+#         vs2_file = "results/vs2/{sample}.vs2.final-viral-score.tsv",
+#         checkV_file = "results/checkV/{sample}.checkv.quality_summary.tsv",
+#         diamond_file = "results/diamond_vs2/{sample}.diamond.tsv",
+#     output:
+#         annotation = "results/annotation/{sample}.tsv"
+#     conda:
+#         "envs/r-pav.yml"
+#     shell:
+#         """
+#         {input.script} 
+#         """
+
+
+rule run_read_data:
     input:
-        script= "workflow/scripts/visualization.R",
-        vs2_file = "results/vs2/{sample}.vs2.final-viral-score.tsv",
-        checkV_file = "results/checkV/{sample}.checkv.quality_summary.tsv",
-        diamond_file = "results/diamond_vs2/{sample}.diamond.tsv",
+        vs2_path="results/vs2/{sample}.vs2.final-viral-score.tsv",
+        checkV_path="results/checkV/{sample}.checkv.quality_summary.tsv",
+        diamond_path="results/diamond/{sample}.tsv.gz",
     output:
-        annotation = "results/annotation/{sample}.tsv"
-    conda:
-        "envs/r-pav.yml"
-    shell:
-        """
-        {input.script} 
-        """
-
-
+        "results/annotation/{sample}_screened.csv"
+    script:
+        "../scripts/screen_result.R"
