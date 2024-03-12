@@ -1,29 +1,21 @@
-
-#!/usr/bin/env Rscript
-
+library(dplyr)
 library(tidyverse)
-library(ggplot2)
-# library(glue)
-# library(lubridate)
 
-# Set working directory if needed
-# setwd("/Users/huiyunwu/Desktop/Virus_particle/pav_mgs_2023")
-
-# Print working directory
-getwd()
-
-vs2_file <- list.files("results/vs2", full.name = TRUE)
-checkV_file <- list.files("results/checkV", full.name = TRUE)
-diamond_file<- list.files("results/diamond", full.name = TRUE)
+sample<- read_tsv(snakemake@input[[1]])%>%
+            write_tsv(snakemake@output[[1]])
 
 
+# vs2_file <- list.files("results/vs2", full.name = TRUE)
+# checkV_file <- list.files("results/checkV", full.name = TRUE)
+# diamond_file<- list.files("results/diamond", full.name = TRUE)
 
-# Read input files
-vs2 <- read_tsv(vs2_file, col_names = TRUE)
-checkV <- read_tsv(checkV_file, col_names = TRUE)
-diamond <- read_tsv(diamond_file, skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
-# diamond_vs2 <- read_tsv(diamond_vs2_file, skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
 
+vs2 <- read_tsv(snakemake@input[["vs2_file"]], col_names = TRUE)
+checkV <- read_tsv(snakemake@input[["checkV_file"]], col_names = TRUE)
+diamond <- read_tsv(snakemake@input[["diamond_file"]], skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
+
+
+print(vs2)
 
 # Rename column names for diamond data
 colnames(diamond) <- c("qseqid", "sseqid", "pident", "length", "mismatch", "evalue", "bitscore", "staxids", "sscinames", "sskingdoms", "skingdoms", "sphylums", "stitle")
@@ -35,6 +27,7 @@ vs2_screened <- vs2 %>%
   filter(length > 1000) %>%
   separate(seqname, into = c("contig_id", "gene"), sep = "\\|\\|")
 
+print(vs2_screened)
 
 # Filter checkV data
 checkV_screened <- checkV %>%
@@ -42,15 +35,17 @@ checkV_screened <- checkV %>%
   filter(contig_length > 1000)%>%
   arrange(checkv_quality,miuvig_quality, desc(completeness))
 
-
+# print(checkV_screened)
 # Join vs2 and checkV data
 contigs_for_diamond <- full_join(vs2_screened, checkV_screened, by = "contig_id")
+# print(contigs_for_diamond)
 
 # Filter and sort diamond data
 diamond_combined <- diamond %>%
   filter(pident > 30 & bitscore > 50 & length > 30) %>%
   arrange(desc(bitscore), evalue, desc(length), desc(pident)) %>%
   separate(qseqid, into = c("contig_id", "gene"), sep = "\\|\\|")
+# print(diamond_combined)
 
 # print(colnames(annotation))
 # 1] "contig_id"           "gene.x"              "dsDNAphage"          "ssDNA"               "NCLDV"               "RNA"                 "lavidaviridae"       "max_score"          
@@ -61,45 +56,12 @@ diamond_combined <- diamond %>%
 # Perform left join and write output
 screen_result <- left_join(contigs_for_diamond, diamond_combined, by = "contig_id") %>%
   distinct(contig_id, .keep_all = TRUE) %>% 
-  select(contig_id, gene.y, contig_length, bitscore, max_score, max_score_group, viral_genes,checkv_quality, completeness,miuvig_quality,skingdoms,sphylums,sscinames) %>%
+  select(contig_id, staxids, gene.y, contig_length, bitscore, max_score, max_score_group, viral_genes,checkv_quality, completeness,miuvig_quality,skingdoms,sphylums,sscinames) %>%
   arrange(checkv_quality, miuvig_quality,desc(completeness),max_score_group, desc(skingdoms), desc(bitscore),desc(contig_length))  %>%
-  write_tsv("results/screen_all_result.tsv")
+  write_csv(snakemake@output[["individual"]])
+# print(screen_result)
 
-# contig_length
-length<- screen_result %>% 
-  count(contig_id, contig_length, completeness) %>%
-  arrange(desc(contig_length))
-
-screen_result %>%
-  count(sphylums)
-
-screen_result %>%
-  count(skingdoms)
-
-ggplot(screen_result, aes(x=contig_length)) + 
-  geom_histogram()
-
-ggplot(screen_result, aes(x=completeness)) + 
-  geom_histogram()
-
-ggplot(screen_result, aes(x= viral_genes))+
-  geom_histogram()
-
-
-ggplot(screen_result %>% count(max_score_group), aes(x= max_score_group, y= n))+
-  geom_bar(stat = "identity")
-
-ggplot(screen_result %>% count(skingdoms), aes(x= skingdoms, y= n))+
-  geom_bar(stat = "identity")
-
-ggplot(screen_result %>% count(sphylums), aes(x= sphylums , y= n))+
-  geom_bar(stat = "identity")
-
-ggplot(screen_result %>% count(checkv_quality), aes(x= checkv_quality, y= n))+
-  geom_bar(stat = "identity")
-
-
-
-
-
+# screen_all_result<- rbind(snakemake@output[["individual"]])%>% 
+#                     write_csv(snakemake@output[["combined"]])
+# print(screen_all_result)
 
