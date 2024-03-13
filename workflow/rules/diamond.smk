@@ -150,7 +150,7 @@ rule r_taxon:
     input:
         diamond_file = "results/diamond/{sample}.tsv"
     conda: 
-        "../envs/r-taxon2.yml"
+        "/project/awlab/wuhuiyun/.conda/envs/r-taxon"
     script:
         "../scripts/r-taxon.R"
 
