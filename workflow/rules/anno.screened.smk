@@ -3,7 +3,7 @@ print(SAMPLES)
 
 rule all:
     input:
-        individual= expand("results/annotation/{sample}_screened.csv", sample=SAMPLES),
+        file = expand("results/annotation/{sample}_screened.csv", sample=SAMPLES),
 
 rule screened_annotation:
     input:
