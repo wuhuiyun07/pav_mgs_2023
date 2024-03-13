@@ -3,8 +3,9 @@ print(SAMPLES)
 
 rule all_diamond:
     input: 
-        diamond_all = expand("results/diamond/{sample}.tsv.gz", sample = SAMPLES),
+        diamond_all = expand("results/diamond_tmp/{sample}.tsv.gz", sample = SAMPLES),
         diamond_vs2 = expand("results/diamond_vs2/{sample}.diamond.tsv", sample = SAMPLES),
+        taxon_file = expand("results/diamond/{sample}.taxa.csv")
 
 rule chg_file_name:
     output:
@@ -46,6 +47,8 @@ rule diamond_vs2:
         """ --verbose """
         """ --compress 1 """
 
+
+
     # qseqid: Query seqID
     # sseqid: Subject seqID
     # pident: percentage of identical matches
@@ -63,7 +66,7 @@ rule diamond_vs2:
 
 rule diamond_all:
     output:
-        tsv = "results/diamond/{sample}.tsv.gz"
+        tsv = "results/diamond_tmp/{sample}.tsv.gz"
     input:    
         fa = "results/spades.3.15/{sample}/contigs.fasta",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
@@ -130,3 +133,22 @@ rule diamond_makedb:
         " --taxonnodes {input.nodes}"
         " --taxonnames {input.names}"
         
+# rule extract_staxids:
+#     output:
+#         taxon_file = "results/diamond/{sample}.taxaID.csv"
+#     input: 
+#         diamond_file = "results/diamond/{sample}.tsv"
+#     script:
+#         """
+#         awk -F'\t' '{print $8}' {input} >> {output} #select eighth column for staxids
+#         """
+
+
+rule r_taxon:
+    output:
+        taxon_file = "results/diamond/{sample}.taxa.csv"
+    input:
+        diamond_file = "results/diamond/{sample}.tsv"
+    conda: "envs/r-taxon2.yml"
+
+    

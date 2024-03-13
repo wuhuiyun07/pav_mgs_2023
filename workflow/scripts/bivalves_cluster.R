@@ -12,21 +12,33 @@ library(phyloseq)
 library(openxlsx)
 library(reshape2)
 
+# BiocManager::install(c("phyloseq"))
+# BiocManager::install(c("ggforce"))
+# BiocManager::install(c("readxl"))
+# BiocManager::install(c("cluster"))
+# BiocManager::install(c("factoextra"))
+# BiocManager::install(c("openxlsx"))
+# BiocManager::install(c("reshape2"))
+# install.packages("cli")
 
 
 ##tutorial https://rpubs.com/lconteville/714853
 ##tutorial https://vaulot.github.io/tutorials/Phyloseq_tutorial.html
-
+getwd()
 # Read the Excel file
-bivalve_data <- read_excel("C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/bivalve_data.xlsx")
+bivalve_data <- read_excel("results/onr/bivalve_data.xlsx")
+
 # Load sample data
-sample_metadata <- read.xlsx("C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/bivalve_sample.xlsx")
+sample_metadata <- read.xlsx("results/onr/bivalve_sample.xlsx")
 
 
 # Identify unique species and assign OTU names
 unique_species <- unique(bivalve_data$species)
 otu_codes <- paste0("Otu", sprintf("%05d", 1:length(unique_species)))
 species_to_otu <- data.frame(species = unique_species, OTU = otu_codes)
+
+
+
 
 # Merge OTU codes with the bivalve data
 bivalve_data <- bivalve_data %>%
@@ -37,6 +49,7 @@ otu_data <- bivalve_data %>%
   group_by(sample.name, OTU) %>%
   summarise(abundance = n()) %>%
   pivot_wider(names_from = sample.name, values_from = abundance, values_fill = 0)
+
 
 # Convert otu_data tibble to data frame
 otu_table <- as.data.frame(otu_data)
@@ -51,18 +64,21 @@ tax_table <- as.data.frame(tax_table)
 
 
 # Save OTU table as CSV
-write.csv(otu_mat, file = "C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/otu_table.csv", row.names = TRUE)
+# write.csv(otu_mat, file = "C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/otu_table.csv", row.names = TRUE)
 
 # Save taxonomic table as CSV
-write.csv(tax_mat, file = "C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/tax_table.csv", row.names = TRUE)
+# write.csv(tax_mat, file = "C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/tax_table.csv", row.names = TRUE)
 
 
 
-## Read in new OTU, tax, and sample tables
-otu_mat <- read.csv("C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/otu_table.csv")
-tax_mat <- read.csv("C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/tax_table.csv")
-samples_df <- read_excel("C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/bivalve_sample_1.xlsx")
+# ## Read in new OTU, tax, and sample tables
+# otu_mat <- read.csv("C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/otu_table.csv")
+# tax_mat <- read.csv("C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/tax_table.csv")
+# samples_df <- read_excel("C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/data/bivalve_sample_1.xlsx")
 
+otu_mat <- otu_table
+tax_mat <- tax_table
+samples_df<- sample_metadata
 
 str(samples_df)
 colnames(otu_mat)
@@ -138,7 +154,7 @@ bivalve_barplot <- plot_bar(carbom_subset_rel, fill = "family") +
   guides(color = FALSE)
 
 # Save the plot as a high-resolution figure
-ggsave("C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/results/bivalve_barplot.png", bivalve_barplot, dpi = 300, width = 8, height = 6, units = "in")
+ggsave("results/onr/bivalve_barplot.png", bivalve_barplot, dpi = 300, width = 8, height = 6, units = "in")
 
 
 
@@ -172,7 +188,7 @@ bivalve_barplot_colors <- plot_bar(carbom_subset_rel, fill = "family") +
   theme(legend.key = element_rect(colour = NA)) +
   guides(color = FALSE) 
   # Save the plot as a high-resolution figure
-  ggsave("C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/results/bivalve_barplot_colors.png", bivalve_barplot_colors, dpi = 300, width = 10, height = 6, units = "in")
+  ggsave("results/onr/bivalve_barplot_colors.png", bivalve_barplot_colors, dpi = 300, width = 10, height = 6, units = "in")
 
 
 ##add sample date to the top of the graph
@@ -207,7 +223,7 @@ bivalve_barplot_colors <- plot_bar(carbom_subset_rel, fill = "family") +
     facet_grid(. ~ collection.date, scales = "free_x", space = "free_x")
   
   # Save the plot as a high-resolution figure
-  ggsave("C:/Users/katie/OneDrive/Desktop/R/ONR_bivalves/results/bivalve_barplot_colors.png", bivalve_barplot_colors, dpi = 300, width = 10, height = 6, units = "in")
+  ggsave("results/onr/bivalve_barplot_colors.png", bivalve_barplot_colors, dpi = 300, width = 10, height = 6, units = "in")
   
 
 ##########HEATMAP#######

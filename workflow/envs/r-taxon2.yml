@@ -3,6 +3,5 @@ channels:
   - bioconda
 dependencies:
   - r-base 
-  - r-tidyverse
   - r-taxonomizr =0.10.2
 

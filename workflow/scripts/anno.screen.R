@@ -14,12 +14,11 @@ vs2 <- read_tsv(snakemake@input[["vs2_file"]], col_names = TRUE)
 checkV <- read_tsv(snakemake@input[["checkV_file"]], col_names = TRUE)
 diamond <- read_tsv(snakemake@input[["diamond_file"]], skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
 
-
-print(vs2)
-
+diamond <- read_tsv("results/diamond/24_5_S20.tsv.gz", skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
 # Rename column names for diamond data
 colnames(diamond) <- c("qseqid", "sseqid", "pident", "length", "mismatch", "evalue", "bitscore", "staxids", "sscinames", "sskingdoms", "skingdoms", "sphylums", "stitle")
 
+print(vs2)
 
 # Filter vs2 data
 vs2_screened <- vs2 %>%
@@ -64,4 +63,3 @@ screen_result <- left_join(contigs_for_diamond, diamond_combined, by = "contig_i
 # screen_all_result<- rbind(snakemake@output[["individual"]])%>% 
 #                     write_csv(snakemake@output[["combined"]])
 # print(screen_all_result)
-
