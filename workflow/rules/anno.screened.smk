@@ -9,7 +9,7 @@ rule screened_annotation:
     input:
         vs2_file="results/vs2/{sample}.vs2.final-viral-score.tsv",
         checkV_file="results/checkV/{sample}.checkv.quality_summary.tsv",
-        diamond_file="results/diamond/{sample}.tsv.gz",
+        diamond_file="results/diamond/{sample}.tsv",
     output:
         individual="results/annotation/{sample}_screened.csv",
     script:
