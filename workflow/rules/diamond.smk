@@ -5,7 +5,7 @@ rule all_diamond:
     input: 
         diamond_all = expand("results/diamond_tmp/{sample}.tsv.gz", sample = SAMPLES),
         diamond_vs2 = expand("results/diamond_vs2/{sample}.diamond.tsv", sample = SAMPLES),
-        taxon_file = expand("results/diamond/{sample}.taxa.csv")
+        taxon_file = expand("results/diamond/{sample}.taxa.csv", sample = SAMPLES)
 
 rule chg_file_name:
     output:
