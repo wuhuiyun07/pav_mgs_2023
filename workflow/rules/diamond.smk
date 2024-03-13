@@ -152,6 +152,6 @@ rule r_taxon:
     conda: 
         "../envs/r-taxon2.yml"
     script:
-        "../script/r-taxon.R"
+        "../scripts/r-taxon.R"
 
     
