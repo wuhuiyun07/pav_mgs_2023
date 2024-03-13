@@ -17,8 +17,10 @@ library(taxonomizr)
 # awk -F'\t' '{print $9}' ONR10623barcode03.tsv >> taxaID.csv #select ninth column
 
 # awk -F'\t' '{print $8}' results/diamond/24_5_S20.tsv >> results/diamond/24_5_S20.taxaID.csv #select eighth column for staxids
+getwd()
+# taxaID <- read.table("results/diamond/24_4_S19.tsv", sep = "\t", header = FALSE)[,8]
+taxaID <- read.table(snakemake@input[[diamond_file]], sep = "\t", header = FALSE)[,8]
 
-taxaID <- read.table("results/diamond/24_4_S19.tsv", sep = "\t", header = FALSE)[,8]
 
 taxa<-getTaxonomy(taxaID,'../r-taxon/accessionTaxa.sql')
 colnames(taxa)[1] <- "staxids"
