@@ -1,10 +1,7 @@
+#!/usr/bin/env Rscript
 
 
-######R code#####
-# packages available in r-tidy conda environment
 library(taxonomizr)
-# library(tidyverse)
-# library(tibble)
 
 # diamond<-read_tsv(snakemake@input[["diamond_file"]])
 # diamond<-read.tsv("results/diamond/24_5_S20.tsv.gz",skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
