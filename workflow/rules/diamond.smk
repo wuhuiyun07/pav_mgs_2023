@@ -67,6 +67,7 @@ rule diamond_vs2:
 rule diamond_all:
     output:
         tsv = "results/diamond_tmp/{sample}.tsv.gz"
+        file = "results/diamond_tmp/{sample}.test.tsv.gz"
     input:    
         fa = "results/spades.3.15/{sample}/contigs.fasta",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
@@ -86,7 +87,7 @@ rule diamond_all:
         """ --verbose """
         """ --compress 1 """
         """ --outfmt  """
-        """ echo {input.fa} {output.tsv} """
+        """ echo {input.fa} {output.tsv} > {output.file}"""
 
     # qseqid: Query seqID
     # sseqid: Subject seqID
