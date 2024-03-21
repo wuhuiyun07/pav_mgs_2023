@@ -66,7 +66,7 @@ rule diamond_vs2:
 
 rule diamond_all:
     output:
-        tsv = "/work/wuhuiyun/pav_2023/results/diamond_tmp/{sample}.tsv.gz"
+        tsv = "results/diamond_tmp/{sample}.tsv.gz"
     input:    
         fa = "results/spades.3.15/{sample}/contigs.fasta",
         db = "resources/ncbi_db/protein/viral.1.protein.dmnd"
