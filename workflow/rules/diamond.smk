@@ -85,6 +85,7 @@ rule diamond_all:
         """ --outfmt {params.fmt} """
         """ --verbose """
         """ --compress 1 """
+        """ --outfmt {sample} """
 
     # qseqid: Query seqID
     # sseqid: Subject seqID
