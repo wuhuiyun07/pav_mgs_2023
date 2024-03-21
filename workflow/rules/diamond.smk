@@ -85,7 +85,8 @@ rule diamond_all:
         """ --outfmt {params.fmt} """
         """ --verbose """
         """ --compress 1 """
-        """ --outfmt {sample} """
+        """ --outfmt  """
+       """ echo {input.fa} {output.tsv} """
 
     # qseqid: Query seqID
     # sseqid: Subject seqID
