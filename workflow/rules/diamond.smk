@@ -87,7 +87,6 @@ rule diamond_all:
         """ --verbose """
         """ --compress 1 """
         """ --outfmt  """
-        """ echo {input.fa} {output.tsv} > {output.file}"""
 
     # qseqid: Query seqID
     # sseqid: Subject seqID
@@ -103,7 +102,6 @@ rule diamond_all:
     # sphylums: subject phylum
     # stitle: subject title
    
-        
 
 rule ncbi_db:
     output: 

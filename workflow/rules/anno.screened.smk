@@ -4,13 +4,16 @@ print(SAMPLES)
 rule all:
     input:
         file = expand("results/annotation/{sample}_screened.csv", sample=SAMPLES),
+        # file.2 = "results/combined.csv"
 
 rule screened_annotation:
     input:
+        script = "workflow/scripts/anno.screen.R",
         vs2_file="results/vs2/{sample}.vs2.final-viral-score.tsv",
         checkV_file="results/checkV/{sample}.checkv.quality_summary.tsv",
         diamond_file="results/diamond/{sample}.tsv",
     output:
         individual="results/annotation/{sample}_screened.csv",
+        # file.2 = "results/combined.csv"
     script:
         "../scripts/anno.screen.R"

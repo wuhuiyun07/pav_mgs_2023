@@ -16,14 +16,17 @@ library(taxonomizr)
 # awk -F'\t' '{print $8}' results/diamond/24_5_S20.tsv >> results/diamond/24_5_S20.taxaID.csv #select eighth column for staxids
 getwd()
 # taxaID <- read.table("results/diamond/24_4_S19.tsv", sep = "\t", header = FALSE)[,8]
-taxaID <- read.table(snakemake@input[[diamond_file]], sep = "\t", header = FALSE)[,8]
+# taxaID <- read.table(snakemake@input[[diamond_file]], sep = "\t", header = FALSE)[,8]
+taxaID <- read.csv("results/combined.csv", header = TRUE)[,2]
 
-
+colnames(taxaID)
 taxa<-getTaxonomy(taxaID,'../r-taxon/accessionTaxa.sql')
 colnames(taxa)[1] <- "staxids"
 # print(taxa)
 
-write.csv(taxa, snakemake@output[["taxon_file"]])
+# write.csv(taxa, snakemake@output[["taxon_file"]])
 # taxonomy  <- write.csv(taxa, "results/diamond/24_4_S19.taxa.csv")
+write.csv(taxa,"results/bigtable.csv")
+
 
 
