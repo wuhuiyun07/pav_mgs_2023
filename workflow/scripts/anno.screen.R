@@ -5,22 +5,19 @@ sample<- read_tsv(snakemake@input[[2]])%>%
             write_tsv(snakemake@output[[1]])
 
 
-# vs2_file <- list.files("results/vs2", full.name = TRUE)
-# checkV_file <- list.files("results/checkV", full.name = TRUE)
-# diamond_file<- list.files("results/diamond", full.name = TRUE)
+
+# vs2 <- read_tsv("results/vs2/Wu_23_4_S14/final-viral-score.tsv", col_names = TRUE)
+# checkV <- read_tsv("results/checkV-megahit/Wu_23_4_S14/quality_summary.tsv", col_names = TRUE)
+# diamond <- read_tsv("results/diamond_tmp/Wu_23_4_S14.tsv", skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
+
+vs2 <- read_tsv(snakemake@input[["vs2"]], col_names = TRUE)
+checkV <- read_tsv(snakemake@input[["checkv"]], col_names = TRUE)
+diamond <- read_tsv(snakemake@input[["diamond"]], skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
 
 
-vs2 <- read_tsv(snakemake@input[["vs2_file"]], col_names = TRUE)
-checkV <- read_tsv(snakemake@input[["checkV_file"]], col_names = TRUE)
-diamond <- read_tsv(snakemake@input[["diamond_file"]], skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
-
-# diamond <- read_tsv("results/diamond/24_5_S20.tsv", skip = 3, col_names = FALSE, col_types = cols(), show_col_types = FALSE)
 # Rename column names for diamond data
 colnames(diamond) <- c("qseqid", "sseqid", "pident", "length", "mismatch", "evalue", "bitscore", "staxids", "sscinames", "sskingdoms", "skingdoms", "sphylums", "stitle")
 
-# test <- read_tsv("results/vs2/29_5_S25.vs2.final-viral-score.tsv")%>%
-#           mutate(sampleID = "29_5_S25")%>%
-#           select(sampleID, everything())
 
 head(vs2)
 head(checkV)
@@ -29,7 +26,7 @@ head(diamond)
 # Filter vs2 data
 vs2_screened <- vs2 %>%
   filter(max_score > 0.5) %>%
-  filter(length > 1000) %>%
+  filter(length > 2000) %>%
   separate(seqname, into = c("contig_id", "gene"), sep = "\\|\\|")
 
 head(vs2_screened)
@@ -37,7 +34,7 @@ head(vs2_screened)
 # Filter checkV data
 checkV_screened <- checkV %>%
   filter(checkv_quality %in% c("Low-quality", "Medium-quality", "High-quality")) %>%
-  filter(contig_length > 1000)%>%
+  filter(contig_length > 3000)%>%
   arrange(checkv_quality,miuvig_quality, desc(completeness))
 
 # print(checkV_screened)
@@ -61,12 +58,15 @@ head(diamond_combined)
 # Perform left join and write output
 screen_result <- left_join(contigs_for_diamond, diamond_combined, by = "contig_id") %>%
   distinct(contig_id, .keep_all = TRUE) %>% 
-  # select(contig_id, staxids, pident, gene.y, contig_length, bitscore, max_score, max_score_group, viral_genes,checkv_quality, completeness,miuvig_quality,skingdoms,sphylums,sscinames) %>%
-  arrange(checkv_quality, miuvig_quality,desc(completeness),max_score_group, desc(skingdoms), desc(bitscore),desc(contig_length))  %>%
-  write_csv(snakemake@output[["individual"]])
+  select(contig_id, staxids, pident, gene.y, contig_length, bitscore, max_score, max_score_group, viral_genes,checkv_quality, completeness,miuvig_quality,skingdoms,sphylums,sscinames) %>%
+  arrange(checkv_quality, miuvig_quality,desc(completeness),max_score_group, desc(skingdoms), desc(bitscore),desc(contig_length)) 
 head(screen_result)
 
-getwd()
+# write_csv(screen_result, "results/screen/Wu_23_4_S14.csv")
+
+write_csv(screen_result, snakemake@output[["highscore"]])
+
+
 
 # combined_file <- list.files("results/annotation", full.name = TRUE)
 
