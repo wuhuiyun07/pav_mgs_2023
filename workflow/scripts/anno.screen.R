@@ -67,17 +67,33 @@ head(screen_result)
 write_csv(screen_result, snakemake@output[["highscore"]])
 
 
+## add sampleID in highscore file
+## add tzxonomizr result in highscore file
+## add filter type, collection location in highscore file
 
-# combined_file <- list.files("results/annotation", full.name = TRUE)
+# Load necessary libraries
+library(dplyr)
 
-# combined<-read_csv(combined_file)%>%
-#           write_csv("results/combined2.csv")
-# colnames(combined)
-#  [1] "contig_id"           "gene.x"              "dsDNAphage"          "ssDNA"               "NCLDV"              
-#  [6] "RNA"                 "lavidaviridae"       "max_score"           "max_score_group"     "length.x"           
-# [11] "hallmark"            "viral"               "cellular"            "contig_length"       "provirus"           
-# [16] "proviral_length"     "gene_count"          "viral_genes"         "host_genes"          "checkv_quality"     
-# [21] "miuvig_quality"      "completeness"        "completeness_method" "contamination"       "kmer_freq"          
-# [26] "warnings"            "gene.y"              "sseqid"              "pident"              "length.y"           
-# [31] "mismatch"            "evalue"              "bitscore"            "staxids"             "sscinames"          
-# [36] "sskingdoms"          "skingdoms"           "sphylums"            "stitle"             
+# Set the directory path containing your CSV files
+folder_path <- "results/screen/Wu_29_2_S22/"
+
+# Get the folder name
+folder_name <- basename(folder_path)
+
+# Read your CSV file
+csv_file <- "high.score.csv" # Your CSV file name
+data <- read.csv(file.path(folder_path, csv_file))
+
+# Add the folder name as a new column
+data <- data %>%
+  mutate(sampleID = folder_name)
+
+# Move the FolderName column to the first position
+data <- data %>%
+  select(sampleID, everything())
+
+# View the first few rows to confirm
+head(data)
+
+# Optionally, save the updated data to a new CSV
+write.csv(data, file = "your_data_with_folder.csv", row.names = FALSE)
