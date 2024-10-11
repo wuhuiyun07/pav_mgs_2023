@@ -66,18 +66,22 @@ head(screen_result)
 
 write_csv(screen_result, snakemake@output[["highscore"]])
 
+### add sample ID to the screen_result###
+# Specify the full file path
+# file_path <- "results/screen/Wu_26_4_S24/high.score.csv"
+file_path <- snakemake@input[["screen"]]
 
+# Load the CSV file
+data <- read.csv(file_path)
 
-# combined_file <- list.files("results/annotation", full.name = TRUE)
+# Extract the folder name
+folder_name <- basename(dirname(file_path))
 
-# combined<-read_csv(combined_file)%>%
-#           write_csv("results/combined2.csv")
-# colnames(combined)
-#  [1] "contig_id"           "gene.x"              "dsDNAphage"          "ssDNA"               "NCLDV"              
-#  [6] "RNA"                 "lavidaviridae"       "max_score"           "max_score_group"     "length.x"           
-# [11] "hallmark"            "viral"               "cellular"            "contig_length"       "provirus"           
-# [16] "proviral_length"     "gene_count"          "viral_genes"         "host_genes"          "checkv_quality"     
-# [21] "miuvig_quality"      "completeness"        "completeness_method" "contamination"       "kmer_freq"          
-# [26] "warnings"            "gene.y"              "sseqid"              "pident"              "length.y"           
-# [31] "mismatch"            "evalue"              "bitscore"            "staxids"             "sscinames"          
-# [36] "sskingdoms"          "skingdoms"           "sphylums"            "stitle"             
+# Add a new column 'SampleID' as the first column
+data <- cbind(SampleID = folder_name, data)
+
+# Save the updated data to a new CSV file
+write.csv(data, file = snakemake@output[["highscorewID"]], row.names = FALSE)
+
+# Optional: If you want to overwrite the original file, you can use the same 'file_path'
+# write.csv(data, file = file_path, row.names = FALSE)
