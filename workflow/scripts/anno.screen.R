@@ -63,13 +63,12 @@ screen_result <- left_join(contigs_for_diamond, diamond_combined, by = "contig_i
 head(screen_result)
 
 # write_csv(screen_result, "results/screen/Wu_23_4_S14.csv")
-
 write_csv(screen_result, snakemake@output[["highscore"]])
 
 ### add sample ID to the screen_result###
 # Specify the full file path
 # file_path <- "results/screen/Wu_26_4_S24/high.score.csv"
-file_path <- snakemake@input[["screen"]]
+file_path <- snakamake@output[["highscore"]] 
 
 # Load the CSV file
 data <- read.csv(file_path)
@@ -83,5 +82,37 @@ data <- cbind(SampleID = folder_name, data)
 # Save the updated data to a new CSV file
 write.csv(data, file = snakemake@output[["highscorewID"]], row.names = FALSE)
 
-# Optional: If you want to overwrite the original file, you can use the same 'file_path'
-# write.csv(data, file = file_path, row.names = FALSE)
+
+
+## read all highscorewID files into one file
+
+# Load necessary package
+library(dplyr)
+
+# Specify the parent directory containing the folders with CSV files
+parent_directory <- "results/screen"
+
+# List all CSV files in the parent directory and its subdirectories
+file_list <- list.files(parent_directory, pattern = "\\.wID.csv$", full.names = TRUE, recursive = TRUE)
+
+# Initialize an empty data frame to store the combined data
+combined_data <- data.frame()
+
+# Loop through each CSV file and process the data
+for (file_path in file_list) {
+  # Read the CSV file
+  data <- read.csv(file_path)
+  
+  # Extract the folder name to use as the Sample ID
+  folder_name <- basename(dirname(file_path))
+  
+  # Add the folder name as the first column (SampleID) in the data
+  data <- cbind(SampleID = folder_name, data)
+  
+  # Combine the data with the previously read data
+  combined_data <- bind_rows(combined_data, data)
+}
+
+# Write the combined data to a new CSV file
+write.csv(combined_data, file = "combined_data.csv", row.names = FALSE)
+
