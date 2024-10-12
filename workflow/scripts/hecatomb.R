@@ -20,7 +20,7 @@ taxonCounts = read.csv('taxonLevelCounts.tsv',header=T,sep='\t')
 # dataMeta = merge(data, meta, by='sampleID')
 
 # If your metadata is incomplete and you want to keep all samples
-dataMeta = merge(data, meta, by='sampleID', all=T)
+dataMeta = merge(data, meta, by='sample_id', all=T)
 
 
 # r$> colnames(dataMeta)

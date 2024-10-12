@@ -63,8 +63,24 @@ screen_result <- left_join(contigs_for_diamond, diamond_combined, by = "contig_i
 head(screen_result)
 
 # write_csv(screen_result, "results/screen/Wu_23_4_S14.csv")
-
 write_csv(screen_result, snakemake@output[["highscore"]])
+
+### add sample ID to the screen_result###
+# Specify the full file path
+# file_path <- "results/screen/Wu_26_4_S24/high.score.csv"
+file_path <- snakamake@output[["highscore"]] 
+
+# Load the CSV file
+data <- read.csv(file_path)
+
+# Extract the folder name
+folder_name <- basename(dirname(file_path))
+
+# Add a new column 'SampleID' as the first column
+data <- cbind(SampleID = folder_name, data)
+
+# Save the updated data to a new CSV file
+write.csv(data, file = snakemake@output[["highscorewID"]], row.names = FALSE)
 
 
 ## add sampleID in highscore file
@@ -92,8 +108,16 @@ data <- data %>%
 data <- data %>%
   select(sampleID, everything())
 
-# View the first few rows to confirm
-head(data)
+# combined_file <- list.files("results/annotation", full.name = TRUE)
 
-# Optionally, save the updated data to a new CSV
-write.csv(data, file = "your_data_with_folder.csv", row.names = FALSE)
+# combined<-read_csv(combined_file)%>%
+#           write_csv("results/combined2.csv")
+# colnames(combined)
+#  [1] "contig_id"           "gene.x"              "dsDNAphage"          "ssDNA"               "NCLDV"              
+#  [6] "RNA"                 "lavidaviridae"       "max_score"           "max_score_group"     "length.x"           
+# [11] "hallmark"            "viral"               "cellular"            "contig_length"       "provirus"           
+# [16] "proviral_length"     "gene_count"          "viral_genes"         "host_genes"          "checkv_quality"     
+# [21] "miuvig_quality"      "completeness"        "completeness_method" "contamination"       "kmer_freq"          
+# [26] "warnings"            "gene.y"              "sseqid"              "pident"              "length.y"           
+# [31] "mismatch"            "evalue"              "bitscore"            "staxids"             "sscinames"          
+# [36] "sskingdoms"          "skingdoms"           "sphylums"            "stitle"             
